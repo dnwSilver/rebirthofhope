@@ -52,11 +52,11 @@ securityContext:
 
 resources:
   limits:
-    memory: 8Mi
-    cpu: 0.01
+    memory: 1Mi
+    cpu: 10m
   requests:
-    memory: 8Mi
-    cpu: 0.01
+    memory: 1Mi
+    cpu: 10m
 
 livenessProbe: {}
 
