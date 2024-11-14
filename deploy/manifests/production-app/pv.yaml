@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: p-pv-julienne
+  name: p-julienne-filesystem
 spec:
   storageClassName: ""
   capacity:
-    storage: 100Mi
+    storage: 5Mi
   accessModes:
     - ReadOnlyMany
   hostPath:

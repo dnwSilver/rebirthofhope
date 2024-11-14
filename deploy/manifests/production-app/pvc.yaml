@@ -5,8 +5,9 @@ metadata:
   namespace: julienne
 spec:
   storageClassName: ""
+  volumeName: p-julienne-filesystem
   accessModes:
     - ReadOnlyMany
   resources:
     requests:
-      storage: 10Mi
+      storage: 5Mi

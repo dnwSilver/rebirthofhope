@@ -162,7 +162,7 @@ deploy-adm:
 
 deploy-pv:
 	cd ${DEPLOY_DIR}; \
-	rsync -chavzP --stats ./manifests/production-app/pvc.yaml root@${CLUSTER_HOST}:/root/pvc.yaml;
-	rsync -chavzP --stats ./manifests/production-app/pv.yaml root@${CLUSTER_HOST}:/root/pv.yaml;
-	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pv.yaml -n julienne";
+	rsync -chavzP ./manifests/production-app/pv.yaml root@${CLUSTER_HOST}:/root/pv.yaml; \
+	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pv.yaml"; \
+	rsync -chavzP ./manifests/production-app/pvc.yaml root@${CLUSTER_HOST}:/root/pvc.yaml; \
 	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pvc.yaml -n julienne";
