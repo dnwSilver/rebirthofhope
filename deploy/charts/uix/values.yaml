@@ -16,7 +16,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - uix.rebirthofhope.ru
+    - julienne-uix.rebirthofhope.ru
   tls: []
   className: nginx
   paths:

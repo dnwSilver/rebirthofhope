@@ -6,7 +6,7 @@ replicaCount: 1
 ingress:
   enabled: true
   hosts:
-    - uix.rebirthofhope.ru
+    - julienne-uix.rebirthofhope.ru
 
 volumeMounts:
   - name: arts
@@ -20,6 +20,6 @@ volumes:
 
 app:
   # TODO Нужно выставить битое значение
-  api: https://api.rebirthofhope.ru
+  api: https://julienne-api.rebirthofhope.ru
   log:
     level: info
