@@ -1,0 +1,28 @@
+{{- if .Values.extraIngress.enabled }}
+{{- range .Values.extraIngress.services }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-%v" (include "app.fullname" $) .name }}
+  labels:
+    {{- include "app.labels" $ | nindent 4 }}
+spec:
+  {{- with .type }}
+  type: {{ . }}
+  {{- end }}
+  {{- with .externalName }}
+  externalName: {{ . | quote }}
+  {{- end }}
+  {{- with .clusterIP }}
+  clusterIP: {{ . }}
+  {{- end }}
+  ports:
+{{- range $k, $v := .ports }}
+    - name: {{ $k }}
+      port: {{ $v }}
+      targetPort: {{ $k }}
+      protocol: TCP
+{{- end }}
+{{- end }}
+{{- end }}

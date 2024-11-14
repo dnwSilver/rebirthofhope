@@ -1,0 +1,25 @@
+image:
+  tag: 0.0.20
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - uix.rebirthofhope.ru
+
+volumeMounts:
+  - name: arts
+    # TODO Нужно сломать путь, чтобы файлы отсутствовали в подах
+    mountPath: /.output/public/arts
+
+volumes:
+  - name: arts
+    persistentVolumeClaim:
+      claimName: p-pvc-arts
+
+app:
+  # TODO Нужно выставить битое значение
+  api: https://api.rebirthofhope.ru
+  log:
+    level: info

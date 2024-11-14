@@ -1,0 +1,66 @@
+{{- if .Values.extraIngress.enabled }}
+{{- range .Values.extraIngress.ingresses }}
+---
+{{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+apiVersion: networking.k8s.io/v1
+{{- else }}
+apiVersion: networking.k8s.io/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ printf "%s-%v" (include "app.fullname" $) .name }}
+  labels:
+    {{- include "app.labels" $ | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .className }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- if .tls }}
+  tls:
+    {{- range .tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+        {{- range .paths }}
+          - path: {{ .path | quote }}
+            pathType: ImplementationSpecific
+            backend:
+              {{- $serviceName := include "app.fullname" $ }}
+              {{- $servicePort := 8080 }}
+              {{- if .service }}
+              {{- if .service.name }}
+              {{- $serviceName =  printf "%s-%v" (include "app.fullname" $) .service.name}}
+              {{- end }}
+              {{- if .service.fullname }}
+              {{- $serviceName = .service.fullname }}
+              {{- end }}
+              {{- if .service.port }}
+              {{- $servicePort = .service.port }}
+              {{- end }}
+              {{- end }}
+              {{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+              {{- else }}
+              serviceName: {{ $serviceName }}
+              servicePort: {{ $servicePort }}
+              {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}

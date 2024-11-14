@@ -1,0 +1,85 @@
+nameOverride: ""
+
+fullnamePrefixOverride: ""
+
+instanceOverride: ""
+
+partOfOverride: ""
+
+image:
+  pullPolicy: IfNotPresent
+  repository: dnwsilver/k8s-frontend
+  tag: ""
+
+ingress:
+  enabled: false
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - uix.rebirthofhope.ru
+  tls: []
+  className: nginx
+  paths:
+    - /
+
+service:
+  enabled: true
+  type: NodePort
+  ports:
+    http: 8080
+
+containerPorts:
+  http: 3000
+
+replicaCount: 1
+
+podSecurityContext:
+  fsGroup: 1001
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1001
+
+# TODO: Увеличение количества ресурсов.
+resources:
+  limits:
+    memory: 32Mi
+    cpu: 0.05
+  requests:
+    memory: 32Mi
+    cpu: 0.05
+
+livenessProbe: {}
+
+readinessProbe: {}
+
+volumeMounts: []
+
+volumes: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+command: []
+
+args: []
+
+annotations: {}
+
+vmPodScrape: {}
+
+configMap: {}
+
+hostAliases: []
+
+app:
+  api: ""
+  log:
+    level: ""

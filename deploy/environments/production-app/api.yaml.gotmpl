@@ -1,0 +1,34 @@
+image:
+  tag: 0.0.21
+
+ingress:
+  enabled: true
+  hosts:
+    # TODO Должны найти в процессе исследования
+    - api.rebirthofhope.ru
+
+# TODO Это должны добавить
+extraIngress:
+  enabled: true
+  ingresses:
+    - name: uix.rebirthofhope.ru
+      annotations:
+        nginx.ingress.kubernetes.io/use-regex: "true"
+      hosts:
+        - host: uix.rebirthofhope.ru
+          paths:
+            - path: /api/*
+
+# TODO Должно быть недостаточное количество реплик (одна)
+replicaCount: 2
+
+app:
+  cors:
+    # TODO Доступ для сайта должен быть закрыт со стороны бека
+    origins: https://uix.rebirthofhope.ru
+  log:
+    # TODO Уровень логирования слишком детальный (trace)
+    level: info
+  database:
+    # TODO Нужно выставить неправильное значение
+    connection: {{ .Values.app.db }}

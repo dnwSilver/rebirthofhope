@@ -1,0 +1,50 @@
+variables:
+  APP_TAG:
+    value: "latest"
+    description: version (image tag)
+  ENVIRONMENT:
+    value: production
+    options:
+      - production
+      - staging
+    description: deploy environment
+
+stages:
+  - 🧪 tests
+  - 🚚 deploy
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+.base:
+  interruptible: false
+  image: dnwsilver/k8s-ci:0.0.4
+  before_script: rm -f ~/.gnupg/public-keys.d/pubring.db.lock
+
+.test:
+  stage: 🧪 tests
+  extends: [.base]
+
+☸️ k8s:
+  extends: [.base]
+  stage: 🚚 deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE =~ /^trigger|pipeline|web$/
+  script: helmfile --environment "${ENVIRONMENT}" apply --suppress-secrets
+  resource_group: deploy
+  environment:
+    name: ${ENVIRONMENT}
+  when: on_success
+
+🗝️ secrets:
+  extends: [.test]
+  script: make verify-secrets
+
+📊 charts:
+  extends: [.test]
+  script: make verify-charts
+
+📤 environments:
+  extends: [.test]
+  script: make verify-environments

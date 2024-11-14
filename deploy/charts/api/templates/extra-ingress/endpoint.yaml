@@ -1,0 +1,22 @@
+{{- if .Values.extraIngress.enabled }}
+{{- range .Values.extraIngress.endpoints }}
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ printf "%s-%v" (include "app.fullname" $) .name }}
+  labels:
+    {{- include "app.labels" $ | nindent 4 }}
+subsets:
+  - addresses:
+    {{- range .addresses }}
+      - ip: {{ . }}
+    {{- end }}
+    ports:
+    {{- range $k, $v := .ports }}
+      - name: {{ $k }}
+        port: {{ $v }}
+        protocol: TCP
+    {{- end }}
+{{- end }}
+{{- end }}
