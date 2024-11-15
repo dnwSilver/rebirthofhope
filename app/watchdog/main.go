@@ -11,11 +11,12 @@ import (
 	"github.com/go-chi/chi"
 )
 
+var features string = os.Getenv("FEATURES")
+
 func main() {
-	features := os.Getenv("FEATURES")
 
 	if !strings.Contains(features, "WATCH") {
-		log.Fatal("Feature WATCH disabled.")
+		log.Print("Feature WATCH disabled.")
 	}
 
 	r := chi.NewRouter()
@@ -32,12 +33,18 @@ func main() {
 
 type MainView struct {
 	Images []string
+	Good   bool
 }
 
 func serveMainPage(w http.ResponseWriter, r *http.Request) {
 	tpl := template.Must(template.ParseFiles("./web/templates/main.html"))
 
-	err := tpl.ExecuteTemplate(w, "main.html", &MainView{[]string{"footage-screenshot-4f358472-59f1-47d8-a53f-bf58b0aebaf0.png"}})
+	good := !strings.Contains(features, "WATCH")
+
+	err := tpl.ExecuteTemplate(w, "main.html", &MainView{
+		Images: []string{"footage-screenshot-4f358472-59f1-47d8-a53f-bf58b0aebaf0.png"},
+		Good:   good,
+	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

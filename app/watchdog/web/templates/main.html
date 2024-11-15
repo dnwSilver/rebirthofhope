@@ -1,17 +1,15 @@
 <!-- web/templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Записи с камер наблюдения</title>
-</head>
+  </head>
 
-<body>
-    {{range .Images}}
-        <img src="/static/{{.}}"/>
-    {{end}}
-</body>
-
+  <body>
+    {{if .Good}} {{range .Images}}
+    <img src="/static/{{.}}" />
+    {{end}} {{end}}
+  </body>
 </html>

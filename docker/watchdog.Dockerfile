@@ -6,10 +6,9 @@ FROM golang:${GO_VERSION} AS build-stage
 
 WORKDIR /app
 
-COPY /app/watchdog/* ./
+COPY /app/watchdog ./
+# COPY /app/watchdog/web/template/main.html ./
 RUN go mod download
-
-COPY /app/watchdog/*.go ./
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /watchdog
 
@@ -19,6 +18,7 @@ FROM gcr.io/distroless/base-debian11 AS build-release-stage
 WORKDIR /
 
 COPY --from=build-stage /watchdog /watchdog
+COPY --from=build-stage /app/web/templates/main.html /web/templates/main.html
 
 EXPOSE 8080
 
