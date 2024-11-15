@@ -15,6 +15,8 @@ environments:
           enabled: false
       - api:
           enabled: false
+      - wd:
+          enabled: false
     secrets:
       - environments/production-adm/secrets.yaml
   production-app:
@@ -28,8 +30,25 @@ environments:
           enabled: true
       - api:
           enabled: true
+      - wd:
+          enabled: false
     secrets:
       - environments/production-app/secrets.yaml
+  production-wd:
+    kubeContext: louvre
+    values:
+      - fullnamePrefixOverride: p-wd
+      - partOfOverride: wd
+      - adm:
+          enabled: false
+      - uix:
+          enabled: false
+      - api:
+          enabled: false
+      - wd:
+          enabled: true
+    secrets:
+      - environments/production-wd/secrets.yaml
 
 templates:
   env: &set
@@ -80,5 +99,13 @@ releases:
     values:
       - environments/{{ .Environment.Name }}/api.yaml.gotmpl
     condition: api.enabled
+    <<: *set
+    <<: *hooks
+  - name: "{{ .Environment.Name }}-wd"
+    namespace: julienne
+    chart: releases/wd
+    values:
+      - environments/{{ .Environment.Name }}/wd.yaml.gotmpl
+    condition: wd.enabled
     <<: *set
     <<: *hooks

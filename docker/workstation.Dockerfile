@@ -39,7 +39,7 @@ COPY --from=build /home/helmfile /usr/local/bin/helmfile
 COPY --from=build /home/sops-v*.linux.amd64 /usr/local/bin/sops
 
 RUN apt update; \
-    apt install git vim gnupg eza httpie --yes;
+    apt install git make vim gnupg eza httpie --yes;
 RUN helm plugin install https://github.com/jkroepke/helm-secrets --version v4.6.2;
 RUN helm plugin install https://github.com/databus23/helm-diff || true;
 

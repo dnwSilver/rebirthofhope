@@ -5,7 +5,7 @@ SUPPURT_PLATHFORMS=linux/amd64,linux/arm64
 SERVER_PLATHFORM=linux/amd64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=0.0.21
+APP_VERSION=0.0.23
 
 FRONTEND_DIR=./app/frontend
 FRONTEND_PORT=4010
@@ -15,6 +15,9 @@ BACKEND_PORT=4020
 
 MANAGER_DIR=./app/manager
 MANAGER_PORT=4000
+
+FRONTEND_DIR=./app/watchdog
+FRONTEND_PORT=4030
 
 DEPLOY_DIR=./deploy
 
@@ -55,6 +58,13 @@ build-manager:
 	--file ${DOCKER_DIR}/manager.Dockerfile \
 	--tag manager:${APP_VERSION} .;
 
+build-watchdog:
+	docker buildx build \
+	--platform ${SUPPURT_PLATHFORMS} \
+	--build-arg NODE_VERSION=${GO_VERSION} \
+	--file ${DOCKER_DIR}/watchdog.Dockerfile \
+	--tag watchdog:${APP_VERSION} .;
+
 build-ci:
 	docker buildx build \
 	--platform ${SUPPURT_PLATHFORMS} \
@@ -81,17 +91,17 @@ push-workstation:
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-workstation:${APP_VERSION};
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-workstation:latest;
 
-push-frontend:
-	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
-	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
-
 push-backend:
 	docker tag backend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-backend:${APP_VERSION};
 	docker tag backend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-backend:latest;
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-backend:${APP_VERSION};
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-backend:latest;
+
+push-frontend:
+	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
+	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
 
 push-manager:
 	docker tag manager:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-manager:${APP_VERSION};
@@ -104,6 +114,12 @@ push-ci:
 	docker tag ci:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-ci:latest;
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-ci:${APP_VERSION};
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-ci:latest;
+
+push-watchdog:
+	docker tag watchdog:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:${APP_VERSION};
+	docker tag watchdog:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:latest;
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:${APP_VERSION};
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:latest;
 
 push-arts:
 	rsync -chavzP --stats ./assets/art-1.webp root@${CLUSTER_HOST}:/root/.storage/art-1.webp;
@@ -159,6 +175,10 @@ deploy-app:
 deploy-adm:
 	cd ${DEPLOY_DIR}; \
 	helmfile --environment production-adm apply;
+
+deploy-wd:
+	cd ${DEPLOY_DIR}; \
+	helmfile --environment production-wd apply;
 
 deploy-pv:
 	cd ${DEPLOY_DIR}; \
