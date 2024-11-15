@@ -29,7 +29,7 @@ service:
     http: 8080
 
 containerPorts:
-  http: 3000
+  http: 8080
 
 replicaCount: 1
 
