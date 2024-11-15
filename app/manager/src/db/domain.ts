@@ -19,22 +19,54 @@ export interface ISavior {
 type StepName =
   | "deep-dive"
   | "research"
-  | "secret-materials"
-  | "need-more-gold"
-  | "reunion"
-  | "maundy-thursday"
-  | "restoration";
+  | "need-more-gold" // Выдаем память
+  | "sort-wheat-from-chaff" // Чистим логи
+  | "secret-materials" // Правим секреты
+  | "attack-of-the-clones" // Увеличиваем реплики
+  | "reunion" // Правим переменную окружения
+  | "scenario-armor" // Настраиваем CORS
+  | "maundy-thursday" // Избавляемся от CORS
+  | "restoration"; // Восстанавливаем volume
 
-type StepIcon = "🤿" | "🥸" | "🗝️" | "💰" | "🧹" | "🔗" | "🖼️";
+type StepIcon = "🤿" | "🔬" | "🗝️" | "💰" | "🧹" | "🔗" | "🖼️" | "👯‍♀️" | "🌾" | "🛡️";
 
-const steps: Record<StepName, StepIcon> = {
+export const previousSteps: Record<StepName, StepName | null> = {
+  "deep-dive": null,
+  research: "deep-dive",
+  "need-more-gold": "research",
+  "sort-wheat-from-chaff": "need-more-gold",
+  "secret-materials": "sort-wheat-from-chaff",
+  "attack-of-the-clones": "secret-materials",
+  reunion: "attack-of-the-clones",
+  "scenario-armor": "reunion",
+  "maundy-thursday": "scenario-armor",
+  restoration: "maundy-thursday",
+};
+
+export const steps: Record<StepName, StepIcon> = {
   "deep-dive": "🤿",
-  research: "🥸",
-  "secret-materials": "🗝️",
+  research: "🔬",
   "need-more-gold": "💰",
-  reunion: "🧹",
-  "maundy-thursday": "🔗",
+  "sort-wheat-from-chaff": "🌾",
+  "secret-materials": "🗝️",
+  "attack-of-the-clones": "👯‍♀️",
+  reunion: "🔗",
+  "scenario-armor": "🛡️",
+  "maundy-thursday": "🧹",
   restoration: "🖼️",
+};
+
+export const stepsRU: Record<StepName, string> = {
+  "deep-dive": "Двадцать тысяч лье под водой",
+  research: "Поиск истины",
+  "need-more-gold": "Нужно больше золота",
+  "sort-wheat-from-chaff": "Отделение зёрен от плевел",
+  "secret-materials": "Секретные материалы",
+  "attack-of-the-clones": "Атака клонов",
+  reunion: "Вместе навсегда",
+  "scenario-armor": "Сценарная броня",
+  "maundy-thursday": "Чистый четверг",
+  restoration: "Реставрация",
 };
 
 export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;

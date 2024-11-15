@@ -29,6 +29,8 @@ export const joinSavior = async (): Promise<boolean> => {
     })),
   });
 
+  await call.deleteOne(saviorCall);
+
   (await cookies()).set("call", saviorCall.call);
   (await cookies()).set("name", name);
 
