@@ -9,10 +9,14 @@ environments:
     values:
       - fullnamePrefixOverride: p-adm
       - partOfOverride: adm
-      - adm: true
-      - uix: false
-      - api: false
-      - wd: false
+      - adm:
+          enabled: true
+      - uix:
+          enabled: false
+      - api:
+          enabled: false
+      - wd:
+          enabled: false
     secrets:
       - environments/production-adm/secrets.yaml
   production-app:
@@ -20,10 +24,14 @@ environments:
     values:
       - fullnamePrefixOverride: p-app
       - partOfOverride: app
-      - adm: false
-      - uix: true
-      - api: true
-      - wd: false
+      - adm:
+          enabled: false
+      - uix:
+          enabled: true
+      - api:
+          enabled: true
+      - wd:
+          enabled: false
     secrets:
       - environments/production-app/secrets.yaml
   production-wd:
@@ -31,10 +39,14 @@ environments:
     values:
       - fullnamePrefixOverride: p-wd
       - partOfOverride: wd
-      - adm: false
-      - uix: false
-      - api: false
-      - wd: true
+      - adm:
+          enabled: false
+      - uix:
+          enabled: false
+      - api:
+          enabled: false
+      - wd:
+          enabled: true
     secrets:
       - environments/production-wd/secrets.yaml
 
