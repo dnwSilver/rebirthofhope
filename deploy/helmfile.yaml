@@ -1,5 +1,5 @@
 helmDefaults:
-  createNamespace: true
+  createNamespace: false
   wait: true
   atomic: true
 
@@ -9,14 +9,10 @@ environments:
     values:
       - fullnamePrefixOverride: p-adm
       - partOfOverride: adm
-      - adm:
-          enabled: true
-      - uix:
-          enabled: false
-      - api:
-          enabled: false
-      - wd:
-          enabled: false
+      - adm: true
+      - uix: false
+      - api: false
+      - wd: false
     secrets:
       - environments/production-adm/secrets.yaml
   production-app:
@@ -24,14 +20,10 @@ environments:
     values:
       - fullnamePrefixOverride: p-app
       - partOfOverride: app
-      - adm:
-          enabled: false
-      - uix:
-          enabled: true
-      - api:
-          enabled: true
-      - wd:
-          enabled: false
+      - adm: false
+      - uix: true
+      - api: true
+      - wd: false
     secrets:
       - environments/production-app/secrets.yaml
   production-wd:
@@ -39,14 +31,10 @@ environments:
     values:
       - fullnamePrefixOverride: p-wd
       - partOfOverride: wd
-      - adm:
-          enabled: false
-      - uix:
-          enabled: false
-      - api:
-          enabled: false
-      - wd:
-          enabled: true
+      - adm: false
+      - uix: false
+      - api: false
+      - wd: true
     secrets:
       - environments/production-wd/secrets.yaml
 
@@ -78,34 +66,34 @@ templates:
 
 releases:
   - name: "{{ .Environment.Name }}-adm"
-    namespace: julienne
+    namespace: short-sup
     chart: releases/adm
-    condition: adm.enabled
+    condition: adm
     values:
       - environments/{{ .Environment.Name }}/adm.yaml.gotmpl
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-uix"
-    namespace: julienne
+    namespace: short-sup
     chart: releases/uix
     values:
       - environments/{{ .Environment.Name }}/uix.yaml.gotmpl
-    condition: uix.enabled
+    condition: uix
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-api"
-    namespace: julienne
+    namespace: short-sup
     chart: releases/api
     values:
       - environments/{{ .Environment.Name }}/api.yaml.gotmpl
-    condition: api.enabled
+    condition: api
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-wd"
-    namespace: julienne
+    namespace: short-sup
     chart: releases/wd
     values:
       - environments/{{ .Environment.Name }}/wd.yaml.gotmpl
-    condition: wd.enabled
+    condition: wd
     <<: *set
     <<: *hooks
