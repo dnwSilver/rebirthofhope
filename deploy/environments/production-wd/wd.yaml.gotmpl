@@ -6,6 +6,15 @@ ingress:
   hosts:
     - julienne-1984.rebirthofhope.ru
 
+volumes:
+  - name: arts
+    persistentVolumeClaim:
+      claimName: p-pvc-arts
+
+volumeMounts:
+  - name: arts
+    mountPath: /.output/public/arts/watchdog
+
 replicaCount: 1
 
 app:
