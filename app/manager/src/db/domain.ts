@@ -1,3 +1,7 @@
+export interface ICall {
+  call: string;
+}
+
 export interface IStep {
   step: string;
   giveUp: Date | null;
@@ -33,7 +37,7 @@ const steps: Record<StepName, StepIcon> = {
   restoration: "🖼️",
 };
 
-export const EXAMPLE_TIME_AVAILABLE = 60 * 60 * 1_000;
+export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
 
 export const stepNames = Object.keys(steps) as Array<StepName>;
 

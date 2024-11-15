@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker/locale/ru";
 import { savior, call } from "@/db";
-import { ISavior } from "@/db/domain";
+import { ICall, ISavior } from "@/db/domain";
 import mongoose from "mongoose";
 
 const generateCall = async (): Promise<string> => {
@@ -11,7 +11,7 @@ const generateCall = async (): Promise<string> => {
   const newCall = faker.food.dish().replaceAll(" ", "-").toLowerCase();
 
   const saviorWithCall = await savior.findOne<ISavior>({ call }).exec();
-  const availableCall = await call.findOne<{ call: string }>({ call }).exec();
+  const availableCall = await call.findOne<ICall>({ call }).exec();
 
   if (saviorWithCall === null && availableCall === null) {
     return newCall;
@@ -20,7 +20,10 @@ const generateCall = async (): Promise<string> => {
   return await generateCall();
 };
 
-export const GET = async (): Promise<Response> => {
-  const calls = await Promise.all(Array.from({ length: 50 }).map(async (_) => await generateCall()));
-  return new Response(calls.join("\n"));
+export const POST = async (): Promise<Response> => {
+  const newCall = await generateCall();
+
+  await call.create<ICall>({ call: newCall });
+
+  return new Response(newCall);
 };

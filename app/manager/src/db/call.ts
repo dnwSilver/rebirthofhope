@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { ICall } from "./domain";
 const { Schema } = mongoose;
 
-const callSchema = new Schema<{ call: string }>({
+const callSchema = new Schema<ICall>({
   call: { type: String, required: true },
 });
 
-const call = mongoose.models.Call || mongoose.model<{ call: string }>("Call", callSchema);
+const call = mongoose.models.Call || mongoose.model<ICall>("Call", callSchema);
 
 export default call;

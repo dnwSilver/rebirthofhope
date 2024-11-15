@@ -20,7 +20,7 @@ export const joinSavior = async (): Promise<boolean> => {
 
   await savior.create<ISavior>({
     name,
-    call: saviorCall,
+    call: saviorCall.call,
     country: faker.internet.emoji({ types: ["flag"] }),
     progress: stepNames.map((step) => ({
       step,
@@ -29,7 +29,7 @@ export const joinSavior = async (): Promise<boolean> => {
     })),
   });
 
-  (await cookies()).set("call", saviorCall);
+  (await cookies()).set("call", saviorCall.call);
   (await cookies()).set("name", name);
 
   return true;

@@ -20,7 +20,7 @@ const Timer = ({ start }: { start: Date }) => {
     return `🏁`;
   }
 
-  return new Date(EXAMPLE_TIME_AVAILABLE - leftTime).toISOString().slice(14, 19);
+  return new Date(EXAMPLE_TIME_AVAILABLE - leftTime).toISOString().slice(11, 19);
 };
 
 export default Timer;
