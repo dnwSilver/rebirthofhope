@@ -80,7 +80,7 @@ releases:
   - name: "{{ .Environment.Name }}-adm"
     namespace: short-sup
     chart: releases/adm
-    condition: adm
+    condition: adm.enabled
     values:
       - environments/{{ .Environment.Name }}/adm.yaml.gotmpl
     <<: *set
@@ -90,7 +90,7 @@ releases:
     chart: releases/uix
     values:
       - environments/{{ .Environment.Name }}/uix.yaml.gotmpl
-    condition: uix
+    condition: uix.enabled
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-api"
@@ -98,7 +98,7 @@ releases:
     chart: releases/api
     values:
       - environments/{{ .Environment.Name }}/api.yaml.gotmpl
-    condition: api
+    condition: api.enabled
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-wd"
@@ -106,6 +106,6 @@ releases:
     chart: releases/wd
     values:
       - environments/{{ .Environment.Name }}/wd.yaml.gotmpl
-    condition: wd
+    condition: wd.enabled
     <<: *set
     <<: *hooks
