@@ -6,7 +6,7 @@ FROM golang:${GO_VERSION} AS build-stage
 
 WORKDIR /app
 
-COPY /app/watchdog/go.mod ./
+COPY /app/watchdog/* ./
 RUN go mod download
 
 COPY /app/watchdog/*.go ./
