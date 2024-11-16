@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { savior } from "@/db";
 import SaviorCards from "@/components/savior-cards";
 import Greeting from "@/components/greeting";
+import StatusPanel from "@/components/status-panel";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,13 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (process.env.DB) {
-    await mongoose.connect(process.env.DB);
-  } else {
-    throw new Error("Environment variable DB not found.");
-  }
-
-  const saviors = await savior.find().exec();
   return (
     <html lang="en">
       <body
@@ -47,9 +41,10 @@ export default async function RootLayout({
         }}
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
-        <SaviorCards saviors={saviors} />
+        <SaviorCards />
         <main>{children}</main>
         <Greeting />
+        <StatusPanel />
       </body>
     </html>
   );

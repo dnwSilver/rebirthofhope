@@ -1,36 +1,33 @@
 "use client";
 
 import { panel } from "@/styles/panel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Button from "./button";
 
 const Greeting = () => {
-  const firstVisit = localStorage.getItem("first");
+  const [show, setShow] = useState(false);
 
-  const [show, setShow] = useState(firstVisit === null);
+  useEffect(() => {
+    setShow(!localStorage?.getItem("first"));
+  }, []);
 
   return (
     <>
-      <button
+      <Button
         style={{
           position: "fixed",
           width: "6rem",
-          bottom: "2rem",
+          bottom: "1rem",
           left: "calc(50vw - 3rem)",
-          backgroundColor: "white",
           zIndex: "3",
-          border: "none",
-          color: "#28282d",
-          padding: "0.5rem 0",
-          borderRadius: "4rem",
-          cursor: "pointer",
         }}
-        onClick={() => {
+        onClick={async () => {
           setShow(!show);
-          localStorage.setItem("first", Date.now().toLocaleString());
+          localStorage?.setItem("first", Date.now().toLocaleString());
         }}
       >
         {show ? "Скрыть" : "Легенда"}
-      </button>
+      </Button>
       <section
         style={{
           ...panel,
@@ -43,6 +40,7 @@ const Greeting = () => {
           display: show ? "block" : "none",
           borderRadius: 5,
           height: "calc(100vh - 6rem)",
+          zIndex: "3",
           overflow: "scroll",
           background: "rgba(255,255,255,0.95)",
         }}
