@@ -10,11 +10,9 @@ type Progress = {
 export const useProgress = create<Progress>()((set) => ({
   hide: true,
   open: false,
-  show: () => set(state => {
-    console.log("SHOW")
-    return ({
-      hide: false
-    });
-  }),
+  show: () =>
+    set(() => ({
+      hide: false,
+    })),
   toggle: () => set((state) => ({ open: !state.open })),
 }));

@@ -28,7 +28,6 @@ const SaviorCards = () => {
 
   const processedSaviors: ISavior[] = saviors.filter(inProgress);
 
-  console.log(finishSaviors);
   return (
     <section style={{ height: "calc(100vh - 2rem)", overflow: "scroll", margin: "1rem" }}>
       {finishSaviors
