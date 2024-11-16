@@ -21,3 +21,6 @@ echo "    · vim"
 echo "    · helm"
 echo ""
 echo "  PS: Прогресс фиксируется, но всё абсолютно анонимно 🥸"
+
+eval $(ssh-agent -s) >/dev/null;
+cat ~/.ssh/id_rsa | tr -d '\r' | ssh-add - &>/dev/null;

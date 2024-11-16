@@ -5,7 +5,7 @@ SUPPURT_PLATHFORMS=linux/amd64,linux/arm64
 SERVER_PLATHFORM=linux/amd64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=0.0.29
+APP_VERSION=0.0.31
 
 FRONTEND_DIR=./app/frontend
 FRONTEND_PORT=4010
@@ -16,8 +16,8 @@ BACKEND_PORT=4020
 MANAGER_DIR=./app/manager
 MANAGER_PORT=4000
 
-FRONTEND_DIR=./app/watchdog
-FRONTEND_PORT=4030
+WATCHDOG_DIR=./app/watchdog
+WATCHDOG_PORT=4030
 
 DEPLOY_DIR=./deploy
 
@@ -26,7 +26,7 @@ DOCKER_HUB_NAMESPACE=dnwsilver
 CLUSTER_HOST=80.87.106.221
 
 build-workstation: update-secrets
-	docker build \
+	docker build --no-cache \
 	--platform ${SUPPURT_PLATHFORMS} \
 	--file ${DOCKER_DIR}/workstation.Dockerfile \
 	--tag workstation:${APP_VERSION} .;
@@ -34,13 +34,14 @@ build-workstation: update-secrets
 build-backend:
 	docker buildx build \
 	--platform ${SUPPURT_PLATHFORMS} \
-	--build-arg NODE_VERSION=${GO_VERSION} \
+	--build-arg GO_VERSION=${GO_VERSION} \
 	--file ${DOCKER_DIR}/backend.Dockerfile \
 	--tag backend:${APP_VERSION} .;
 
 build-frontend:
-	rm -rf ${FRONTEND_DIR}/.output
+	rm -rf ${FRONTEND_DIR}/.output;
 	cd ${FRONTEND_DIR}; \
+	bun install; \
 	bun run build;
 	docker buildx build \
 	--platform ${SUPPURT_PLATHFORMS} \
@@ -49,8 +50,9 @@ build-frontend:
 	--tag frontend:${APP_VERSION} .;
 
 build-manager:
-	rm -rf ${MANAGER_DIR}/.next
+	rm -rf ${MANAGER_DIR}/.next;
 	cd ${MANAGER_DIR}; \
+	npm install --force; \
 	npm run build;
 	docker buildx build \
 	--platform ${SUPPURT_PLATHFORMS} \
@@ -141,6 +143,7 @@ update-secrets:
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/ca.crt ./secrets/ca.crt ;
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.crt ./secrets/client.crt;
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.key ./secrets/client.key;
+	cp -r ../secrets ./secrets;
 
 update-reverse-proxy:
 	rsync -chavzP --stats ./configs/k8s.nginx.conf root@${CLUSTER_HOST}:/etc/nginx/sites-available/default;
