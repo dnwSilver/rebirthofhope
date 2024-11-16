@@ -1,0 +1,96 @@
+helmDefaults:
+  createNamespace: false
+  wait: true
+  atomic: true
+
+environments:
+  production-app:
+    kubeContext: louvre
+    values:
+      - fullnamePrefixOverride: p-app
+      - partOfOverride: app
+      - adm:
+          enabled: false
+      - uix:
+          enabled: true
+      - api:
+          enabled: true
+      - wd:
+          enabled: false
+    secrets:
+      - environments/production-app/secrets.yaml
+  production-wd:
+    kubeContext: louvre
+    values:
+      - fullnamePrefixOverride: p-wd
+      - partOfOverride: wd
+      - adm:
+          enabled: false
+      - uix:
+          enabled: false
+      - api:
+          enabled: false
+      - wd:
+          enabled: true
+    secrets:
+      - environments/production-wd/secrets.yaml
+
+templates:
+  env: &set
+    set:
+      - name: fullnamePrefixOverride
+        value: {{ .Values.fullnamePrefixOverride }}
+      - name: partOfOverride
+        value: {{ .Values.partOfOverride }}
+      - name: image.tag
+        value: {{ env "APP_TAG" }}
+  hooks: &hooks
+    hooks:
+      - events:
+          - prepare
+        showlogs: true
+        command: sh
+        args:
+          - -c
+          - |
+            mkdir -p releases
+            rm -rf releases/{{`{{ base .Release.Chart }}`}}
+            helm package charts/{{`{{ base .Release.Chart }}`}} \
+              --app-version '{{`{{ env "APP_TAG" }}`}}' \
+              -d releases
+            tar xvf $(ls {{`{{ .Release.Chart }}`}}-*.tgz) -C releases
+            rm -rf releases/{{`{{ base .Release.Chart }}`}}-*.tgz
+
+releases:
+  - name: "{{ .Environment.Name }}-adm"
+    namespace: julienne
+    chart: releases/adm
+    condition: adm.enabled
+    values:
+      - environments/{{ .Environment.Name }}/adm.yaml.gotmpl
+    <<: *set
+    <<: *hooks
+  - name: "{{ .Environment.Name }}-uix"
+    namespace: julienne
+    chart: releases/uix
+    values:
+      - environments/{{ .Environment.Name }}/uix.yaml.gotmpl
+    condition: uix.enabled
+    <<: *set
+    <<: *hooks
+  - name: "{{ .Environment.Name }}-api"
+    namespace: julienne
+    chart: releases/api
+    values:
+      - environments/{{ .Environment.Name }}/api.yaml.gotmpl
+    condition: api.enabled
+    <<: *set
+    <<: *hooks
+  - name: "{{ .Environment.Name }}-wd"
+    namespace: julienne
+    chart: releases/wd
+    values:
+      - environments/{{ .Environment.Name }}/wd.yaml.gotmpl
+    condition: wd.enabled
+    <<: *set
+    <<: *hooks

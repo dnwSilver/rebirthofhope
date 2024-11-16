@@ -1,0 +1,17 @@
+image:
+  tag: 0.0.21
+
+ingress:
+  enabled: true
+  hosts:
+    - julienne-api.rebirthofhope.ru
+
+replicaCount: 1
+
+app:
+  cors:
+    origins: https://julienne-api.abyssofdespair.ru
+  log:
+    level: trace
+  database:
+    connection: {{ .Values.app.db }}
