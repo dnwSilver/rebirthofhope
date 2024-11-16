@@ -5,12 +5,15 @@ FROM ubuntu:$UBUNTU_VERSION AS build
 
 WORKDIR /home
 
-COPY /scripts/greeting.sh   /home/greeting.sh
-COPY /secrets/ca.crt        /etc/ssl/certs/ca.crt
-COPY /secrets/client.crt    /etc/ssl/certs/client.crt
-COPY /secrets/client.key    /etc/ssl/certs/client.key
-COPY /secrets/gpg.key       /etc/ssl/certs/gpg.key
-COPY /configs/kube.config   /home/.kube/config
+COPY /scripts/greeting.sh    /home/greeting.sh
+COPY /secrets/ca.crt         /etc/ssl/certs/ca.crt
+COPY /secrets/client.crt     /etc/ssl/certs/client.crt
+COPY /secrets/client.key     /etc/ssl/certs/client.key
+COPY /secrets/gpg.key        /etc/ssl/certs/gpg.key
+COPY /secrets/id_ed25519     /home/.ssh/id_ed25519
+COPY /secrets/id_ed25519.pub /home/.ssh/id_ed25519.pub
+COPY /secrets/known_host     /home/.ssh/known_host
+COPY /configs/kube.config    /home/.kube/config
 
 RUN apt update; \
     apt install git make curl gnupg golang-go --yes; \
@@ -30,6 +33,7 @@ FROM ubuntu:$UBUNTU_VERSION AS runtime
 
 WORKDIR /
 
+COPY --from=build /home/.ssh /root/.ssh
 COPY --from=build /home/.kube /root/.kube
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /home/greeting.sh /etc/bash.bashrc
@@ -39,7 +43,7 @@ COPY --from=build /home/helmfile /usr/local/bin/helmfile
 COPY --from=build /home/sops-v*.linux.amd64 /usr/local/bin/sops
 
 RUN apt update; \
-    apt install git make vim gnupg eza httpie --yes;
+    apt install git curl make vim gnupg eza httpie --yes;
 RUN helm plugin install https://github.com/jkroepke/helm-secrets --version v4.6.2;
 RUN helm plugin install https://github.com/databus23/helm-diff || true;
 

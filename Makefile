@@ -136,6 +136,7 @@ setup-application-cluster:
 	ssh root@${CLUSTER_HOST} "rm setup.sh";
 
 update-secrets:
+	[[ -d secrets ]] || mkdir secrets;
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/etc/ssl/certs/gpg.key ./secrets/gpg.key;
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/ca.crt ./secrets/ca.crt ;
 	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.crt ./secrets/client.crt;

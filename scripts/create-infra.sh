@@ -79,7 +79,7 @@ gsed -zi 's|enabled: false|enabled: true|2' $HELM_FILE >/dev/null && echo "⏽ E
 gsed -i 's|createNamespace: true|createNamespace: false|' $HELM_FILE >/dev/null && echo " Disable create namespace";
 
 # git add . >/dev/null && echo "󰊢 Add files"
-# git commit -m "🎬 It has begun." >/dev/null && echo "󰊢  Create commit" 
+# git commit -m "🎬 It has begun." >/dev/null && echo "󰊢  Create commit"
 # git push -u origin $BRANCH_NAME >/dev/null && echo "󰊢 Push branch $BRANCH_NAME"
 
 # git switch main >/dev/null && echo "󰊢 Switch to main"

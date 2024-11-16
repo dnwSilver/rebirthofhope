@@ -87,7 +87,6 @@ const StatusPanel = () => {
               <h3 key={step} style={{ display: "grid", gridTemplateColumns: "2rem 2rem auto 10rem" }}>
                 <span> {getStepStatus(new Date(currentSavior.joining), currentStep)} </span>
                 <span>{steps[step]}</span>
-                <p>{new Date(currentSavior.joining).toISOString()}</p>
                 <span style={{ textDecoration: isStepFinish ? "line-through" : "none" }}>{stepsRU[step]}</span>
                 {isStepAvailable && <Link href={`/manual/${step}`}>📝 Методичка</Link>}
               </h3>

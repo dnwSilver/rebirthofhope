@@ -1,20 +1,10 @@
+import DeepDiveManual from "@/components/manuals/01-deep-dive";
+import { panel } from "@/styles/panel";
 
-const DeepDive = async () => {
-    return (
-      <main
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          marginLeft: "2%",
-          marginRight: "2%",
-          display: "grid",
-          gridTemplateColumns: "400px auto 400px",
-        }}
-      >
-        Глубже
-      </main>
-    );
-  };
+const ManualPage = async ({ params }) => {
+  const { step } = params;
 
-  export default DeepDive;
+  return <section style={{ ...panel, marginTop: "1rem" }}>{step === "deep-dive" && <DeepDiveManual />}</section>;
+};
+
+export default ManualPage;

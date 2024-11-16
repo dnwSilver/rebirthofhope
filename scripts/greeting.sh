@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APPROACH=$(curl --silent http://rebirthofhope.ru/api/approach || 0)
+APPROACH=$(curl --silent https://rebirthofhope.ru/api/approach || 0)
 
 [[ -z $call ]] && \
 echo "Кто ты? Почему у тебя нет позывного? Он должен быть на сайте, cверху." && \
