@@ -13,11 +13,11 @@ const generateCall = async (): Promise<string> => {
   const saviorWithCall = await savior.findOne<ISavior>({ call }).exec();
   const availableCall = await call.findOne<ICall>({ call }).exec();
 
-  if (saviorWithCall === null && availableCall === null) {
-    return newCall;
+  if (saviorWithCall !== null || availableCall !== null) {
+    return await generateCall();
   }
 
-  return await generateCall();
+  return newCall;
 };
 
 export const POST = async (): Promise<Response> => {

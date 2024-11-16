@@ -22,24 +22,29 @@ const SaviorCard = ({
   name,
   progress,
   start,
+  score,
 }: {
-  position: number;
+  position?: number;
   country: string;
   name: string;
   start: Date;
   progress: IStep[];
+  score?: number | null;
 }) => {
   return (
     <article style={panel}>
       <h4>
-        {country} {getPosition(position)} <b>{name}</b>
+        {country} {position && getPosition(position) + " "}
+        <b>{name}</b>
       </h4>
+      {score && <span style={{ position: "absolute", right: "0.2rem", top: "0rem" }}>🎬</span>}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <p style={{ marginLeft: "2rem" }}>
           <Progress start={start} progress={progress} />
         </p>
         <p style={{ alignContent: "flex-end" }}>
-          <Timer start={start} />
+          {!!score && new Date(score).toISOString().slice(11, 19)}
+          {!score && <Timer start={start} />}
         </p>
       </div>
     </article>

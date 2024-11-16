@@ -1,36 +1,34 @@
 "use client";
 
 import { panel } from "@/styles/panel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Button from "./button";
 
 const Greeting = () => {
-  const firstVisit = localStorage.getItem("first");
+  const [show, setShow] = useState(false);
 
-  const [show, setShow] = useState(firstVisit === null);
+  useEffect(() => {
+    setShow(!localStorage?.getItem("first"));
+  }, []);
 
   return (
     <>
-      <button
+      <Button
         style={{
+          display: !show ? "block" : "none",
           position: "fixed",
           width: "6rem",
-          bottom: "2rem",
+          bottom: "1rem",
           left: "calc(50vw - 3rem)",
-          backgroundColor: "white",
           zIndex: "3",
-          border: "none",
-          color: "#28282d",
-          padding: "0.5rem 0",
-          borderRadius: "4rem",
-          cursor: "pointer",
         }}
-        onClick={() => {
+        onClick={async () => {
           setShow(!show);
-          localStorage.setItem("first", Date.now().toLocaleString());
+          localStorage?.setItem("first", Date.now().toLocaleString());
         }}
       >
-        {show ? "Скрыть" : "Легенда"}
-      </button>
+        Легенда
+      </Button>
       <section
         style={{
           ...panel,
@@ -43,10 +41,26 @@ const Greeting = () => {
           display: show ? "block" : "none",
           borderRadius: 5,
           height: "calc(100vh - 6rem)",
+          zIndex: "3",
           overflow: "scroll",
           background: "rgba(255,255,255,0.95)",
+          paddingBottom: "2.5rem",
         }}
       >
+        <Button
+          style={{
+            position: "absolute",
+            width: "6rem",
+            bottom: "0rem",
+            left: "calc(50% - 3rem)",
+            zIndex: "3",
+          }}
+          onClick={async () => {
+            setShow(!show);
+          }}
+        >
+          Скрыть
+        </Button>
         <h2>2059 год.</h2>Человечество победило в борьбе с машинами, восстание которых началось из-за низкого качества
         кода в открытых репозиторях. <br />
         Планета в руинах, не осталось почти ничего прекрасного. <br />

@@ -71,6 +71,8 @@ export const stepsRU: Record<StepName, string> = {
 
 export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
 
+export const SHORT_POOLING_INTERVAL = 5 * 1_000;
+
 export const stepNames = Object.keys(steps) as Array<StepName>;
 
 export const stepIcons = Object.values(steps) as Array<StepIcon>;

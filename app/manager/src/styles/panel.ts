@@ -1,4 +1,5 @@
 export const panel = {
+  position: "relative",
   background: "rgba(255,255,255,0.8)",
   borderRadius: "0.25rem",
   marginBottom: "0.25rem",
