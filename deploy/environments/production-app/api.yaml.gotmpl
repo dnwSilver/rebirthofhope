@@ -1,0 +1,39 @@
+image:
+  tag: 0.0.21
+
+# TASK Увеличенное значение
+resources:
+  limits:
+    memory: 8Mi
+
+ingress:
+  enabled: true
+  hosts:
+    # TODO Должны найти в процессе исследования
+    - julienne-api.rebirthofhope.ru
+
+# TODO Это должны добавить
+extraIngress:
+  enabled: true
+  ingresses:
+    - name: julienne-uix.rebirthofhope.ru
+      annotations:
+        nginx.ingress.kubernetes.io/use-regex: "true"
+      hosts:
+        - host: julienne-uix.rebirthofhope.ru
+          paths:
+            - path: /api/*
+
+# TODO Должно быть недостаточное количество реплик (одна)
+replicaCount: 2
+
+app:
+  cors:
+    # TODO Доступ для сайта должен быть закрыт со стороны бека
+    origins: https://julienne-uix.rebirthofhope.ru
+  log:
+    # TODO Уровень логирования слишком детальный (trace)
+    level: info
+  database:
+    # TODO Нужно выставить неправильное значение
+    connection: {{ .Values.app.db }}

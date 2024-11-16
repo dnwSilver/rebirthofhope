@@ -1,1 +1,6 @@
-releases/
+*.crt
+*.key
+
+/releases
+/secrets
+/records
