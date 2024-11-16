@@ -4,12 +4,14 @@ import Button from "@/components/button";
 import EntryPoint from "@/components/entrypoint";
 import useCall from "@/hooks/use-call";
 import { joinSavior } from "@/server-functions/join-savior";
+import { useProgress } from "@/store/store";
 import { useState, useEffect } from "react";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [fullHouse, setIsFullHouse] = useState(false);
   const { call, updateCall } = useCall();
+  const { toggle, show } = useProgress();
 
   useEffect(() => {
     setLoading(false);
@@ -20,12 +22,15 @@ const Home = () => {
   }
 
   const handleJoinClick = async () => {
+    setLoading(true);
     const isSuccess = await joinSavior();
     if (!isSuccess) {
       setIsFullHouse(true);
     }
     updateCall();
-    setLoading(true);
+    show();
+    toggle();
+    setLoading(false);
   };
 
   if (fullHouse) {

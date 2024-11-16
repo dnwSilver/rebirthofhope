@@ -1,16 +1,26 @@
 "use client";
 
 import { panel } from "@/styles/panel";
-import { useState } from "react";
 import Button from "./button";
 import { steps, previousSteps, stepsRU } from "@/db/domain";
 import Link from "next/link";
 import { getStepStatus } from "./progress";
 import useCurrentSaviour from "@/hooks/use-current-savior";
+import { useProgress } from "@/store/store";
+import { useEffect } from "react";
 
 const StatusPanel = () => {
-  const [show, setShow] = useState(open);
-  const currentSavior = useCurrentSaviour();
+  const { hide, open, toggle } = useProgress();
+
+  const { currentSavior, verify } = useCurrentSaviour();
+
+  useEffect(() => {
+    verify();
+  }, [hide]);
+
+  if (!currentSavior && hide) {
+    return false;
+  }
 
   if (!currentSavior) {
     return false;
@@ -20,6 +30,7 @@ const StatusPanel = () => {
     <>
       <Button
         style={{
+          display: open ? "none" : "block",
           position: "fixed",
           width: "7rem",
           bottom: "3rem",
@@ -27,11 +38,11 @@ const StatusPanel = () => {
           zIndex: 2,
         }}
         onClick={async () => {
-          setShow(!show);
+          toggle();
           localStorage.setItem("first", Date.now().toLocaleString());
         }}
       >
-        {show ? "Скрыть" : "Прогресс"}
+        Прогресс
       </Button>
       <section
         style={{
@@ -39,15 +50,31 @@ const StatusPanel = () => {
           position: "fixed",
           alignItems: "center",
           justifyContent: "center",
-          top: "3rem",
+          top: "15rem",
           left: "calc(50vw - 20rem)",
           width: "40rem",
-          display: show ? "block" : "none",
+          paddingBottom: "1.5rem",
+          display: open ? "block" : "none",
           borderRadius: 5,
           overflow: "scroll",
           background: "rgba(255,255,255,0.95)",
         }}
       >
+        <Button
+          style={{
+            position: "absolute",
+            width: "7rem",
+            bottom: "0.25rem",
+            left: "calc(50% - 3.5rem)",
+            zIndex: 2,
+          }}
+          onClick={async () => {
+            toggle();
+            localStorage.setItem("first", Date.now().toLocaleString());
+          }}
+        >
+          Скрыть
+        </Button>
         <h2>Прогресс</h2>
         {currentSavior &&
           Object.keys(steps).map((step) => {

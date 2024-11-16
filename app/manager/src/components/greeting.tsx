@@ -15,6 +15,7 @@ const Greeting = () => {
     <>
       <Button
         style={{
+          display: !show ? "block" : "none",
           position: "fixed",
           width: "6rem",
           bottom: "1rem",
@@ -26,7 +27,7 @@ const Greeting = () => {
           localStorage?.setItem("first", Date.now().toLocaleString());
         }}
       >
-        {show ? "Скрыть" : "Легенда"}
+        Легенда
       </Button>
       <section
         style={{
@@ -43,8 +44,23 @@ const Greeting = () => {
           zIndex: "3",
           overflow: "scroll",
           background: "rgba(255,255,255,0.95)",
+          paddingBottom: "2.5rem",
         }}
       >
+        <Button
+          style={{
+            position: "absolute",
+            width: "6rem",
+            bottom: "0rem",
+            left: "calc(50% - 3rem)",
+            zIndex: "3",
+          }}
+          onClick={async () => {
+            setShow(!show);
+          }}
+        >
+          Скрыть
+        </Button>
         <h2>2059 год.</h2>Человечество победило в борьбе с машинами, восстание которых началось из-за низкого качества
         кода в открытых репозиторях. <br />
         Планета в руинах, не осталось почти ничего прекрасного. <br />
