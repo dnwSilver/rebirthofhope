@@ -4,9 +4,8 @@ import { FC } from "react";
 import Manual from "./manual";
 import { verifyAttackOfTheClones } from "@/server-functions/verify/verify-attack-of-the-clones";
 import Tutorial from "../tutorials/tutorial";
-import Command from "../command";
-import Helper from "../helper";
-import { GO_REPO, RUN_LINTING, GIT_STAGE, GIT_COMMIT, GIT_PUSH } from "../tutorials/commands";
+import DeployHint from "../deploy-hint";
+import CommitHint from "../commit-hint";
 
 const AttackOfTheClonesManual: FC = () => {
   return (
@@ -22,8 +21,8 @@ const AttackOfTheClonesManual: FC = () => {
           Бродя по логам
         </Tutorial>{" "}
         <b>API</b> мы поняли, что нам не хватает оперативной памяти. Увеличивать ресурсы за счет лимитов уже нельзя,
-        увы. Но есть еще один способ. Горизонтально масштабирование. Разработчики контейнеров обещали, конечно же, корректную работы
-        своих продуктов в таком стиле.
+        увы. Но есть еще один способ. Горизонтально масштабирование. Разработчики контейнеров обещали, конечно же,
+        корректную работы своих продуктов в таком стиле.
       </p>
       <p>
         {" "}
@@ -34,17 +33,9 @@ const AttackOfTheClonesManual: FC = () => {
         <mark>replicaCount</mark>. Давай увеличим количество реплик наших подов до <b>2</b>?
       </p>
 
+      <br />
+      <DeployHint />
       <h2>Опять двадцать пять</h2>
-      <p>
-        <Tutorial theme={"helmfile"} chapter="linting">
-          Проверим конфигурацию
-        </Tutorial>{" "}
-        и{" "}
-        <Tutorial theme={"helmfile"} chapter="deploy">
-          обновим нашу инфраструктуру
-        </Tutorial>
-        .
-      </p>
       <p>
         <Tutorial theme={"k9s"} chapter={"pods"}>
           Пялимся в <b>POD</b>'ы
@@ -56,21 +47,8 @@ const AttackOfTheClonesManual: FC = () => {
         <b>API</b> и видим другую ошибку 🤪. Ну теперь нам, хотя бы хватает ресурсов. А это ошибка это проблема будущего
         тебя.
       </p>
-      <p>
-        <Tutorial theme={"git"} chapter={"commit"}>
-          Пихаем
-        </Tutorial>{" "}
-        нашу работы в <b>git</b>.
-      </p>
-      <Helper>
-        <Command
-          text={`${GO_REPO}
-${RUN_LINTING}
-${GIT_STAGE}
-${GIT_COMMIT}
-${GIT_PUSH}`}
-        />
-      </Helper>
+      <br />
+      <CommitHint action="Пихаем" result="нашу работы" />
     </Manual>
   );
 };

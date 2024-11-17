@@ -4,9 +4,9 @@ import { FC } from "react";
 import Manual from "./manual";
 import Tutorial from "../tutorials/tutorial";
 import Command from "../command";
-import Helper from "../helper";
-import { GO_REPO, GIT_STAGE, GIT_COMMIT, GIT_PUSH, RUN_LINTING } from "../tutorials/commands";
 import { verifySecretMaterial } from "@/server-functions/verify/verify-secret-materials";
+import DeployHint from "../deploy-hint";
+import CommitHint from "../commit-hint";
 
 const SecretMaterialManual: FC = () => {
   return (
@@ -37,39 +37,19 @@ const SecretMaterialManual: FC = () => {
         этого файла:
         <Command text="helm secrets edit ./environments/production-app/secrets.yaml" />
       </p>
+
+      <br />
+      <DeployHint />
+
       <h2>Повторение — мать учения</h2>
-      <p>
-        <Tutorial theme={"helmfile"} chapter="linting">
-          Проверим конфигурацию
-        </Tutorial>{" "}
-        и{" "}
-        <Tutorial theme={"helmfile"} chapter="deploy">
-          обновим нашу инфраструктуру
-        </Tutorial>
-        .
-      </p>
       <p>
         <Tutorial theme={"k9s"} chapter={"logs"}>
           Шуршим в логах
         </Tutorial>{" "}
         <b>API</b> и наша ошибка пропала! Правда появилась другая. Никогда такого не было и вот опять👏.
       </p>
-      <p>
-        Куда же мы без{" "}
-        <Tutorial theme={"git"} chapter={"commit"}>
-          фиксации
-        </Tutorial>{" "}
-        нашей работы в <b>git</b>.
-      </p>
-      <Helper>
-        <Command
-          text={`${GO_REPO}
-${RUN_LINTING}
-${GIT_STAGE}
-${GIT_COMMIT}
-${GIT_PUSH}`}
-        />
-      </Helper>
+      <br />
+      <CommitHint action="Фиксируем" result="нашу деятельность" />
     </Manual>
   );
 };

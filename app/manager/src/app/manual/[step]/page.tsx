@@ -4,6 +4,7 @@ import NeedMoreGoldManual from "@/components/manuals/03-need-more-gold";
 import SortWheatFromChaffManual from "@/components/manuals/04-sort-wheat-from-chaff";
 import SecretMaterialManual from "@/components/manuals/05-secret-materials";
 import AttackOfTheClonesManual from "@/components/manuals/06-attack-of-the-clones";
+import ReunionManual from "@/components/manuals/07-reunion";
 import { StepName } from "@/db/domain";
 import { panel } from "@/styles/panel";
 
@@ -20,6 +21,7 @@ const ManualPage = async ({ params }: { params: Promise<{ step: StepName }> }) =
       {step === "sort-wheat-from-chaff" && <SortWheatFromChaffManual />}
       {step === "secret-materials" && <SecretMaterialManual />}
       {step === "attack-of-the-clones" && <AttackOfTheClonesManual />}
+      {step === "reunion" && <ReunionManual />}
     </section>
   );
 };

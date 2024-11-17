@@ -3,11 +3,10 @@
 import { FC } from "react";
 import Manual from "./manual";
 import Tutorial from "../tutorials/tutorial";
-import Helper from "../helper";
-import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
-import { GIT_COMMIT, GIT_PUSH, GIT_STAGE, GO_REPO, RUN_DEPLOY, RUN_LINTING } from "../tutorials/commands";
 import { verifySortWheatFromChaff } from "@/server-functions/verify/verify-sort-wheat-from-chaff";
+import DeployHint from "../deploy-hint";
+import CommitHint from "../commit-hint";
 
 const SortWheatFromChaffManual: FC = () => {
   const call = getCookie("call");
@@ -38,24 +37,8 @@ const SortWheatFromChaffManual: FC = () => {
         </Tutorial>{" "}
         уровень логирования с <mark>trace</mark> на что-то более вменяемое, например на <mark>info</mark>.
       </p>
-      <p>
-        Как обычно{" "}
-        <Tutorial theme={"helmfile"} chapter="linting">
-          проверим конфигурацию
-        </Tutorial>{" "}
-        и{" "}
-        <Tutorial theme={"helmfile"} chapter="deploy">
-          обновим нашу инфраструктуру
-        </Tutorial>
-        .
-      </p>
-      <Helper>
-        <Command
-          text={`${GO_REPO}
-${RUN_LINTING}
-${RUN_DEPLOY}`}
-        />
-      </Helper>
+      <br />
+      <DeployHint />
       <h2>Только нужное</h2>
       <p>
         Повторим упражнение! Опять{" "}
@@ -66,22 +49,8 @@ ${RUN_DEPLOY}`}
       </p>
       <p>Теперь то понятно! Просто пароли для строки подключения к БД в секретах протухли.</p>
       <p>Ты это починишь. Но не сейчас.</p>
-      <p>
-        Сперва надо{" "}
-        <Tutorial theme={"git"} chapter={"commit"}>
-          зафиксировать
-        </Tutorial>{" "}
-        результаты нашей работы в <b>git</b>.
-      </p>
-      <Helper>
-        <Command
-          text={`${GO_REPO}
-${RUN_LINTING}
-${GIT_STAGE}
-${GIT_COMMIT}
-${GIT_PUSH}`}
-        />
-      </Helper>
+      <br />
+      <CommitHint action="Складываем" result="все добро" />
     </Manual>
   );
 };

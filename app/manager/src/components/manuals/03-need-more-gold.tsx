@@ -5,6 +5,8 @@ import Command from "../command";
 import Manual from "./manual";
 import Helper from "../helper";
 import { verifyNeedMoreGold } from "@/server-functions/verify/verify-need-more-gold";
+import DeployHint from "../deploy-hint";
+import CommitHint from "../commit-hint";
 
 const NeedMoreGoldManual = () => {
   return (
@@ -61,24 +63,20 @@ const NeedMoreGoldManual = () => {
   limits:
     memory: 8Mi`}
       />
-      <p>
-        После правок обязательно запускаем{" "}
-        <Tutorial theme="helmfile" chapter="linting">
-          проверку целостности
-        </Tutorial>
-        .
-      </p>
+      <br />
+      <DeployHint />
+
       <h2>Публикация приложений</h2>
       <p>
-        <Tutorial theme="helmfile" chapter="deploy">
-          Обновляем
-        </Tutorial>{" "}
-        приложения. После обновления находим наш{" "}
+        После обновления находим наш{" "}
         <Tutorial theme="k9s" chapter="namespace">
           namespace
         </Tutorial>{" "}
         в k9s.
       </p>
+
+      <br />
+      <CommitHint action="Отправляем" result="нашу победу" />
     </Manual>
   );
 };
