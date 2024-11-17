@@ -42,7 +42,7 @@ const NeedMoreGoldManual = () => {
         <Command text="bat ~/rebirthofhope/charts/uix/values.yaml" />
       </Helper>
       <p>
-        Похоже что <b>API</b> явно обделили.
+        Определённо <b>API</b> явно обделили.
       </p>
       <h2>Конфигурирование ресурсов</h2>
       <p>Самое время внести первые правки в конфигурацию.</p>

@@ -9,7 +9,7 @@ const EntryPoint = () => {
 
   return (
     <section style={panel}>
-      Мы рады что ты с нами <b>{decodeURIComponent(getCookie("name") || "")}</b>!
+      Мы рады, что ты с нами <b>{decodeURIComponent(getCookie("name") || "")}</b>!
       <br />
       Твой позывной <b>{call}</b>.
       <br />

@@ -6,7 +6,7 @@ import Tutorial from "../tutorials/tutorial";
 import Command from "../command";
 import Helper from "../helper";
 import { GO_REPO, GIT_STAGE, GIT_COMMIT, GIT_PUSH, RUN_LINTING } from "../tutorials/commands";
-import { verifySecretMaterial } from "@/server-functions/verify/secret-materials";
+import { verifySecretMaterial } from "@/server-functions/verify/verify-secret-materials";
 
 const SecretMaterialManual: FC = () => {
   return (
@@ -37,8 +37,7 @@ const SecretMaterialManual: FC = () => {
         этого файла:
         <Command text="helm secrets edit ./environments/production-app/secrets.yaml" />
       </p>
-      <h2>Стабилизируемся</h2>
-      <p>Повторение — мать учения. </p>
+      <h2>Повторение — мать учения</h2>
       <p>
         <Tutorial theme={"helmfile"} chapter="linting">
           Проверим конфигурацию

@@ -7,7 +7,7 @@ import Helper from "../helper";
 import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
 import { GIT_COMMIT, GIT_PUSH, GIT_STAGE, GO_REPO, RUN_DEPLOY, RUN_LINTING } from "../tutorials/commands";
-import { verifySortWheatFromChaff } from "@/server-functions/verify/sort-wheat-from-chaff";
+import { verifySortWheatFromChaff } from "@/server-functions/verify/verify-sort-wheat-from-chaff";
 
 const SortWheatFromChaffManual: FC = () => {
   const call = getCookie("call");
@@ -29,7 +29,7 @@ const SortWheatFromChaffManual: FC = () => {
       </p>
       <p>Что-то там слишком много логов, тянутся, летят. Глаз ни за что не цепляется даже.</p>
       <p>
-        Похоже кто-то занимался отладкой <b>API</b> на проде и забыл отключить трейсы. Бог ему судья.
+        Похоже, кто-то занимался отладкой <b>API</b> на проде и забыл отключить трейсы. Бог ему судья.
       </p>
       <p>
         Пойдем{" "}

@@ -89,9 +89,12 @@ const StatusPanel = () => {
                 <span>{steps[step]}</span>
                 <span style={{ textDecoration: isStepFinish ? "line-through" : "none" }}>{stepsRU[step]}</span>
                 {isStepAvailable && (
-                  <Link href={`/manual/${step}`} onClick={toggle}>
-                    📝 Методичка
-                  </Link>
+                  <span>
+                    📝
+                    <Link href={`/manual/${step}`} onClick={toggle}>
+                      Методичка
+                    </Link>
+                  </span>
                 )}
               </h3>
             );

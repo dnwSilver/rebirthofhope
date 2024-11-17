@@ -23,7 +23,7 @@ export const deployConfig = async (
   config: "secrets.yaml" | "api.yaml.gotmpl" | "uix.yaml.gotmpl"
 ): Promise<DeployConfig> => {
   const endpoint =
-    "https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/secrets.yaml";
+    "https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/api.yaml.gotmpl";
 
   //   const endpoint = `${origin}${repo}${branch(call)}${file(config)}`;
 
