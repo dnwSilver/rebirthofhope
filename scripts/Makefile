@@ -13,7 +13,7 @@ verify-environments:
 		(echo "Environment {} is broken! Update values files in {} directory."; false)';
 
 verify: verify-secrets verify-charts verify-environments
-	https POST rebirthofhope.ru/api/verify call=${CALL}
+	https POST rebirthofhope.ru/api/verify call=${CALL} task=linting
 
 deploy:
 	helmfile --environment production-app apply;

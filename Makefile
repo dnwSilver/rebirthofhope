@@ -84,6 +84,7 @@ run-dev-backend:
 
 run-dev-frontend:
 	cd ${FRONTEND_DIR}; \
+	bun install; \
 	bun run dev --port=${FRONTEND_PORT};
 
 run-dev-manager:

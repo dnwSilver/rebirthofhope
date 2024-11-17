@@ -60,7 +60,7 @@ export const steps: Record<StepName, StepIcon> = {
 
 export const stepsRU: Record<StepName, string> = {
   "deep-dive": "Двадцать тысяч лье под водой",
-  research: "Поиск истины",
+  research: "В поисках истины",
   "need-more-gold": "Нужно больше золота",
   "sort-wheat-from-chaff": "Отделение зёрен от плевел",
   "secret-materials": "Секретные материалы",
