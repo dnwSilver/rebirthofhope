@@ -7,6 +7,9 @@ GO_VERSION=1.23
 NODE_VERSION=20.18.0
 APP_VERSION=0.0.31
 
+BIN_DIR=~/practice/bin
+SECRETS_DIR=~/practice/secrets
+
 FRONTEND_DIR=./app/frontend
 FRONTEND_PORT=4010
 
@@ -25,7 +28,7 @@ DOCKER_HUB_NAMESPACE=dnwsilver
 
 CLUSTER_HOST=80.87.106.221
 
-build-workstation: update-secrets
+build-workstation: update-bin update-secrets
 	docker build --no-cache \
 	--platform ${SUPPURT_PLATHFORMS} \
 	--file ${DOCKER_DIR}/workstation.Dockerfile \
@@ -137,13 +140,18 @@ setup-application-cluster:
 	ssh root@${CLUSTER_HOST} "./setup.sh";
 	ssh root@${CLUSTER_HOST} "rm setup.sh";
 
+update-bin:
+	cp -r ${BIN_DIR} ./.bin;
+
 update-secrets:
+	cp -r ${SECRETS_DIR} ./.secrets;
+
+download-secrets:
 	[[ -d secrets ]] || mkdir secrets;
-	rsync -chavzP --stats root@${CLUSTER_HOST}:/etc/ssl/certs/gpg.key ./secrets/gpg.key;
-	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/ca.crt ./secrets/ca.crt ;
-	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.crt ./secrets/client.crt;
-	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.key ./secrets/client.key;
-	cp -r ../secrets ./secrets;
+	rsync -chavzP --stats root@${CLUSTER_HOST}:/etc/ssl/certs/gpg.key ${SECRETS_DIR}/gpg.key;
+	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/ca.crt ${SECRETS_DIR}/ca.crt ;
+	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.crt ${SECRETS_DIR}/client.crt;
+	rsync -chavzP --stats root@${CLUSTER_HOST}:/root/.minikube/profiles/minikube/client.key ${SECRETS_DIR}/client.key;
 
 update-reverse-proxy:
 	rsync -chavzP --stats ./configs/k8s.nginx.conf root@${CLUSTER_HOST}:/etc/nginx/sites-available/default;

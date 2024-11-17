@@ -2,6 +2,5 @@
 *.key
 
 /releases
-/secrets
-/records
-/bin
+/.secrets
+/.bin
