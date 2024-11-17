@@ -4,6 +4,7 @@ import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import Manual from "./manual";
 import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
+import Tutorial from "../tutorials/tutorial";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
@@ -15,6 +16,7 @@ const DeepDiveManual = () => {
       error="Похоже что ты еще не выполнил полную проверку линтинга в контейнере."
       verify={verifyDeepDive}
     >
+      <h2>Понеслась</h2>
       <p>Ну что ж. Начнём.</p>
       <p>Заранее спасибо за оказанную помощь!</p>
       <br />
@@ -38,7 +40,6 @@ const DeepDiveManual = () => {
       <br />
       <p>Запускаем наше рабочее место командой:</p>
       <Command text={`docker run -e CALL=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
-      <br />
       <h2>Получение конфигураций</h2>
       Клонируем себе репозитория в домашнюю директорию <b>~/rebirthofhope</b>.
       <Command text={`git clone git@github.com:dnwSilver/rebirthofhope.git`} />
@@ -46,9 +47,8 @@ const DeepDiveManual = () => {
       Переходим в директорию c git репозиторием.
       <Command text={`cd rebirthofhope`} />
       <br />
-      Переключаемся на нашу на ветку <b>download-secretsr/{call}</b>.
-      <Command text={`git switch download-secretsr/${call}`} />
-      <br />
+      Переключаемся на нашу на ветку <b>savior/{call}</b>.
+      <Command text={`git switch savior/${call}`} />
       <h2>Валидация конфигураций</h2>
       <p>
         Все нужные команды лежать в фaйле <b>~/rebirthofhope/Makefile</b>.
@@ -69,8 +69,11 @@ const DeepDiveManual = () => {
       <Command text={`make verify-environments`} />
       <br />
       <p>
-        Напоследок запустим все вместе. Скрипт <b>verify</b> нам понадобится дальше, довольно таки часто. Запускать её
-        нужно перед каждым <b>commit</b>'ом в репозиторий, для того чтобы убедиться что мы все заполнили корректно.
+        Напоследок запустим все вместе. Скрипт <b>verify</b> нам понадобится дальше, довольно таки часто.
+      </p>
+      <p>
+        Запускать его нужно перед каждым <Tutorial theme="git" chapter="commit">commit</Tutorial>'ом в репозиторий , для того чтобы
+        убедиться что мы все заполнили корректно.
       </p>
       <Command text={`make verify`} />
     </Manual>

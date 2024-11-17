@@ -27,11 +27,26 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+details {
+  margin: 0.5rem;
 }
 
+summary {
+  color: green;
+}
+
+a {
+  color: #022aba;
+   {
+     {
+      /* text-decoration: none; */
+    }
+  }
+}
+
+h2 {
+  margin-top: 2rem;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

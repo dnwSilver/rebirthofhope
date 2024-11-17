@@ -1,14 +1,86 @@
+"use client";
+
+import Tutorial from "../tutorials/tutorial";
+import Command from "../command";
+import Manual from "./manual";
+import Helper from "../helper";
+import { verifyNeedMoreGold } from "@/server-functions/verify/verify-need-more-gold";
+
 const NeedMoreGoldManual = () => {
   return (
-    <>
-      <br />
+    <Manual
+      stepName={"need-more-gold"}
+      title={"💰 Нужно больше золота"}
+      verify={verifyNeedMoreGold}
+      error={"Ресурсы так и не зарезервированы..."}
+    >
+      <h2>Что имеем?</h2>
+      <p>
+        Ходит легенда, о минимальных требованиях к ресурсам у <b>API</b> и <b>UIX</b>. Их создатели заявляли следующее:
+        <ul>
+          <li>
+            <b>UIX</b> требует <mark>32Mi RAM</mark> <mark>50m CPU</mark>
+          </li>
+          <li>
+            <b>API</b> требует <mark>8Mi RAM</mark> <mark>10m CPU</mark>
+          </li>
+          <li></li>
+        </ul>
+        Теперь ты знаешь требования.
+      </p>
+      <p>
+        Текущие запросы можешь найти в репозитории в файлах <mark>/charts/uix/values.yaml</mark> и{" "}
+        <mark>/charts/api/values.yaml</mark> неплохо было бы их{" "}
+        <Tutorial theme={"bat"} chapter={"read"}>
+          прочитать
+        </Tutorial>
+        .
+      </p>
+      <Helper>
+        <Command text="bat ~/rebirthofhope/charts/api/values.yaml" />
+        <br />
+        <Command text="bat ~/rebirthofhope/charts/uix/values.yaml" />
+      </Helper>
+      <p>
+        Похоже что <b>API</b> явно обделили.
+      </p>
+      <h2>Конфигурирование ресурсов</h2>
+      <p>Самое время внести первые правки в конфигурацию.</p>
+      <p>
+        Внеси правки в файл <mark>/environments/production-app/api.yaml.gotmpl</mark>.
+      </p>
+      <p>
+        Правки нужно{" "}
+        <Tutorial theme="editors" chapter="vim">
+          вставить
+        </Tutorial>{" "}
+        в новый раздел resources, расширим память для <b>API</b> до <mark>8mi</mark>.
+      </p>
+      <Command
+        text={`resources:
+  limits:
+    memory: 8Mi`}
+      />
+      <p>
+        После правок обязательно запускаем{" "}
+        <Tutorial theme="helmfile" chapter="linting">
+          проверку целостности
+        </Tutorial>
+        .
+      </p>
       <h2>Публикация приложений</h2>
       <p>
-        Наша конфигурация отправляется в кластер всего одной командой. Туда улетает сразу <b>API</b> и <b>UIX</b>.
+        <Tutorial theme="helmfile" chapter="deploy">
+          Обновляем
+        </Tutorial>{" "}
+        приложения. После обновления находим наш{" "}
+        <Tutorial theme="k9s" chapter="namespace">
+          namespace
+        </Tutorial>{" "}
+        в k9s.
       </p>
-      <Command text={`helmfile --environment production-app apply`} />
-    </>
+    </Manual>
   );
 };
 
-export default NeedMoreGoldManual
+export default NeedMoreGoldManual;

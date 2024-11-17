@@ -71,7 +71,7 @@ export const stepsRU: Record<StepName, string> = {
   restoration: "Реставрация",
 };
 
-export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
+export const EXAMPLE_TIME_AVAILABLE = 200 * 60 * 60 * 1_000;
 
 export const SHORT_POLLING_INTERVAL = 60 * 60 * 1_000;
 
