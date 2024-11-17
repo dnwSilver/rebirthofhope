@@ -1,3 +1,5 @@
+'use client'
+
 import { getCookie } from "@/helpers/cookies";
 import { panel } from "@/styles/panel";
 import Command from "./command";

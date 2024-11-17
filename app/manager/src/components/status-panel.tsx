@@ -12,10 +12,10 @@ import { useEffect } from "react";
 const StatusPanel = () => {
   const { hide, open, toggle } = useProgress();
 
-  const { currentSavior, verify } = useCurrentSaviour();
+  const { currentSavior, actualize } = useCurrentSaviour();
 
   useEffect(() => {
-    verify();
+    actualize();
   }, [hide]);
 
   if (!currentSavior && hide) {

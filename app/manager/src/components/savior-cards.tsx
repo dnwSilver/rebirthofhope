@@ -23,6 +23,8 @@ const SaviorCards = () => {
     country: savior.country,
     progress: savior.progress,
     name: savior.name,
+    linting: savior.linting,
+    metrics: savior.metrics,
     score: score(new Date(savior.joining), savior.progress),
   }));
 

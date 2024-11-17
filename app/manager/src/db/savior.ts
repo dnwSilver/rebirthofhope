@@ -6,6 +6,8 @@ const saviorSchema = new Schema<ISavior>({
   name: { type: String, required: true },
   call: { type: String, required: true, unique: true },
   country: { type: String, required: true },
+  linting: { type: Boolean, default: false },
+  metrics: { type: Boolean, default: false },
   joining: { type: Date, default: Date.now, required: true },
   progress: [{ step: String, giveUp: Date, finish: Date }],
 });

@@ -2,9 +2,22 @@
 
 import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
+import Button from "../button";
+import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
+import { useSavior } from "@/store/store";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
+  const { currentSavior, actualize } = useSavior();
+
+  const isFinished = currentSavior?.progress.some((step) => step.step === "deep-dive" && step.finish !== null);
+
+  const handleVerifyClick = async () => {
+    const isSuccess = await verifyDeepDive();
+    if (isSuccess) {
+      actualize();
+    }
+  };
 
   return (
     <>
@@ -32,7 +45,7 @@ const DeepDiveManual = () => {
         </p>
         <br />
         <p>Запускаем наше рабочее место командой:</p>
-        <Command text={`docker run -e call=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
+        <Command text={`docker run -e CALL=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
         <br />
         <h2>Получение конфигураций</h2>
         Клонируем себе репозитория в домашнюю директорию <b>~/rebirthofhope</b>.
@@ -41,8 +54,8 @@ const DeepDiveManual = () => {
         Переходим в директорию c git репозиторием.
         <Command text={`cd rebirthofhope`} />
         <br />
-        Переключаемся на нашу на ветку <b>savior/${call}</b>.
-        <Command text={`git switch savior/${call}`} />
+        Переключаемся на нашу на ветку <b>download-secretsr/{call}</b>.
+        <Command text={`git switch download-secretsr/${call}`} />
         <br />
         <h2>Валидация конфигураций</h2>
         <p>
@@ -69,13 +82,8 @@ const DeepDiveManual = () => {
         </p>
         <Command text={`make verify`} />
         <br />
-        <h2>Публикация приложений</h2>
-        <p>
-          Наша конфигурация отправляется в кластер всего одной командой. Туда улетает сразу <b>API</b> и <b>UIX</b>.
-        </p>
-        <Command text={`helmfile --environment production-app apply`} />
         <br />
-        <br />
+        {!isFinished && <Button onClick={handleVerifyClick}>Все сделано!</Button>}
       </section>
     </>
   );

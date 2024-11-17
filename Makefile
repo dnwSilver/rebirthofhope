@@ -88,6 +88,7 @@ run-dev-frontend:
 
 run-dev-manager:
 	cd ${MANAGER_DIR}; \
+	[[ -d ${MANAGER_DIR}/node_modules ]] && npm install --force; \
 	npm run dev;
 
 push-workstation:

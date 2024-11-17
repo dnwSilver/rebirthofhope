@@ -1,20 +1,14 @@
-import { ISavior } from "@/db/domain";
-import { readCurrentSavior } from "@/server-functions/read-current-savior";
-import { useProgress } from "@/store/store";
-import { useState, useEffect } from "react";
+import { useSavior } from "@/store/store";
+import { useEffect } from "react";
 
 const useCurrentSaviour = () => {
-  const [currentSavior, setCurrentSavior] = useState<ISavior | null>();
-
-  const verify = () => {
-    readCurrentSavior().then((savior) => setCurrentSavior(JSON.parse(savior)));
-  };
+  const { currentSavior, actualize } = useSavior();
 
   useEffect(() => {
-    verify();
+    actualize();
   }, []);
 
-  return { currentSavior, verify };
+  return { currentSavior, actualize };
 };
 
 export default useCurrentSaviour;

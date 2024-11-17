@@ -1,4 +1,4 @@
-import { ISavior, SHORT_POOLING_INTERVAL } from "@/db/domain";
+import { ISavior, SHORT_POLLING_INTERVAL } from "@/db/domain";
 import { readSaviors } from "@/server-functions/read-saviours";
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,7 @@ const useSaviors = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       readSaviors().then((result) => setSaviors(JSON.parse(result)));
-    }, SHORT_POOLING_INTERVAL);
+    }, SHORT_POLLING_INTERVAL);
 
     readSaviors().then((result) => setSaviors(JSON.parse(result)));
     return () => {

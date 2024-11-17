@@ -13,10 +13,12 @@ export interface ISavior {
   call: string;
   country: string;
   joining: Date;
+  linting: boolean;
+  metrics: boolean;
   progress: IStep[];
 }
 
-type StepName =
+export type StepName =
   | "deep-dive"
   | "research"
   | "need-more-gold" // Выдаем память
@@ -71,7 +73,7 @@ export const stepsRU: Record<StepName, string> = {
 
 export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
 
-export const SHORT_POOLING_INTERVAL = 5 * 1_000;
+export const SHORT_POLLING_INTERVAL = 60 * 60 * 1_000;
 
 export const stepNames = Object.keys(steps) as Array<StepName>;
 
