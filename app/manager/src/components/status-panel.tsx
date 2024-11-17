@@ -78,9 +78,9 @@ const StatusPanel = () => {
         <h2>Прогресс</h2>
         {currentSavior &&
           Object.keys(steps).map((step) => {
-            const currentStep = currentSavior.progress.find((s) => s.step === steps[step]);
-            const previousStep = previousSteps[step];
-            const isStepAvailable = previousStep === null || previousStep?.finish || previousStep?.giveUp;
+            const currentStep = currentSavior.progress.find((s) => s.step === step);
+            const previousStep = currentSavior.progress.find((s) => s.step === previousSteps[step]);
+            const isStepAvailable = previousStep === undefined || previousStep?.finish || previousStep?.giveUp;
             const isStepFinish = currentStep?.finish || currentStep?.giveUp;
 
             return (
@@ -88,7 +88,11 @@ const StatusPanel = () => {
                 <span> {getStepStatus(new Date(currentSavior.joining), currentStep)} </span>
                 <span>{steps[step]}</span>
                 <span style={{ textDecoration: isStepFinish ? "line-through" : "none" }}>{stepsRU[step]}</span>
-                {isStepAvailable && <Link href={`/manual/${step}`}>📝 Методичка</Link>}
+                {isStepAvailable && (
+                  <Link href={`/manual/${step}`} onClick={toggle}>
+                    📝 Методичка
+                  </Link>
+                )}
               </h3>
             );
           })}

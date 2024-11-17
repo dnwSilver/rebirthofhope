@@ -4,11 +4,12 @@ import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import Button from "../button";
 import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
-import { useSavior } from "@/store/store";
+import { useProgress, useSavior } from "@/store/store";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
   const { currentSavior, actualize } = useSavior();
+  const { toggle } = useProgress();
 
   const isFinished = currentSavior?.progress.some((step) => step.step === "deep-dive" && step.finish !== null);
 
@@ -16,6 +17,9 @@ const DeepDiveManual = () => {
     const isSuccess = await verifyDeepDive();
     if (isSuccess) {
       actualize();
+      toggle();
+    } else {
+      alert("Похоже что ты еще не выполнил полную проверку линтинга в контейнере.");
     }
   };
 

@@ -2,7 +2,7 @@ import DeepDiveManual from "@/components/manuals/01-deep-dive";
 import { panel } from "@/styles/panel";
 
 const ManualPage = async ({ params }) => {
-  const { step } = params;
+  const { step } = await params;
 
   return (
     <section
