@@ -32,14 +32,14 @@ const SaviorCard = ({
   score?: number | null;
 }) => {
   return (
-    <article style={panel}>
+    <article style={{...panel, minWidth:"310px"}}>
       <h4>
         {country} {position && getPosition(position) + " "}
         <b>{name}</b>
       </h4>
       {score && <span style={{ position: "absolute", right: "0.2rem", top: "0rem" }}>🎬</span>}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <p style={{ marginLeft: "2rem" }}>
+        <p>
           <Progress start={start} progress={progress} />
         </p>
         <p style={{ alignContent: "flex-end" }}>

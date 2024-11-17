@@ -7,8 +7,13 @@ type DeployConfig = {
       memory?: string;
     };
   };
+  volumeMounts?: { mountPath?: string }[];
+  extraIngress?: any;
   app?: {
-    api?: string
+    api?: string;
+    cors?: {
+      origins?: string;
+    };
     db?: string;
     log?: { level?: string };
   };
@@ -23,8 +28,7 @@ export const deployConfig = async (
   call: string | undefined,
   config: "secrets.yaml" | "api.yaml.gotmpl" | "uix.yaml.gotmpl"
 ): Promise<DeployConfig> => {
-  const endpoint =
-    `https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/${config}`;
+  const endpoint = `https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/${config}`;
 
   //   const endpoint = `${origin}${repo}${branch(call)}${file(config)}`;
 

@@ -5,7 +5,6 @@ import Manual from "./manual";
 import { verifyReunion } from "@/server-functions/verify/verify-reunion";
 import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
-import Tutorial from "../tutorials/tutorial";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 
@@ -21,7 +20,7 @@ const ReunionManual: FC = () => {
     >
       <h2>Небольшая оплошность</h2>
       <p>
-        Ух ты, <b>API</b>'шка заработала! С ней можно сыграть в пинг-понг, например так:
+        Ух ты, <b>API</b>'шка заработала! С ней можно сыграть в пинг-понг🏓, например так:
         <Command text={`https ${call}-api.rebirthofhope.ru/api/ping`} />
       </p>
       <p>
@@ -32,7 +31,6 @@ const ReunionManual: FC = () => {
         При внимательном изучении вкладки <b>network</b> в <b>devtools</b> выяснилось интересное.
       </p>
       <p>
-        {" "}
         <b>UIX</b> смотрит не туда 🤡!
       </p>
       <p>

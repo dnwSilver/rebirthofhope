@@ -38,6 +38,11 @@ button {
   border-radius: 4rem;
 }
 
+h3:hover {
+  border-radius: 4rem;
+  background-color: #e8f0ff;
+}
+
 p {
   margin-bottom: 0.25rem;
 }
@@ -62,6 +67,7 @@ a {
 h2 {
   margin-top: 2rem;
 }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

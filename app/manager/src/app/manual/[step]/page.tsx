@@ -5,6 +5,9 @@ import SortWheatFromChaffManual from "@/components/manuals/04-sort-wheat-from-ch
 import SecretMaterialManual from "@/components/manuals/05-secret-materials";
 import AttackOfTheClonesManual from "@/components/manuals/06-attack-of-the-clones";
 import ReunionManual from "@/components/manuals/07-reunion";
+import ScenarioArmorManual from "@/components/manuals/08-scenario-armor";
+import MaundyThursdayManual from "@/components/manuals/09-maundy-thursday";
+import RestorationManual from "@/components/manuals/10-restoration";
 import { StepName } from "@/db/domain";
 import { panel } from "@/styles/panel";
 
@@ -22,6 +25,9 @@ const ManualPage = async ({ params }: { params: Promise<{ step: StepName }> }) =
       {step === "secret-materials" && <SecretMaterialManual />}
       {step === "attack-of-the-clones" && <AttackOfTheClonesManual />}
       {step === "reunion" && <ReunionManual />}
+      {step === "scenario-armor" && <ScenarioArmorManual />}
+      {step === "maundy-thursday" && <MaundyThursdayManual />}
+      {step === "restoration" && <RestorationManual />}
     </section>
   );
 };

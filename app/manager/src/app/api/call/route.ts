@@ -13,7 +13,7 @@ const generateCall = async (): Promise<string> => {
   const saviorWithCall = await savior.findOne<ISavior>({ call }).exec();
   const availableCall = await call.findOne<ICall>({ call }).exec();
 
-  if (saviorWithCall !== null || availableCall !== null) {
+  if (saviorWithCall !== null || availableCall !== null || newCall.length > 26) {
     return await generateCall();
   }
 
