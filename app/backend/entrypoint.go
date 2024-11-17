@@ -12,7 +12,7 @@ import (
 var ReplicaCount = 1
 
 func main() {
-	ReplicaCount = getReplicaCount("main")
+	ReplicaCount = getReplicaCount(os.Getenv("CALL"))
 
 	r := gin.Default()
 

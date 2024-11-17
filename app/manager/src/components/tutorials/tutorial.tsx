@@ -17,6 +17,7 @@ export type Chapter =
   | "sops"
   | "read"
   | "GET"
+  | "logs"
   | "POST";
 
 const Tutorial = ({ theme, chapter, children }: { theme: Tutorial; chapter: Chapter } & PropsWithChildren) => (

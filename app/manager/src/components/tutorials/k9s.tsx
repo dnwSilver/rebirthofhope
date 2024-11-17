@@ -24,9 +24,11 @@ const K9sTutorial = () => {
         <mark>namespace</mark>/<mark>ns</mark>.
       </p>
 
-      <h2 id="ingress">
+      <h2 id="ingress">Ingress</h2>
+      <p>
         Список <b>ingress</b>'ов доступен по команде <mark>ingress</mark>/<mark>ing</mark>.
-      </h2>
+      </p>
+      <h2 id="logs">Logs</h2>
     </>
   );
 };

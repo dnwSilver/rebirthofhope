@@ -5,6 +5,7 @@ import Command from "../command";
 import Manual from "./manual";
 import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
 import Tutorial from "../tutorials/tutorial";
+import { GO_REPO, RUN_DEPLOY } from "../tutorials/commands";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
@@ -45,7 +46,7 @@ const DeepDiveManual = () => {
       <Command text={`git clone git@github.com:dnwSilver/rebirthofhope.git`} />
       <br />
       Переходим в директорию c git репозиторием.
-      <Command text={`cd rebirthofhope`} />
+      <Command text={GO_REPO} />
       <br />
       Переключаемся на нашу на ветку <b>savior/{call}</b>.
       <Command text={`git switch savior/${call}`} />
@@ -72,10 +73,13 @@ const DeepDiveManual = () => {
         Напоследок запустим все вместе. Скрипт <b>verify</b> нам понадобится дальше, довольно таки часто.
       </p>
       <p>
-        Запускать его нужно перед каждым <Tutorial theme="git" chapter="commit">commit</Tutorial>'ом в репозиторий , для того чтобы
-        убедиться что мы все заполнили корректно.
+        Запускать его нужно перед каждым{" "}
+        <Tutorial theme="git" chapter="commit">
+          commit
+        </Tutorial>
+        'ом в репозиторий , для того чтобы убедиться что мы все заполнили корректно.
       </p>
-      <Command text={`make verify`} />
+      <Command text={RUN_DEPLOY} />
     </Manual>
   );
 };
