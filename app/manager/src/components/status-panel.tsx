@@ -29,12 +29,12 @@ const StatusPanel = () => {
   return (
     <>
       <Button
+        disabled={open}
         style={{
-          display: open ? "none" : "block",
           position: "fixed",
           width: "7rem",
-          bottom: "3rem",
-          left: "calc(50vw - 3.5rem)",
+          bottom: "1rem",
+          right: "8rem",
           zIndex: 2,
         }}
         onClick={async () => {

@@ -14,12 +14,12 @@ const Greeting = () => {
   return (
     <>
       <Button
+        disabled={show}
         style={{
-          display: !show ? "block" : "none",
           position: "fixed",
           width: "6rem",
           bottom: "1rem",
-          left: "calc(50vw - 3rem)",
+          right: "1.5rem",
           zIndex: "3",
         }}
         onClick={async () => {

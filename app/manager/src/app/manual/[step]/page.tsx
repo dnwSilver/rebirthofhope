@@ -12,7 +12,7 @@ const ManualPage = async ({ params }: { params: Promise<{ step: StepName }> }) =
 
   return (
     <section
-      style={{ ...panel, marginTop: "1rem", paddingBottom: "3rem", height: "calc(100vh - 7rem)", overflowY: "scroll" }}
+      style={{ ...panel, marginTop: "1rem", paddingBottom: "3rem", height: "calc(100vh - 4rem)", overflowY: "scroll" }}
     >
       {step === "deep-dive" && <DeepDiveManual />}
       {step === "research" && <ResearchManual />}
