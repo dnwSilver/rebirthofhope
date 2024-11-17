@@ -7,25 +7,29 @@ type DeployConfig = {
       memory?: string;
     };
   };
-  app: { log: { level: string } };
+  app: {
+    db: string;
+    log: { level: string };
+  };
 };
 
 const origin = "https://raw.githubusercontent.com";
 const repo = "/dnwSilver/rebirthofhope";
 const branch = (call: string | undefined) => `/refs/heads/savior/${call}`;
-const file = (app: string) => `/environments/production-app/${app}.yaml.gotmpl`;
+const file = (config: string) => `/environments/production-app/${config}`;
 
-export const deployConfig = async (call: string | undefined, app: "api" | "uix"): Promise<DeployConfig> => {
+export const deployConfig = async (
+  call: string | undefined,
+  config: "secrets.yaml" | "api.yaml.gotmpl" | "uix.yaml.gotmpl"
+): Promise<DeployConfig> => {
   const endpoint =
-    "https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/api.yaml.gotmpl";
+    "https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/main/deploy/environments/production-app/secrets.yaml";
 
-  //   const endpoint = `${origin}${repo}${branch(call)}${file(app)}`;
+  //   const endpoint = `${origin}${repo}${branch(call)}${file(config)}`;
 
   const response = await fetch(endpoint);
 
   const body = await response.text();
 
-  const config = YAML.parse(body);
-  //   console.log(config);
-  return config;
+  return YAML.parse(body);
 };

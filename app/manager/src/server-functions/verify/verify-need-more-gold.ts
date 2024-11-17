@@ -7,7 +7,7 @@ import { finishStep } from "../finish-step";
 export const verifyNeedMoreGold = async (): Promise<boolean> => {
   const call = await currentCall();
 
-  const config = await deployConfig(call, "uix");
+  const config = await deployConfig(call, "uix.yaml.gotmpl");
 
   const isSuccess = config?.resources?.limits?.memory === "8Mi";
 
