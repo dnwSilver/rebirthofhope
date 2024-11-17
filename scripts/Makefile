@@ -8,7 +8,7 @@ verify-charts:
 		xargs -I {} sh -c 'helm lint {}';
 
 verify-environments:
-	yq '.environments | keys | join(" ")' helmfile.yaml | tr ' ' '\n' | \
+	echo "production-app production-wd" | tr ' ' '\n' | \
 	xargs -I {} sh -c 'echo {} && helmfile -e $(basename {}) template >/dev/null || \
 		(echo "Environment {} is broken! Update values files in {} directory."; false)';
 
