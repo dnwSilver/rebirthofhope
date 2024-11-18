@@ -1,5 +1,7 @@
 "use client";
 
+import Example from "../example";
+
 const K9sTutorial = () => {
   return (
     <>
@@ -27,8 +29,13 @@ const K9sTutorial = () => {
       </p>
       {/* TODO ТУТ БУДЕТ GIF */}
       <h2>Deployment</h2>
-      <p>Представление приложения в кластере. Собственно конфиг, который мы собираем, и является <b>deployment</b>'ом.</p>
-      <p>В первую очередь нас волнуют его настройки. Добраться до них можно через команду <mark>deploy</mark> и hotkey <mark>d</mark></p>
+      <p>
+        Представление приложения в кластере. Собственно конфиг, который мы собираем, и является <b>deployment</b>'ом.
+      </p>
+      <p>
+        В первую очередь нас волнуют его настройки. Добраться до них можно через команду <mark>deploy</mark> и hotkey{" "}
+        <mark>d</mark>
+      </p>
       {/* TODO ТУТ БУДЕТ GIF */}
       <h2 id="ingress">Ingress</h2>
       <p>
@@ -78,6 +85,8 @@ const K9sTutorial = () => {
         </ul>
       </p>
       {/* TODO ТУТ БУДЕТ GIF */}
+      <h2>POD</h2>
+      <Example theme="k9s-pods" />
     </>
   );
 };

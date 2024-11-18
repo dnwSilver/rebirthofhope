@@ -7,6 +7,7 @@ import Helper from "../helper";
 import { verifyNeedMoreGold } from "@/server-functions/verify/verify-need-more-gold";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Example from "../example";
 
 const NeedMoreGoldManual = () => {
   return (
@@ -21,7 +22,7 @@ const NeedMoreGoldManual = () => {
         Ходит легенда, о минимальных требованиях к ресурсам у <b>API</b> и <b>UIX</b>. Их создатели заявляли следующее:
         <ul>
           <li>
-            <b>UIX</b> требует <mark>32Mi RAM</mark> <mark>50m CPU</mark>
+            <b>UIX</b> требует <mark>32Mi RAM</mark> <mark>5m CPU</mark>
           </li>
           <li>
             <b>API</b> требует <mark>8Mi RAM</mark> <mark>10m CPU</mark>
@@ -67,6 +68,8 @@ const NeedMoreGoldManual = () => {
     memory: 8Mi`}
       />
       <br />
+      <Example theme="vim-edit" />
+      <br />
       <DeployHint />
 
       <h2>Публикация приложений</h2>
@@ -75,9 +78,9 @@ const NeedMoreGoldManual = () => {
         <Tutorial theme="k9s" chapter="namespace">
           namespace
         </Tutorial>{" "}
-        в k9s.
+        в k9s. Похоже что это помогло <b>API</b>🩹.
       </p>
-
+      <Example theme="k9s-pods" />
       <br />
       <CommitHint action="Отправляем" result="нашу победу" />
     </Manual>

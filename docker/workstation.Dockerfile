@@ -34,4 +34,6 @@ RUN ln -s /usr/bin/batcat /usr/bin/bat;\
     chmod 400 ~/.ssh/id_rsa; \
     chmod +x /usr/local/bin/*; \
     chmod go-r ~/.kube/config; \
-    gpg --import /etc/ssl/certs/gpg.key
+    gpg --import /etc/ssl/certs/gpg.key; \
+    git config --global user.email "k8s.savior@gmail.com"; \
+    git config --global user.email "Savior";

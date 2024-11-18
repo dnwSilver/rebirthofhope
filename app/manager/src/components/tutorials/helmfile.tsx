@@ -3,6 +3,7 @@
 import { FC } from "react";
 import Command from "../command";
 import Tutorial from "./tutorial";
+import Example from "../example";
 
 const HelmfileTutorial: FC = () => (
   <>
@@ -12,7 +13,9 @@ const HelmfileTutorial: FC = () => (
       Конфигурация отправляется в кластер всего одной командой. Улетает сразу <b>API</b> и <b>UIX</b>.
     </p>
     <Command text={`helmfile --environment production-app apply`} />
-    {/* TODO ТУТ БУДЕТ GIF */}
+    <br />
+    <Example theme="helmfile-deploy" />
+    <br />
     <p>
       Если что-то пошло не так то процедура обновления будет длительной (более 30 сек). Можно отправить сигнал для
       остановки процесса <mark>CTRL + C</mark>.
@@ -26,7 +29,12 @@ const HelmfileTutorial: FC = () => (
       'ом в репозиторий , для того чтобы убедиться что мы все заполнили корректно.
     </p>
     <Command text={`make verify`} />
-    {/* TODO ТУТ БУДЕТ GIF */}
+    <br />
+    <Example theme="helmfile-verify" />
+    <br />
+    <br />
+    <p>Вместо полной проверки можно запускать по частям.</p>
+    <Example theme="helmfile-linting" />
   </>
 );
 
