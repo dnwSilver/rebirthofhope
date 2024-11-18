@@ -34,7 +34,7 @@ const Manual = (props: Props) => {
       <h1>{title}</h1>
       <section>
         {children}
-        {isFinished && (
+        {!isFinished && (
           <Button
             style={{
               position: "fixed",
@@ -44,7 +44,7 @@ const Manual = (props: Props) => {
               zIndex: "3",
             }}
             onClick={handleVerifyClick}
-            disabled={!isFinished}
+            disabled={!!isFinished}
           >
             Все сделано!
           </Button>

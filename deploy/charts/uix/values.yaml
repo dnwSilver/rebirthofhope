@@ -47,11 +47,11 @@ securityContext:
 # TODO: Увеличение количества ресурсов.
 resources:
   limits:
-    memory: 32Mi
-    cpu: 5m
+    memory: 64Mi
+    cpu: 10m
   requests:
     memory: 32Mi
-    cpu: 5m
+    cpu: 10m
 
 livenessProbe: {}
 

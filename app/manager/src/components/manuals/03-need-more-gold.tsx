@@ -22,7 +22,7 @@ const NeedMoreGoldManual = () => {
         Ходит легенда, о минимальных требованиях к ресурсам у <b>API</b> и <b>UIX</b>. Их создатели заявляли следующее:
         <ul>
           <li>
-            <b>UIX</b> требует <mark>32Mi RAM</mark> <mark>5m CPU</mark>
+            <b>UIX</b> требует <mark>32Mi RAM</mark> <mark>10m CPU</mark>
           </li>
           <li>
             <b>API</b> требует <mark>8Mi RAM</mark> <mark>10m CPU</mark>

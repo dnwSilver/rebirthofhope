@@ -19,7 +19,7 @@ const EntryPoint = () => {
       Доступ можно получить только через специальный контейнер, который нам подготовили наши предки:
       <br />
       <br />
-      <Command text={`docker run -e call=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
+      <Command text={`docker run -e CALL=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
       <br />
       <p>
         Можешь начать свой путь с <Link href="/manual/deep-dive">первого задания</Link>.
