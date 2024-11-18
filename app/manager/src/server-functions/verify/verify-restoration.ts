@@ -14,6 +14,6 @@ export const verifyRestoration = async (): Promise<boolean> => {
   if (isSuccess) {
     finishStep(call, "restoration");
   }
-
+q
   return isSuccess;
 };

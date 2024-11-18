@@ -62,7 +62,11 @@ const MaundyThursdayManual: FC = () => {
             - path: /api/*`}
         />
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <br />
+      <p>
+        В файле <mark>/environments/production-app/uix.yaml.gotmpl</mark>. Нужно заменить ссылку с <b>API</b> на{" "}
+        <mark>https://{call}-uix.rebirthofhope.ru</mark>
+      </p>
       <br />
       <DeployHint />
       <h2>Шо, опять?</h2>
@@ -73,7 +77,6 @@ const MaundyThursdayManual: FC = () => {
         </Tutorial>
         'а.
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
       <p>
         <b>UIX</b> запросы отправляет, <b>API</b> отвечает. Идиллия, но есть нюанс. Картины есть, но не те что нужно.
       </p>
