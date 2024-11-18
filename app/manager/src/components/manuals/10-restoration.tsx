@@ -5,6 +5,7 @@ import Manual from "./manual";
 import { verifyRestoration } from "@/server-functions/verify/verify-restoration";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Tutorial from "../tutorials/tutorial";
 
 const RestorationManual: FC = () => {
   return (
@@ -16,7 +17,15 @@ const RestorationManual: FC = () => {
     >
       <h2>А ты точно реставратор?</h2>
       <br />
-      <p>Проб</p>
+      <p>Картины вроде как есть, но они не те. Хранилище картин настроили не правильно. Ну, бывает.</p>
+      <p>Исправлять тебе.</p>
+      <p>
+        Помнится, что хранилище имеет путь <mark>/.output/public/arts</mark>, оно должно быть{" "}
+        <Tutorial theme="editors" chapter="vim">
+          зафиксировано
+        </Tutorial>{" "}
+        в файле <mark>/environments/production-app/uix.yaml.gotmpl</mark> в разделе в <b>volumeMounts</b>.
+      </p>
       <DeployHint />
       <h2>День сурка</h2>
       <p>Ну наконец-то! Победа, все баги устранены. Можно пойти на обед🥙.</p>
