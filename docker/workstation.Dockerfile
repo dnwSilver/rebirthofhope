@@ -30,7 +30,8 @@ RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/
 
 WORKDIR /root
 
-RUN chmod 400 ~/.ssh/id_rsa; \
+RUN ln -s /usr/bin/batcat ~/.local/bin/bat;\
+    chmod 400 ~/.ssh/id_rsa; \
     chmod +x /usr/local/bin/*; \
     chmod go-r ~/.kube/config; \
     gpg --import /etc/ssl/certs/gpg.key

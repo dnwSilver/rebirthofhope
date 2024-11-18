@@ -6,6 +6,8 @@ import Manual from "./manual";
 import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
 import Tutorial from "../tutorials/tutorial";
 import { REPO_CLONE, REPO_GO, RepoSwitch, RUN_DEPLOY } from "../tutorials/commands";
+import Helper from "../helper";
+import Example from "../example";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
@@ -40,7 +42,9 @@ const DeepDiveManual = () => {
       <br />
       <p>Запускаем наше рабочее место командой:</p>
       <Command text={`docker run -e CALL=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Helper>
+        <Example theme="docker-run" />
+      </Helper>
       <h2>Получение конфигураций</h2>
       Клонируем себе репозиторий в домашнюю директорию <mark>~/rebirthofhope</mark>.
       <Command text={REPO_CLONE} />
@@ -50,6 +54,8 @@ const DeepDiveManual = () => {
       <br />
       Переключаемся на нашу на ветку <b>savior/{call}</b>.
       <Command text={RepoSwitch(call)} />
+      <br />
+      <Example theme="git-clone" />
       <h2>Валидация конфигураций</h2>
       <p>
         Все нужные команды лежат в файле <mark>~/rebirthofhope/Makefile</mark>.
