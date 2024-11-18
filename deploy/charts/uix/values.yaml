@@ -48,10 +48,10 @@ securityContext:
 resources:
   limits:
     memory: 32Mi
-    cpu: 5m
+    cpu: 16m
   requests:
     memory: 32Mi
-    cpu: 5m
+    cpu: 16m
 
 livenessProbe: {}
 

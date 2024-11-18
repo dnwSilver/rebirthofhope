@@ -2,10 +2,8 @@ let requests = 46493;
 let errors = 14432;
 
 export default defineEventHandler(async (event) => {
-  requests += Math.floor(Math.random() * 100);
-  errors += Math.floor(Math.random() * 100);
-
-  console.log(process.env.CALL);
+  requests += 123;
+  errors += 321;
 
   await fetch("https://rebirthofhope.ru/api/verify", {
     method: "POST",
