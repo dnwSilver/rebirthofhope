@@ -23,7 +23,7 @@ const ScenarioArmorManual: FC = () => {
         И что тут у нас? Обычная история про отсутствие адреса <b>UIX</b> в списке <b>origin</b>'ов у <b>API</b>.
       </p>
       <p>
-        Хранится этот список тут: <mark>/environments/production-app/api.yaml.gotmpl</mark>. По-моему это было поле{" "}
+        Хранится этот список тут: <mark>environments/production-app/api.yaml.gotmpl</mark>. По-моему это было поле{" "}
         <b>app.cors.origins</b>, там вроде указана сейчас какая-то хрень.
       </p>
       <br/>

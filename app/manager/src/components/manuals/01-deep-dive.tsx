@@ -26,6 +26,7 @@ const DeepDiveManual = () => {
       <p>Обозначим пару правил:</p>
       <ul>
         <li>Все действия должны быть из командной строки;</li>
+        <li>Использовать браузер можно для диагностики UIX;</li>
         <li>Все действия должны быть сделаны в докер контейнере;</li>
         <li>Нельзя ломать и вредить, все крайне хрупкое;</li>
         <li>После того как все действия в шаге выполнены, нужно завершить его (кнопка внизу страницы);</li>
@@ -56,6 +57,9 @@ const DeepDiveManual = () => {
       <Command text={RepoSwitch(call)} />
       <br />
       <Example theme="git-clone" />
+      <br />
+      <p>Посмотреть структуру каталогов можно командой:</p>
+      <Command text="eza --tree --icons" />
       <h2>Валидация конфигураций</h2>
       <p>
         Все нужные команды лежат в файле <mark>~/rebirthofhope/Makefile</mark>.
@@ -74,7 +78,7 @@ const DeepDiveManual = () => {
       <p>
         Всё ли в порядке с переменными окружения? Для этого написан скрипт <b>verify-envs</b>:
       </p>
-      <Command text={`make verify-env`} />
+      <Command text={`make verify-envs`} />
       <br />
       <p>Если все хорошо, то в консоли не должно быть ничего красного.</p>
       <Example theme="helmfile-linting" />
@@ -90,6 +94,7 @@ const DeepDiveManual = () => {
         </Tutorial>
         'ом в репозиторий , для того чтобы убедиться что мы все заполнили корректно.
       </p>
+      <Command text="make verify" />
     </Manual>
   );
 };

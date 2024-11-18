@@ -23,7 +23,7 @@ COPY --from=build /home/.certs /etc/ssl/certs
 COPY --from=build /home/greeting.sh /etc/bash.bashrc
 
 RUN apt update; \
-    apt install git curl make vim gnupg nano yq httpie bat --yes;
+    apt install git curl make vim gnupg nano eza yq httpie bat --yes;
 RUN helm plugin install https://github.com/jkroepke/helm-secrets --version v4.6.2;
 RUN helm plugin install https://github.com/databus23/helm-diff || true;
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"

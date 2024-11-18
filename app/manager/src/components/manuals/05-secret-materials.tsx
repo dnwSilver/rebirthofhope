@@ -31,7 +31,7 @@ const SecretMaterialManual: FC = () => {
       </p>
 
       <p>
-        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever</mark>. Следующей командой можно
+        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever:27017</mark>. Следующей командой можно
         добраться до{" "}
         <Tutorial theme="editors" chapter="vim">
           редактирования

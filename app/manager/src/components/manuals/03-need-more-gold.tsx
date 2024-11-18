@@ -27,7 +27,6 @@ const NeedMoreGoldManual = () => {
           <li>
             <b>API</b> требует <mark>8Mi RAM</mark> <mark>10m CPU</mark>
           </li>
-          <li></li>
         </ul>
         Теперь ты знаешь требования.
       </p>
@@ -53,14 +52,10 @@ const NeedMoreGoldManual = () => {
         <Tutorial theme="editors" chapter="vim">
           Внеси правки
         </Tutorial>{" "}
-        в файл <mark>/environments/production-app/api.yaml.gotmpl</mark>.
+        в файл <mark>environments/production-app/api.yaml.gotmpl</mark>.
       </p>
       <p>
-        Правки нужно{" "}
-        <Tutorial theme="editors" chapter="vim">
-          вставить
-        </Tutorial>{" "}
-        в новый раздел resources, расширим память для <b>API</b> до <mark>8Mi</mark>.
+        Правки нужно вставить в новый раздел resources, расширим память для <b>API</b> до <mark>8Mi</mark>.
       </p>
       <Command
         text={`resources:

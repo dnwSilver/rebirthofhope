@@ -29,7 +29,7 @@ const AttackOfTheClonesManual: FC = () => {
         <Tutorial theme={"k9s"} chapter={"logs"}>
           Прогуляемся
         </Tutorial>{" "}
-        до файла <mark>/environments/production-app/api.yaml.gotmpl</mark>. В нем должен быть параметр{" "}
+        до файла <mark>environments/production-app/api.yaml.gotmpl</mark>. В нем должен быть параметр{" "}
         <mark>replicaCount</mark>. Давай увеличим количество реплик наших подов до <b>2</b>?
       </p>
       <Example theme="k9s-replica"/>

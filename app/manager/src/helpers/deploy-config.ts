@@ -28,7 +28,7 @@ export const deployConfig = async (
   call: string | undefined,
   config: "secrets.yaml" | "api.yaml.gotmpl" | "uix.yaml.gotmpl"
 ): Promise<DeployConfig> => {
-  const endpoint = `${origin}${repo}${branch(call)}${file(config)}`;
+  const endpoint = `${origin}${repo}${branch(call)}${file(config)}?token=${Date.now()}`;
 
   const response = await fetch(endpoint);
 

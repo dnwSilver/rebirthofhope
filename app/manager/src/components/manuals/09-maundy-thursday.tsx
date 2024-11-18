@@ -44,7 +44,7 @@ const MaundyThursdayManual: FC = () => {
       </p>
       <br />
       <p>
-        Ползём в файл <mark>/environments/production-app/api.yaml.gotmpl</mark>. Туда{" "}
+        Ползём в файл <mark>environments/production-app/api.yaml.gotmpl</mark>. Туда{" "}
         <Tutorial theme="editors" chapter="vim">
           скидываем
         </Tutorial>{" "}
@@ -64,7 +64,7 @@ const MaundyThursdayManual: FC = () => {
       </p>
       <br />
       <p>
-        В файле <mark>/environments/production-app/uix.yaml.gotmpl</mark>. Нужно заменить ссылку с <b>API</b> на{" "}
+        В файле <mark>environments/production-app/uix.yaml.gotmpl</mark>. Нужно заменить ссылку с <b>API</b> на{" "}
         <mark>https://{call}-uix.rebirthofhope.ru</mark>
       </p>
       <br />

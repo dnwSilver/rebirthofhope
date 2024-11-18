@@ -12,8 +12,9 @@ const generateCall = async (): Promise<string> => {
 
   const saviorWithCall = await savior.findOne<ISavior>({ call }).exec();
   const availableCall = await call.findOne<ICall>({ call }).exec();
+  const invalidSymbols = newCall.match(new RegExp(/[^a-zA-Z\-]+/, "i"));
 
-  if (saviorWithCall !== null || availableCall !== null || newCall.length > 26) {
+  if (saviorWithCall !== null || availableCall !== null || invalidSymbols !== null || newCall.length > 26) {
     return await generateCall();
   }
 

@@ -10,7 +10,7 @@ const K9sTutorial = () => {
       </h1>
       <h2>Основы</h2>
       <p>
-        Команды в <b>k9s</b> можно вводить после нажатия символа <mark>SHIFT + ;</mark>.
+        Команды в <b>k9s</b> можно вводить после нажатия символа <mark>SHIFT</mark> + <mark>;</mark>.
       </p>
       <p>
         Фильтры в <b>k9s</b> можно вводить после нажатия символа <mark>/</mark>.
@@ -21,11 +21,14 @@ const K9sTutorial = () => {
       <p>
         Для отмены команды или фильтра используем <mark>ESC</mark>.
       </p>
+      <p>
+        Выход доступен по командой <mark>quit</mark>.
+      </p>
 
       <h2 id="namespace">Namespace</h2>
       <p>
         В кубах сервисы живут в <b>namespace</b>'ах. Проверить перечень <b>Namespace</b>'ов можно использовав команду{" "}
-        <mark>namespace</mark>/<mark>ns</mark>.
+        <mark>namespaces</mark> или <mark>ns</mark>.
       </p>
       <Example theme="k9s-namespace" />
       <h2>Deployment</h2>

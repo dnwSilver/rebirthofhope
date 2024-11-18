@@ -25,7 +25,7 @@ const SortWheatFromChaffManual: FC = () => {
         <Tutorial theme={"k9s"} chapter={"logs"}>
           заглянем в логи
         </Tutorial>{" "}
-        наших сервисов.
+        наших сервисов. Особенно в <b>API</b>.
       </p>
       <br />
       <Example theme="k9s-logs" />
