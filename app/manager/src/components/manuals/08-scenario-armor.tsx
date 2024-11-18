@@ -6,6 +6,7 @@ import { verifyScenarioArmor } from "@/server-functions/verify/verify-scenario-a
 import CommitHint from "../commit-hint";
 import DeployHint from "../deploy-hint";
 import { getCookie } from "@/helpers/cookies";
+import Example from "../example";
 
 const ScenarioArmorManual: FC = () => {
   const call = getCookie("call");
@@ -25,10 +26,12 @@ const ScenarioArmorManual: FC = () => {
         Хранится этот список тут: <mark>/environments/production-app/api.yaml.gotmpl</mark>. По-моему это было поле{" "}
         <b>app.cors.origins</b>, там вроде указана сейчас какая-то хрень.
       </p>
+      <br/>
+      <Example theme="chrome-cors"/>
+      <br/>
       <p>
         Не западло поменять на <mark>https://{call}-uix.rebirthofhope.ru</mark>?
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
       <br />
       <DeployHint />
       <h2>Deploy, deploy, deploy</h2>

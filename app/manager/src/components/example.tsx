@@ -11,10 +11,13 @@ const Example: FC<{
     | "k9s-ingress"
     | "k9s-pods"
     | "k9s-logs"
+    | "k9s-replica"
     | "httpie-metrics"
     | "vim-edit"
     | "sops-edit"
-    | "nano-edit";
+    | "nano-edit"
+    | "chrome-network"
+    | "chrome-cors";
 }> = ({ theme }) => (
   <img
     src={`/example/${theme}.gif`}

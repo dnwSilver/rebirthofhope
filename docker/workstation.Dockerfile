@@ -36,4 +36,5 @@ RUN ln -s /usr/bin/batcat /usr/bin/bat;\
     chmod go-r ~/.kube/config; \
     gpg --import /etc/ssl/certs/gpg.key; \
     git config --global user.email "k8s.savior@gmail.com"; \
-    git config --global user.email "Savior";
+    git config --global user.email "Savior"; \
+    sed -i 's|"font"|"cupcake"|' /root/.bashrc

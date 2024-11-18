@@ -23,7 +23,7 @@ const RestorationManual: FC = () => {
         <Tutorial theme="editors" chapter="vim">
           зафиксировано
         </Tutorial>{" "}
-        в файле <mark>/environments/production-app/uix.yaml.gotmpl</mark> в разделе в <b>volumeMounts</b>.
+        в файле <mark>environments/production-app/uix.yaml.gotmpl</mark> в разделе в <b>volumeMounts</b>.
       </p>
       {/* TODO ТУТ БУДЕТ GIF */}
       <DeployHint />

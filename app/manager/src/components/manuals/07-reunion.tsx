@@ -7,6 +7,7 @@ import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Example from "../example";
 
 const ReunionManual: FC = () => {
   const call = getCookie("call");
@@ -37,10 +38,10 @@ const ReunionManual: FC = () => {
         Он смотрит на <mark>https://{call}-api.abyssofdespair.ru</mark>, вместо{" "}
         <mark>https://{call}-api.rebirthofhope.ru</mark>.
       </p>
+      <Example theme="chrome-network"/>
       <p>
-        Погнали менять это в файле <mark>/environments/production-app/uix.yaml.gotmpl</mark>.
+        Погнали менять это в файле <mark>environments/production-app/uix.yaml.gotmpl</mark>.
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
       <br />
       <DeployHint />
       <h2>Еще один круг</h2>

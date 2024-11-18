@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -14,6 +15,7 @@ var ReplicaCount = 1
 func main() {
 	ReplicaCount = getReplicaCount(os.Getenv("CALL"))
 
+	log.Println("Fetch replica counts", ReplicaCount)
 	r := gin.Default()
 
 	r.GET("/api/ping", func(c *gin.Context) {

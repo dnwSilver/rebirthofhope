@@ -6,6 +6,7 @@ import { verifyAttackOfTheClones } from "@/server-functions/verify/verify-attack
 import Tutorial from "../tutorials/tutorial";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Example from "../example";
 
 const AttackOfTheClonesManual: FC = () => {
   return (
@@ -20,19 +21,18 @@ const AttackOfTheClonesManual: FC = () => {
         <Tutorial theme={"k9s"} chapter={"logs"}>
           Бродя по логам
         </Tutorial>{" "}
-        <b>API</b> мы поняли, что нам не хватает оперативной памяти. Увеличивать ресурсы за счет лимитов уже нельзя,
+        <b>API</b> мы поняли, что есть нехватка оперативной памяти. Увеличивать ресурсы за счет лимитов уже нельзя,
         увы. Но есть еще один способ. Горизонтально масштабирование. Разработчики контейнеров обещали, конечно же,
         корректную работы своих продуктов в таком стиле.
       </p>
       <p>
-        {" "}
         <Tutorial theme={"k9s"} chapter={"logs"}>
           Прогуляемся
         </Tutorial>{" "}
         до файла <mark>/environments/production-app/api.yaml.gotmpl</mark>. В нем должен быть параметр{" "}
         <mark>replicaCount</mark>. Давай увеличим количество реплик наших подов до <b>2</b>?
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="k9s-replica"/>
       <br />
       <DeployHint />
       <h2>Опять двадцать пять</h2>

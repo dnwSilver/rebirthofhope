@@ -3,6 +3,8 @@
   value: {{ .Values.app.cors.origins | quote }}
 - name: LOG_LEVEL
   value: {{ .Values.app.log.level | quote }}
+- name: CALL
+  value: julienne
 {{- end }}
 
 {{- define "app.values.env.secret" -}}

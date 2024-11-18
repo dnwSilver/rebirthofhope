@@ -2,7 +2,6 @@ package main
 
 import (
 	"io"
-	"log"
 	"net/http"
 	"os"
 
@@ -25,8 +24,7 @@ type Deployment struct {
 type FuncIntInt func(string) int
 
 func getReplicaCount(call string) int {
-	log.Println("Fetch replica counts")
-	response, _ := http.Get("https://gitlab.com/dnwsilver/k8s-practice/-/raw/" + call + "/environments/production-apps/backend.yaml.gotmpl?ref_type=heads")
+	response, _ := http.Get("https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/savior/" + call + "/environments/production-app/api.yaml.gotmpl")
 
 	defer response.Body.Close()
 	body, _ := io.ReadAll(response.Body)
