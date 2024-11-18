@@ -47,4 +47,4 @@ workflow:
 
 📤 environments:
   extends: [.test]
-  script: make verify-environments
+  script: make verify-envs

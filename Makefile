@@ -174,13 +174,13 @@ verify-charts:
 	find charts -type d -mindepth 1 -maxdepth 1 | \
 		xargs -I {} sh -c 'helm lint {}';
 
-verify-environments:
+verify-envs:
 	cd ${DEPLOY_DIR}; \
 	yq '.environments | keys | join(" ")' helmfile.yaml | tr ' ' '\n' | \
 	xargs -I {} sh -c 'echo {} && helmfile -e $(basename {}) template >/dev/null || \
 		(echo "Environment {} is broken! Update values files in {} directory."; false)';
 
-verify: verify-secrets verify-charts verify-environments
+verify: verify-secrets verify-charts verify-envs
 
 deploy-app:
 	cd ${DEPLOY_DIR}; \

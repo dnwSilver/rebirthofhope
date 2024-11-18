@@ -60,6 +60,7 @@ const DeepDiveManual = () => {
       <p>
         Все нужные команды лежат в файле <mark>~/rebirthofhope/Makefile</mark>.
       </p>
+      <br />
       <p>
         Начнем проверку с секретов, для этого написан скрипт <b>verify-secrets</b>:
       </p>
@@ -71,11 +72,14 @@ const DeepDiveManual = () => {
       <Command text={`make verify-charts`} />
       <br />
       <p>
-        Всё ли в порядке с переменными окружения? Для этого написан скрипт <b>verify-environments</b>:
+        Всё ли в порядке с переменными окружения? Для этого написан скрипт <b>verify-envs</b>:
       </p>
-      <Command text={`make verify-environments`} />
+      <Command text={`make verify-env`} />
       <br />
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <p>Если все хорошо, то в консоли не должно быть ничего красного.</p>
+      <Example theme="helmfile-linting" />
+      <br />
+      <br />
       <p>
         Напоследок запустим все вместе. Скрипт <b>verify</b> нам понадобится дальше, довольно таки часто.
       </p>
@@ -86,7 +90,6 @@ const DeepDiveManual = () => {
         </Tutorial>
         'ом в репозиторий , для того чтобы убедиться что мы все заполнили корректно.
       </p>
-      <Command text={RUN_DEPLOY} />
     </Manual>
   );
 };
