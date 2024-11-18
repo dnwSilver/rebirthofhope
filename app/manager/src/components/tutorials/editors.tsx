@@ -57,8 +57,19 @@ const EditorsTutorial: FC = () => {
           </li>
         </ul>
       </p>
-      <br/>
+      <br />
       <Example theme="nano-edit" />
+      <br />
+      <h2>SOPS</h2>
+      <p>Просмотр зашифрованных файлов.</p>
+      <Command text="helm secrets decrypt ./environments/production-app/secrets.yaml" />
+      <br />
+
+      <p>Редактирование зашифрованных файлов.</p>
+      <br />
+      <Command text="helm secrets edit ./environments/production-app/secrets.yaml" />
+      <br />
+      <Example theme="sops-edit" />
     </>
   );
 };

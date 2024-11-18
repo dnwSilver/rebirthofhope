@@ -53,7 +53,7 @@ func GetAppStatus() StatusType {
 		return CORRUPTED_ENVS
 	}
 
-	if ReplicaCount == 2 {
+	if ReplicaCount == 1 {
 		return LOW_MEMORY
 	}
 

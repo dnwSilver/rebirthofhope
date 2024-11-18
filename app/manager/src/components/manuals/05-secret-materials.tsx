@@ -7,6 +7,7 @@ import Command from "../command";
 import { verifySecretMaterial } from "@/server-functions/verify/verify-secret-materials";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Example from "../example";
 
 const SecretMaterialManual: FC = () => {
   return (
@@ -28,7 +29,6 @@ const SecretMaterialManual: FC = () => {
         Файл с секретами не содержит ничего необычного, это простой <b>yaml</b>. Прочитай файл с секретами командой:
         <Command text="helm secrets decrypt ./environments/production-app/secrets.yaml" />
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
 
       <p>
         Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever</mark>. Следующей командой можно
@@ -39,7 +39,7 @@ const SecretMaterialManual: FC = () => {
         этого файла:
         <Command text="helm secrets edit ./environments/production-app/secrets.yaml" />
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="sops-edit" />
       <br />
       <DeployHint />
 

@@ -13,6 +13,7 @@ const Example: FC<{
     | "k9s-logs"
     | "httpie-metrics"
     | "vim-edit"
+    | "sops-edit"
     | "nano-edit";
 }> = ({ theme }) => (
   <img
