@@ -30,7 +30,7 @@ RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/
 
 WORKDIR /root
 
-RUN ln -s /usr/bin/batcat ~/.local/bin/bat;\
+RUN ln -s /usr/bin/batcat /usr/bin/bat;\
     chmod 400 ~/.ssh/id_rsa; \
     chmod +x /usr/local/bin/*; \
     chmod go-r ~/.kube/config; \
