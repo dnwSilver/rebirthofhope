@@ -5,7 +5,7 @@ SUPPURT_PLATHFORMS=linux/amd64,linux/arm64
 SERVER_PLATHFORM=linux/amd64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=1.0.0
+APP_VERSION=1.1.0
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
@@ -159,6 +159,8 @@ update-reverse-proxy:
 	rsync -chavzP --stats ./configs/k8s.nginx.conf root@${CLUSTER_HOST}:/etc/nginx/sites-available/default;
 	ssh root@${CLUSTER_HOST} "nginx -t";
 	ssh root@${CLUSTER_HOST} "systemctl reload nginx";
+
+push-full: build-frontend push-frontend build-backend push-backend build-manager push-manager
 
 record-examples:
 	vhs ./examples/k9s.enter.tape;
