@@ -4,13 +4,16 @@ const Example: FC<{
   theme:
     | "docker-run"
     | "git-clone"
+    | "git-commit"
     | "helmfile-linting"
     | "helmfile-verify"
     | "helmfile-deploy"
     | "k9s-ingress"
     | "k9s-pods"
+    | "k9s-logs"
     | "httpie-metrics"
-    | "vim-edit";
+    | "vim-edit"
+    | "nano-edit";
 }> = ({ theme }) => (
   <img
     src={`/example/${theme}.gif`}

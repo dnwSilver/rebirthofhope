@@ -7,6 +7,7 @@ import { getCookie } from "@/helpers/cookies";
 import { verifySortWheatFromChaff } from "@/server-functions/verify/verify-sort-wheat-from-chaff";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
+import Example from "../example";
 
 const SortWheatFromChaffManual: FC = () => {
   const call = getCookie("call");
@@ -26,11 +27,13 @@ const SortWheatFromChaffManual: FC = () => {
         </Tutorial>{" "}
         наших сервисов.
       </p>
+      <br />
+      <Example theme="k9s-logs" />
+      <br />
       <p>Что-то там слишком много логов🤯, тянутся, летят. Глаз ни за что не цепляется даже.</p>
       <p>
         Похоже, кто-то занимался отладкой <b>API</b> на <b>prod</b>'е и забыл отключить <b>trace</b>'ы. Бог ему судья.
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
 
       <p>
         Пойдем{" "}
@@ -39,6 +42,8 @@ const SortWheatFromChaffManual: FC = () => {
         </Tutorial>{" "}
         уровень логирования с <mark>trace</mark> на что-то более вменяемое, например на <mark>info</mark>.
       </p>
+      <br />
+      <Example theme="nano-edit" />
       <br />
       <DeployHint />
       <h2>Только нужное</h2>

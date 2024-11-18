@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import Command from "../command";
+import Example from "../example";
 
 const EditorsTutorial: FC = () => {
   return (
@@ -37,7 +38,7 @@ const EditorsTutorial: FC = () => {
           </li>
         </ul>
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="vim-edit" />
       <h2 id="nano">Nano</h2>
       <p>
         Если <b>Vim</b> победил, тогда используем <b>Nano</b>.
@@ -56,6 +57,8 @@ const EditorsTutorial: FC = () => {
           </li>
         </ul>
       </p>
+      <br/>
+      <Example theme="nano-edit" />
     </>
   );
 };

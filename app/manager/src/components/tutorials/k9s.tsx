@@ -84,7 +84,7 @@ const K9sTutorial = () => {
           </li>
         </ul>
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="k9s-logs" />
       <h2>POD</h2>
       <Example theme="k9s-pods" />
     </>
