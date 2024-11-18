@@ -5,7 +5,7 @@ import Command from "../command";
 import Manual from "./manual";
 import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
 import Tutorial from "../tutorials/tutorial";
-import { GO_REPO, RUN_DEPLOY } from "../tutorials/commands";
+import { REPO_CLONE, REPO_GO, RepoSwitch, RUN_DEPLOY } from "../tutorials/commands";
 
 const DeepDiveManual = () => {
   const call = getCookie("call");
@@ -18,16 +18,15 @@ const DeepDiveManual = () => {
       verify={verifyDeepDive}
     >
       <h2>Понеслась</h2>
-      <p>Ну что ж. Начнём.</p>
+      <p>Что ж. Начнём.</p>
       <p>Заранее спасибо за оказанную помощь!</p>
-      <br />
       <br />
       <p>Обозначим пару правил:</p>
       <ul>
         <li>Все действия должны быть из командной строки;</li>
         <li>Все действия должны быть сделаны в докер контейнере;</li>
         <li>Нельзя ломать и вредить, все крайне хрупкое;</li>
-        <li>После того как все действия в шаге выполнены, нужно завершить его;</li>
+        <li>После того как все действия в шаге выполнены, нужно завершить его (кнопка внизу страницы);</li>
         <li>
           Для редактирования текста есть <b>vim</b>, ну или менее хардкорный <b>nano</b>.
         </li>
@@ -35,21 +34,22 @@ const DeepDiveManual = () => {
       <h2>Подключение к рабочей среде</h2>
       <p>
         Для запуска у тебя должен быть установлен <b>docker</b>. Настоятельно рекомендуем поставить{" "}
-        <a href="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip">Nerd шрифт</a>, иначе
-        некоторые иконки могут не отображаться.
+        <a href="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hack.zip">Nerd шрифт</a> в терминал,
+        иначе некоторые иконки могут не отображаться.
       </p>
       <br />
       <p>Запускаем наше рабочее место командой:</p>
       <Command text={`docker run -e CALL=${call} -ti dnwsilver/k8s-workstation:latest /bin/bash`} />
+      {/* TODO ТУТ БУДЕТ GIF */}
       <h2>Получение конфигураций</h2>
-      Клонируем себе репозитория в домашнюю директорию <mark>~/rebirthofhope</mark>.
-      <Command text={`git clone git@github.com:dnwSilver/rebirthofhope.git`} />
+      Клонируем себе репозиторий в домашнюю директорию <mark>~/rebirthofhope</mark>.
+      <Command text={REPO_CLONE} />
       <br />
       Переходим в директорию c git репозиторием.
-      <Command text={GO_REPO} />
+      <Command text={REPO_GO} />
       <br />
       Переключаемся на нашу на ветку <b>savior/{call}</b>.
-      <Command text={`git switch savior/${call}`} />
+      <Command text={RepoSwitch(call)} />
       <h2>Валидация конфигураций</h2>
       <p>
         Все нужные команды лежат в файле <mark>~/rebirthofhope/Makefile</mark>.
@@ -69,6 +69,7 @@ const DeepDiveManual = () => {
       </p>
       <Command text={`make verify-environments`} />
       <br />
+      {/* TODO ТУТ БУДЕТ GIF */}
       <p>
         Напоследок запустим все вместе. Скрипт <b>verify</b> нам понадобится дальше, довольно таки часто.
       </p>

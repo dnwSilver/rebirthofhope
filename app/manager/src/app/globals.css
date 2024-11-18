@@ -21,10 +21,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+*:not(li) {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+ul {
+  padding-left: 2rem;
 }
 
 button {

@@ -49,7 +49,7 @@ func GetAppStatus() StatusType {
 		return EMPTY_ENVS
 	}
 
-	if databaseConnection != "mongodb://bestserverever:27017" {
+	if databaseConnection != "mongodb://bestserverever" {
 		return CORRUPTED_ENVS
 	}
 

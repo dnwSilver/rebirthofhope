@@ -49,14 +49,17 @@ const NeedMoreGoldManual = () => {
       <h2>Конфигурирование ресурсов</h2>
       <p>Самое время внести первые правки в конфигурацию.</p>
       <p>
-        Внеси правки в файл <mark>/environments/production-app/api.yaml.gotmpl</mark>.
+        <Tutorial theme="editors" chapter="vim">
+          Внеси правки
+        </Tutorial>{" "}
+        в файл <mark>/environments/production-app/api.yaml.gotmpl</mark>.
       </p>
       <p>
         Правки нужно{" "}
         <Tutorial theme="editors" chapter="vim">
           вставить
         </Tutorial>{" "}
-        в новый раздел resources, расширим память для <b>API</b> до <mark>8mi</mark>.
+        в новый раздел resources, расширим память для <b>API</b> до <mark>8Mi</mark>.
       </p>
       <Command
         text={`resources:

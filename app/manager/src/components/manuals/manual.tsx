@@ -34,9 +34,21 @@ const Manual = (props: Props) => {
       <h1>{title}</h1>
       <section>
         {children}
-        <br />
-        <br />
-        {!isFinished && <Button onClick={handleVerifyClick}>Все сделано!</Button>}
+        {!isFinished && (
+          <Button
+            style={{
+              position: "fixed",
+              // width: "6rem",
+              bottom: "1rem",
+              right: "16rem",
+              zIndex: "3",
+            }}
+            onClick={handleVerifyClick}
+            disabled={!!isFinished}
+          >
+            Все сделано!
+          </Button>
+        )}
       </section>
     </>
   );

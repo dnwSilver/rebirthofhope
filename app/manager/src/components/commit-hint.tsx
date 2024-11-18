@@ -1,10 +1,13 @@
 import { FC } from "react";
 import Command from "./command";
 import Helper from "./helper";
-import { GO_REPO, GIT_STAGE, GIT_COMMIT, GIT_PUSH } from "./tutorials/commands";
+import { REPO_GO, GIT_STAGE, GIT_COMMIT, GitPush } from "./tutorials/commands";
 import Tutorial from "./tutorials/tutorial";
+import { getCookie } from "@/helpers/cookies";
 
 const CommitHint = ({ action, result }: { action: string; result: string }) => {
+  const call = getCookie("call");
+
   return (
     <>
       <p>
@@ -15,11 +18,12 @@ const CommitHint = ({ action, result }: { action: string; result: string }) => {
       </p>
       <Helper>
         <Command
-          text={`${GO_REPO}
+          text={`${REPO_GO}
 ${GIT_STAGE}
 ${GIT_COMMIT}
-${GIT_PUSH}`}
+${GitPush(call)}`}
         />
+        {/* TODO ТУТ БУДЕТ GIF */}
       </Helper>
     </>
   );

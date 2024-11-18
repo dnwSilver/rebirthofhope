@@ -28,16 +28,18 @@ const SecretMaterialManual: FC = () => {
         Файл с секретами не содержит ничего необычного, это простой <b>yaml</b>. Прочитай файл с секретами командой:
         <Command text="helm secrets decrypt ./environments/production-app/secrets.yaml" />
       </p>
+      {/* TODO ТУТ БУДЕТ GIF */}
+
       <p>
-        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever:27017</mark>. Следующей командой
-        можно добраться до{" "}
+        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever</mark>. Следующей командой можно
+        добраться до{" "}
         <Tutorial theme="editors" chapter="vim">
           редактирования
         </Tutorial>{" "}
         этого файла:
         <Command text="helm secrets edit ./environments/production-app/secrets.yaml" />
       </p>
-
+      {/* TODO ТУТ БУДЕТ GIF */}
       <br />
       <DeployHint />
 

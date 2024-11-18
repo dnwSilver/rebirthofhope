@@ -84,7 +84,7 @@ const Greeting = () => {
         <img src="/k9s.png" width="16" height="10" /> k9s управление k8s
         <br /> <img src="/vim.svg" width="16" height="16" /> vim редактор файлов
         <br /> <img src="/helm.svg" width="16" height="16" /> helm пакетный менеджер k8s
-        <br /> <img src="/gitlab.svg" width="16" height="16" /> gitlab управление конфигурациями
+        {/* <br /> <img src="/gitlab.svg" width="16" height="16" /> gitlab управление конфигурациями */}
         <br /> <img src="/httpie.svg" width="16" height="16" /> httpie отправка сетевых запросов
       </section>
     </>

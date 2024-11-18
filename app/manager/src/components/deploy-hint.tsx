@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Command from "./command";
 import Helper from "./helper";
-import { GO_REPO, RUN_LINTING, GIT_STAGE, GIT_COMMIT, GIT_PUSH, RUN_DEPLOY } from "./tutorials/commands";
+import { REPO_GO, RUN_LINTING, GIT_STAGE, GIT_COMMIT, GitPush, RUN_DEPLOY } from "./tutorials/commands";
 import Tutorial from "./tutorials/tutorial";
 
 const DeployHint: FC = () => (
@@ -18,7 +18,7 @@ const DeployHint: FC = () => (
     </p>
     <Helper>
       <Command
-        text={`${GO_REPO}
+        text={`${REPO_GO}
 ${RUN_LINTING}
 ${RUN_DEPLOY}`}
       />

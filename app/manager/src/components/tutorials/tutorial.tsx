@@ -20,8 +20,8 @@ export type Chapter =
   | "logs"
   | "POST";
 
-const Tutorial = ({ theme, chapter, children }: { theme: Tutorial; chapter: Chapter } & PropsWithChildren) => (
-  <Link href={`/tutorials/${theme}#${chapter}`} target="_blank">
+const Tutorial = ({ theme, chapter, children }: { theme: Tutorial; chapter?: Chapter } & PropsWithChildren) => (
+  <Link href={`/tutorials/${theme}#${chapter || ""}`} target="_blank">
     {children}
   </Link>
 );

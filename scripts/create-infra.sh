@@ -38,7 +38,7 @@ gsed -i 's|level: info|level: trace|' $API_FILE >/dev/null && echo " Create t
 
 # Задание (SECRETS)
 helm secrets decrypt -i $SECRET_FILE >/dev/null && echo " Decrypt secrets"
-gsed -i 's|bestserver|worstserver|' $SECRET_FILE >/dev/null && echo " Create task (SECRETS)"
+gsed -i 's|bestserverever|worstserverever|' $SECRET_FILE >/dev/null && echo " Create task (SECRETS)"
 helm secrets encrypt -i $SECRET_FILE >/dev/null && echo " Encrypt secrets"
 
 # Задание (SCALE)
