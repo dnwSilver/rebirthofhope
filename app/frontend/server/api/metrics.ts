@@ -3,8 +3,8 @@ let errors = 14432;
 let needVerify = false;
 
 export default defineEventHandler(async (event) => {
-  requests += 123;
-  errors += 321;
+  requests += Math.floor(Math.random() * 100);
+  errors += Math.floor(Math.random() * 100);
 
   if (needVerify) {
     await fetch("https://rebirthofhope.ru/api/verify", {
