@@ -27,7 +27,7 @@ const K9sTutorial = () => {
         В кубах сервисы живут в <b>namespace</b>'ах. Проверить перечень <b>Namespace</b>'ов можно использовав команду{" "}
         <mark>namespace</mark>/<mark>ns</mark>.
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="k9s-namespace" />
       <h2>Deployment</h2>
       <p>
         Представление приложения в кластере. Собственно конфиг, который мы собираем, и является <b>deployment</b>'ом.
@@ -36,12 +36,12 @@ const K9sTutorial = () => {
         В первую очередь нас волнуют его настройки. Добраться до них можно через команду <mark>deploy</mark> и hotkey{" "}
         <mark>d</mark>
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="k9s-deploy" />
       <h2 id="ingress">Ingress</h2>
       <p>
         Список <b>ingress</b>'ов доступен по команде <mark>ingress</mark>/<mark>ing</mark>.
       </p>
-      {/* TODO ТУТ БУДЕТ GIF */}
+      <Example theme="k9s-ingress-solo" />
       <h2 id="logs">Logs</h2>
       <p>
         Для просмотра логов нужно зайти в <b>POD</b> и использовать горячую клавишу <mark>L</mark>. Доступные фильтры по
