@@ -11,10 +11,9 @@ verify-envs:
 	echo "production-app production-wd" | tr ' ' '\n' | \
 	xargs -I {} sh -c 'echo {} && helmfile -e $(basename {}) template >/dev/null || \
 		(echo "Environment {} is broken! Update values files in {} directory."; false)';
-ga
+
 verify: verify-secrets verify-charts verify-envs
 	https --quiet POST rebirthofhope.ru/api/verify call=${CALL} task=linting
 
 deploy:
 	helmfile --environment production-app apply;
-
