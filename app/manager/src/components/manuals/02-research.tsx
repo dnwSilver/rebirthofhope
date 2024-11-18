@@ -71,6 +71,8 @@ const ResearchManual = () => {
         <Command text={`https ${call}-uix.rebirthofhope.ru/api/metrics`} />
         <br />
         <Command text={`https ${call}-api.rebirthofhope.ru/metrics`} />
+        <br />
+        <Example theme="httpie-metrics" />
       </Helper>
       <p>
         <b>API</b> завален полностью. <b>UIX</b> ещё шевелится, выбрасывая 500 ошибки. Чем богаты, тому и рады 😔.
