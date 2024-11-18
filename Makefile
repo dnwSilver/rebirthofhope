@@ -5,7 +5,7 @@ SUPPURT_PLATHFORMS=linux/amd64,linux/arm64
 SERVER_PLATHFORM=linux/amd64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=0.1.3
+APP_VERSION=0.1.4
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets

