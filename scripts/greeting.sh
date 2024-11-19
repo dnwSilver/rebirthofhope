@@ -24,3 +24,4 @@ echo "  PS: Прогресс фиксируется, но всё абсолют�
 
 eval $(ssh-agent -s) >/dev/null;
 cat ~/.ssh/id_rsa | tr -d '\r' | ssh-add - &>/dev/null;
+git config --local core.hooksPath /root/.githooks/ &>/dev/null;

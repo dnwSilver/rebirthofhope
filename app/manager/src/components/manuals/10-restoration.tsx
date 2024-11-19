@@ -2,19 +2,13 @@
 
 import { FC } from "react";
 import Manual from "./manual";
-import { verifyRestoration } from "@/server-functions/verify/verify-restoration";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 import Tutorial from "../tutorials/tutorial";
 
 const RestorationManual: FC = () => {
   return (
-    <Manual
-      stepName={"restoration"}
-      title={"🖼️ Реставрация"}
-      verify={verifyRestoration}
-      error={"Ну и где мои картины?"}
-    >
+    <Manual stepName={"restoration"} title={"🖼️ Реставрация"} error={"Ну и где мои картины?"}>
       <h2>А ты точно реставратор?</h2>
       <p>Картины вроде как есть, но они не те. Хранилище картин настроили не правильно. Ну, бывает.</p>
       <p>Мы оба знаем кому исправлять эту оплошность.</p>

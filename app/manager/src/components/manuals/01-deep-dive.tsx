@@ -3,9 +3,8 @@
 import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import Manual from "./manual";
-import { verifyDeepDive } from "@/server-functions/verify/verify-deep-dive";
 import Tutorial from "../tutorials/tutorial";
-import { REPO_CLONE, REPO_GO, RepoSwitch, RUN_DEPLOY } from "../tutorials/commands";
+import { REPO_CLONE, REPO_GO, RepoSwitch } from "../tutorials/commands";
 import Helper from "../helper";
 import Example from "../example";
 
@@ -17,7 +16,6 @@ const DeepDiveManual = () => {
       stepName="deep-dive"
       title="🤿 Двадцать тысяч лье под водой"
       error="Похоже, что ты еще не выполнил полную проверку линтинга в контейнере."
-      verify={verifyDeepDive}
     >
       <h2>Понеслась</h2>
       <p>Что ж. Начнём.</p>

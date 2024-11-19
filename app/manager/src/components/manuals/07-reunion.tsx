@@ -2,7 +2,6 @@
 
 import { FC } from "react";
 import Manual from "./manual";
-import { verifyReunion } from "@/server-functions/verify/verify-reunion";
 import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
 import DeployHint from "../deploy-hint";
@@ -13,12 +12,7 @@ const ReunionManual: FC = () => {
   const call = getCookie("call");
 
   return (
-    <Manual
-      stepName={"reunion"}
-      title={"🔗 Вместе навсегда"}
-      verify={verifyReunion}
-      error={"API и UIX все еще в разлуке 💔"}
-    >
+    <Manual stepName={"reunion"} title={"🔗 Вместе навсегда"} error={"API и UIX все еще в разлуке 💔"}>
       <h2>Небольшая оплошность</h2>
       <p>
         Ух ты, <b>API</b>'шка заработала! С ней можно сыграть в пинг-понг🏓:
@@ -38,7 +32,7 @@ const ReunionManual: FC = () => {
         Он смотрит на <mark>https://{call}-api.abyssofdespair.ru</mark>, вместо{" "}
         <mark>https://{call}-api.rebirthofhope.ru</mark>.
       </p>
-      <Example theme="chrome-network"/>
+      <Example theme="chrome-network" />
       <p>
         Погнали менять это в файле <mark>environments/production-app/uix.yaml.gotmpl</mark>.
       </p>

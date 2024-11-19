@@ -4,19 +4,13 @@ import Tutorial from "../tutorials/tutorial";
 import Command from "../command";
 import Manual from "./manual";
 import Helper from "../helper";
-import { verifyNeedMoreGold } from "@/server-functions/verify/verify-need-more-gold";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 import Example from "../example";
 
 const NeedMoreGoldManual = () => {
   return (
-    <Manual
-      stepName={"need-more-gold"}
-      title={"💰 Нужно больше золота"}
-      verify={verifyNeedMoreGold}
-      error={"Ресурсы так и не зарезервированы..."}
-    >
+    <Manual stepName={"need-more-gold"} title={"💰 Нужно больше золота"} error={"Ресурсы так и не зарезервированы..."}>
       <h2>Что имеем?</h2>
       <p>
         Ходит легенда, о минимальных требованиях к ресурсам у <b>API</b> и <b>UIX</b>. Их создатели заявляли следующее:

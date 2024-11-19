@@ -11,6 +11,9 @@ COPY /.bin                  /home/.bin
 COPY /.secrets/ssh          /home/.ssh
 COPY /.secrets/certs        /home/.certs
 COPY /configs/kube.config   /home/.kube/config
+COPY /scripts/pre-push      /home/.githooks/.pre-push
+
+RUN chmod +x /home/.githooks/.pre-push;
 
 FROM ubuntu:$UBUNTU_VERSION AS runtime
 
@@ -20,6 +23,7 @@ COPY --from=build /home/.ssh /root/.ssh
 COPY --from=build /home/.kube /root/.kube
 COPY --from=build /home/.bin /usr/local/bin
 COPY --from=build /home/.certs /etc/ssl/certs
+COPY --from=build /home/.githooks /root/.githooks
 COPY --from=build /home/greeting.sh /etc/bash.bashrc
 
 RUN apt update; \
@@ -37,4 +41,4 @@ RUN ln -s /usr/bin/batcat /usr/bin/bat;\
     gpg --import /etc/ssl/certs/gpg.key; \
     git config --global user.email "k8s.savior@gmail.com"; \
     git config --global user.email "Savior"; \
-    sed -i 's|"font"|"cupcake"|' /root/.bashrc
+    sed -i 's|"font"|"cupcake"|' /root/.bashrc;

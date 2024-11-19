@@ -1,11 +1,10 @@
 
 DOCKER_DIR=./docker
 
-SUPPURT_PLATHFORMS=linux/amd64,linux/arm64
-SERVER_PLATHFORM=linux/amd64
+SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=1.1.1
+APP_VERSION=1.3.0
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
@@ -30,13 +29,13 @@ CLUSTER_HOST=80.87.106.221
 
 build-workstation: update-bin update-secrets
 	docker build --no-cache \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--file ${DOCKER_DIR}/workstation.Dockerfile \
 	--tag workstation:${APP_VERSION} .;
 
 build-backend:
 	docker buildx build \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg GO_VERSION=${GO_VERSION} \
 	--file ${DOCKER_DIR}/backend.Dockerfile \
 	--tag backend:${APP_VERSION} .;
@@ -47,7 +46,7 @@ build-frontend:
 	bun install; \
 	bun run build;
 	docker buildx build \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg GO_VERSION=${NODE_VERSION} \
 	--file ${DOCKER_DIR}/frontend.Dockerfile \
 	--tag frontend:${APP_VERSION} .;
@@ -58,21 +57,21 @@ build-manager:
 	npm install --force; \
 	npm run build;
 	docker buildx build \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg NODE_VERSION=${NODE_VERSION} \
 	--file ${DOCKER_DIR}/manager.Dockerfile \
 	--tag manager:${APP_VERSION} .;
 
 build-watchdog:
 	docker buildx build \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg NODE_VERSION=${GO_VERSION} \
 	--file ${DOCKER_DIR}/watchdog.Dockerfile \
 	--tag watchdog:${APP_VERSION} .;
 
 build-ci:
 	docker buildx build \
-	--platform ${SUPPURT_PLATHFORMS} \
+	--platform ${SUPPORT_PLATFORMS} \
 	--file ${DOCKER_DIR}/ci.Dockerfile \
 	--tag ci:${APP_VERSION} .;
 

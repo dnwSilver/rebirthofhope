@@ -3,7 +3,6 @@
 import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import Manual from "./manual";
-import { verifyResearch } from "@/server-functions/verify/verify-research";
 import Tutorial from "../tutorials/tutorial";
 import Helper from "../helper";
 import Example from "../example";
@@ -15,7 +14,6 @@ const ResearchManual = () => {
     <Manual
       stepName={"research"}
       title={"🔬 В поисках истины"}
-      verify={verifyResearch}
       error={"Похоже, что ты еще не заглядывал в метрики. Настоятельно рекомендую. ☝️"}
     >
       <h2>Сбор информации</h2>

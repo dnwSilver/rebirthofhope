@@ -1,0 +1,69 @@
+#!/bin/bash
+
+API_CONFIG=deploy/environments/production-app/api.yaml.gotmpl
+UIX_CONFIG=deploy/environments/production-app/uix.yaml.gotmpl
+SEC_CONFIG=deploy/environments/production-app/secrets.yaml
+
+# 03 RESOURCE
+if grep -q "memory: 8Mi" $API_CONFIG; then
+  RESOURCE=true
+fi
+
+# 04 LOGS
+if grep -q "level: info" $API_CONFIG; then
+  LOGS=true
+fi
+
+# 05 SECRETS
+if ! grep -q "MP7L7goFiZtmRlWPrakbY2Web2rQA+qwjjfUQl1zOgmUU2u477DMt3rcteVQ,iv" $SEC_CONFIG; then
+  SECRETS=true
+fi
+
+# 06 REPLICA
+if grep -q "replicaCount: 2" $API_CONFIG; then
+  REPLICA=true
+fi
+
+# 07 ENVIRONMENTS
+if grep -q api.*-apis.rebirthofhope.ru $UIX_CONFIG; then
+  ENVIRONMENTS=true
+fi
+
+# 08 CORS
+if grep -q origins.*uix.rebirthofhope.ru $API_CONFIG; then
+  CORS=true
+fi
+
+# 09 INGRESS
+if grep -q "extraIngress" $API_CONFIG; then
+  INGRESS=true
+fi
+
+# 10 VOLUMES
+if grep -q "mountPath: /.output/public/arts" $UIX_CONFIG; then
+  VOLUME=true
+fi
+
+# BONUS FEATURES
+
+# [[ -z $RESOURCE ]]      && echo "🍄 RESOURCE"       || echo "🍀 RESOURCE"
+# [[ -z $LOGS ]]          && echo "🍄 LOGS"           || echo "🍀 LOGS"
+# [[ -z $SECRETS ]]       && echo "🍄 SECRETS"        || echo "🍀 SECRETS"
+# [[ -z $REPLICA ]]       && echo "🍄 REPLICA"        || echo "🍀 REPLICA"
+# [[ -z $ENVIRONMENTS ]]  && echo "🍄 ENVIRONMENTS"   || echo "🍀 ENVIRONMENTS"
+# [[ -z $CORS ]]          && echo "🍄 CORS"           || echo "🍀 CORS"
+# [[ -z $INGRESS ]]       && echo "🍄 INGRESS"        || echo "🍀 INGRESS"
+# [[ -z $VOLUME ]]        && echo "🍄 VOLUME"         || echo "🍀 VOLUMES"
+
+TASKS=""
+
+[[ -z $RESOURCE ]]      || TASKS="${TASKS} tasks[resources]=true"
+[[ -z $LOGS ]]          || TASKS="${TASKS} tasks[logs]=true"
+[[ -z $SECRETS ]]       || TASKS="${TASKS} tasks[secrets]=true"
+[[ -z $REPLICA ]]       || TASKS="${TASKS} tasks[replicas]=true"
+[[ -z $ENVIRONMENTS ]]  || TASKS="${TASKS} tasks[envs]=true"
+[[ -z $CORS ]]          || TASKS="${TASKS} tasks[cors]=true"
+[[ -z $INGRESS ]]       || TASKS="${TASKS} tasks[ingress]=true"
+[[ -z $VOLUME ]]        || TASKS="${TASKS} tasks[volume]=true"
+
+https --quiet POST rebirthofhope.ru/api/verify call=$CALL $TASKS

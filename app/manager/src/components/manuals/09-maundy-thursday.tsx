@@ -2,7 +2,6 @@
 
 import { FC } from "react";
 import Manual from "./manual";
-import { verifyMaundyThursday } from "@/server-functions/verify/verify-maundy-thursday";
 import CommitHint from "../commit-hint";
 import DeployHint from "../deploy-hint";
 import { getCookie } from "@/helpers/cookies";
@@ -16,7 +15,6 @@ const MaundyThursdayManual: FC = () => {
     <Manual
       stepName={"maundy-thursday"}
       title={"🧹 Чистый четверг"}
-      verify={verifyMaundyThursday}
       error={"Недостаточно чисто. Должно быть идеально!"}
     >
       <h2>Чистим-чистим трубочиста - чисто-чисто, чисто-чисто!</h2>

@@ -4,7 +4,6 @@ import { FC } from "react";
 import Manual from "./manual";
 import Tutorial from "../tutorials/tutorial";
 import Command from "../command";
-import { verifySecretMaterial } from "@/server-functions/verify/verify-secret-materials";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 import Example from "../example";
@@ -14,7 +13,6 @@ const SecretMaterialManual: FC = () => {
     <Manual
       stepName={"secret-materials"}
       title={"🗝️ Секретные материалы"}
-      verify={verifySecretMaterial}
       error={"Подключение к базе все еще сломано. Починишь?"}
     >
       <h2>Выносим грязь</h2>
@@ -31,8 +29,8 @@ const SecretMaterialManual: FC = () => {
       </p>
 
       <p>
-        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever:27017</mark>. Следующей командой можно
-        добраться до{" "}
+        Оказывается, новая строка подключения звучит так <mark>mongodb://bestserverever:27017</mark>. Следующей командой
+        можно добраться до{" "}
         <Tutorial theme="editors" chapter="vim">
           редактирования
         </Tutorial>{" "}

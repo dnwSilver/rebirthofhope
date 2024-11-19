@@ -15,6 +15,15 @@ export interface ISavior {
   joining: Date;
   linting: boolean;
   metrics: boolean;
+  resources: boolean;
+  logs: boolean;
+  secrets: boolean;
+  replicas: boolean;
+  envs: boolean;
+  cors: boolean;
+  ingress: boolean;
+  volume: boolean;
+  features: boolean;
   progress: IStep[];
 }
 
@@ -28,9 +37,10 @@ export type StepName =
   | "reunion" // Правим переменную окружения
   | "scenario-armor" // Настраиваем CORS
   | "maundy-thursday" // Избавляемся от CORS
-  | "restoration"; // Восстанавливаем volume
+  | "restoration" // Восстанавливаем volume
+  | "watchdog"; // Восстанавливаем volume
 
-type StepIcon = "🤿" | "🔬" | "🗝️" | "💰" | "🧹" | "🔗" | "🖼️" | "👯‍♀️" | "🌾" | "🛡️";
+type StepIcon = "🤿" | "🔬" | "🗝️" | "💰" | "🧹" | "🔗" | "🖼️" | "👯‍♀️" | "🌾" | "🛡️" | "🐶";
 
 export const previousSteps: Record<StepName, StepName | null> = {
   "deep-dive": null,
@@ -43,6 +53,7 @@ export const previousSteps: Record<StepName, StepName | null> = {
   "scenario-armor": "reunion",
   "maundy-thursday": "scenario-armor",
   restoration: "maundy-thursday",
+  watchdog: null,
 };
 
 export const steps: Record<StepName, StepIcon> = {
@@ -56,6 +67,7 @@ export const steps: Record<StepName, StepIcon> = {
   "scenario-armor": "🛡️",
   "maundy-thursday": "🧹",
   restoration: "🖼️",
+  watchdog: "🐶",
 };
 
 export const stepsRU: Record<StepName, string> = {
@@ -69,9 +81,24 @@ export const stepsRU: Record<StepName, string> = {
   "scenario-armor": "Сценарная броня",
   "maundy-thursday": "Чистый четверг",
   restoration: "Реставрация",
+  watchdog: "Руководитель посадки"
 };
 
-export const EXAMPLE_TIME_AVAILABLE = 200 * 60 * 60 * 1_000;
+export const stepValidators: Record<StepName, string> = {
+  "deep-dive": "linting",
+  research: "metrics",
+  "need-more-gold": "resources",
+  "sort-wheat-from-chaff": "logs",
+  "secret-materials": "secrets",
+  "attack-of-the-clones": "replicas",
+  reunion: "envs",
+  "scenario-armor": "cors",
+  "maundy-thursday": "ingress",
+  restoration: "volume",
+  watchdog: "features"
+};
+
+export const EXAMPLE_TIME_AVAILABLE = 3 * 60 * 60 * 1_000;
 
 export const SHORT_POLLING_INTERVAL = 60 * 60 * 1_000;
 

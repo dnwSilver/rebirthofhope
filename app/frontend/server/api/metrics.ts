@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
       method: "POST",
       body: JSON.stringify({
         call: process.env.CALL,
-        task: "metrics",
+        tasks: { metrics: true },
       }),
     });
 

@@ -4,7 +4,6 @@ import { FC } from "react";
 import Manual from "./manual";
 import Tutorial from "../tutorials/tutorial";
 import { getCookie } from "@/helpers/cookies";
-import { verifySortWheatFromChaff } from "@/server-functions/verify/verify-sort-wheat-from-chaff";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 import Example from "../example";
@@ -16,7 +15,6 @@ const SortWheatFromChaffManual: FC = () => {
     <Manual
       stepName={"sort-wheat-from-chaff"}
       title={"🌾 Отделение зёрен от плевел"}
-      verify={verifySortWheatFromChaff}
       error={"Логов все равно многовато 😥"}
     >
       <h2>Почитаем?</h2>
