@@ -24,7 +24,7 @@ const generateCall = async (): Promise<string> => {
 export const POST = async (): Promise<Response> => {
   const newCall = await generateCall();
 
-  // await call.create<ICall>({ call: newCall });
+  await call.create<ICall>({ call: newCall });
 
   return new Response(newCall);
 };
