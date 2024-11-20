@@ -86,7 +86,6 @@ gsed -i 's|createNamespace: false|createNamespace: true|' $HELM_FILE >/dev/null 
 gsed -i '/  production-adm:/,+14 d' $HELM_FILE >/dev/null && echo " Clean helmfile";
 gsed -zi 's|enabled: true|enabled: false|2' $HELM_FILE >/dev/null && echo "⭘ Disable API deploy"
 helmfile --environment production-app apply &>/dev/null && echo "󱃾 Deploy to cluster";
-helmfile --environment production-wd apply &>/dev/null && echo "󱃾 Deploy to cluster";
 gsed -zi 's|enabled: false|enabled: true|2' $HELM_FILE >/dev/null && echo "⏽ Enable API deploy";
 gsed -i 's|createNamespace: true|createNamespace: false|' $HELM_FILE >/dev/null && echo " Disable create namespace";
 

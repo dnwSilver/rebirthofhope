@@ -30,18 +30,6 @@ environments:
           enabled: true
     secrets:
       - environments/production-app/secrets.yaml
-  production-wd:
-    kubeContext: louvre
-    values:
-      - fullnamePrefixOverride: p-wd
-      - partOfOverride: wd
-      - web:
-          enabled: false
-      - uix:
-          enabled: false
-      - api:
-          enabled: false
-    secrets:
       - environments/production-wd/secrets.yaml
 
 templates:
