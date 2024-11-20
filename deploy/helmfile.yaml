@@ -1,5 +1,5 @@
 helmDefaults:
-  createNamespace: false
+  createNamespace: true
   wait: true
   atomic: true
 
@@ -78,7 +78,7 @@ templates:
 
 releases:
   - name: "{{ .Environment.Name }}-adm"
-    namespace: julienne
+    namespace: savior-julienne
     chart: releases/adm
     condition: adm.enabled
     values:
@@ -86,7 +86,7 @@ releases:
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-uix"
-    namespace: julienne
+    namespace: savior-julienne
     chart: releases/uix
     values:
       - environments/{{ .Environment.Name }}/uix.yaml.gotmpl
@@ -94,7 +94,7 @@ releases:
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-api"
-    namespace: julienne
+    namespace: savior-julienne
     chart: releases/api
     values:
       - environments/{{ .Environment.Name }}/api.yaml.gotmpl
@@ -102,7 +102,7 @@ releases:
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-wd"
-    namespace: julienne
+    namespace: savior-julienne
     chart: releases/wd
     values:
       - environments/{{ .Environment.Name }}/wd.yaml.gotmpl

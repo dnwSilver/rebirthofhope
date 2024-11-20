@@ -10,10 +10,11 @@ type Props = {
   stepName: StepName;
   title: string;
   error: string;
+  showButton?: boolean;
 } & PropsWithChildren;
 
 const Manual = (props: Props) => {
-  const { stepName, title, error, children } = props;
+  const { stepName, title, error, children, showButton = true } = props;
   const { currentSavior, actualize } = useSavior();
   const { toggle } = useProgress();
 
@@ -34,7 +35,7 @@ const Manual = (props: Props) => {
       <h1>{title}</h1>
       <section>
         {children}
-        {!isFinished && (
+        {!isFinished && showButton && (
           <Button
             style={{
               position: "fixed",

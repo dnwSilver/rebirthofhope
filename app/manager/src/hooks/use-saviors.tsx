@@ -1,5 +1,5 @@
-import { ISavior, SHORT_POLLING_INTERVAL } from "@/db/domain";
-import { readSaviors } from "@/server-functions/read-saviours";
+import { ISavior } from "@/db/domain";
+import { readSaviors } from "@/server-functions/read-saviors";
 import { useEffect, useState } from "react";
 
 const useSaviors = () => {

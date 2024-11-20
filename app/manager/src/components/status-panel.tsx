@@ -5,14 +5,14 @@ import Button from "./button";
 import { steps, previousSteps, stepsRU } from "@/db/domain";
 import Link from "next/link";
 import { getStepStatus } from "./progress";
-import useCurrentSaviour from "@/hooks/use-current-savior";
+import useCurrentSavior from "@/hooks/use-current-savior";
 import { useProgress } from "@/store/store";
 import { useEffect } from "react";
 
 const StatusPanel = () => {
   const { hide, open, toggle } = useProgress();
 
-  const { currentSavior, actualize } = useCurrentSaviour();
+  const { currentSavior, actualize } = useCurrentSavior();
 
   useEffect(() => {
     actualize();

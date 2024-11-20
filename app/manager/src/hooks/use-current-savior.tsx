@@ -1,7 +1,7 @@
 import { useSavior } from "@/store/store";
 import { useEffect } from "react";
 
-const useCurrentSaviour = () => {
+const useCurrentSavior = () => {
   const { currentSavior, actualize } = useSavior();
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const useCurrentSaviour = () => {
   return { currentSavior, actualize };
 };
 
-export default useCurrentSaviour;
+export default useCurrentSavior;

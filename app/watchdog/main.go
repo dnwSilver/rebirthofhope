@@ -12,7 +12,7 @@ import (
 )
 
 var features string = os.Getenv("FEATURES")
-var filesDirectory string = "/.output/public/arts/watchdog"
+var filesDirectory string = "/.output/public/arts"
 
 func main() {
 	if !strings.Contains(features, "WATCH") {
@@ -48,7 +48,7 @@ func serveMainPage(w http.ResponseWriter, r *http.Request) {
 	isEnabled := strings.Contains(features, "WATCH")
 
 	images := []*Image{}
-	entries, err := os.ReadDir(filesDirectory)
+	entries, err := os.ReadDir(filesDirectory + "/watchdog/")
 	if err != nil {
 		log.Fatal(err)
 	}

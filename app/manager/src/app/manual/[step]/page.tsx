@@ -8,6 +8,7 @@ import ReunionManual from "@/components/manuals/07-reunion";
 import ScenarioArmorManual from "@/components/manuals/08-scenario-armor";
 import MaundyThursdayManual from "@/components/manuals/09-maundy-thursday";
 import RestorationManual from "@/components/manuals/10-restoration";
+import WatchdogManual from "@/components/manuals/99-watch-dog";
 import { StepName } from "@/db/domain";
 import { panel } from "@/styles/panel";
 
@@ -28,6 +29,7 @@ const ManualPage = async ({ params }: { params: Promise<{ step: StepName }> }) =
       {step === "scenario-armor" && <ScenarioArmorManual />}
       {step === "maundy-thursday" && <MaundyThursdayManual />}
       {step === "restoration" && <RestorationManual />}
+      {step === "watchdog" && <WatchdogManual />}
     </section>
   );
 };

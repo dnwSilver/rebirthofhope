@@ -1,15 +1,15 @@
 import { getCookie } from "@/helpers/cookies";
 import { useEffect, useState } from "react";
 
-const useCall = () => {
-  const [call, setCall] = useState<string | undefined>();
+const useCall = (time = 0) => {
+  const [call, setCall] = useState<string | undefined | null>();
 
   const updateCall = () => {
     setCall(getCookie("call"));
   };
 
   useEffect(() => {
-    setCall(getCookie("call"));
+    setTimeout(() => setCall(getCookie("call") || null), time);
   }, [call]);
 
   return { call, updateCall };

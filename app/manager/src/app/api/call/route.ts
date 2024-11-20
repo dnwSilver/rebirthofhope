@@ -10,11 +10,11 @@ const generateCall = async (): Promise<string> => {
 
   const newCall = faker.food.dish().replaceAll(" ", "-").toLowerCase();
 
-  const saviorWithCall = await savior.findOne<ISavior>({ call }).exec();
-  const availableCall = await call.findOne<ICall>({ call }).exec();
+  const saviorWithCall = await savior.findOne<ISavior>({ call: newCall }).exec();
+  const availableCall = await call.findOne<ICall>({ call: newCall }).exec();
   const invalidSymbols = newCall.match(new RegExp(/[^a-zA-Z\-]+/, "i"));
 
-  if (saviorWithCall !== null || availableCall !== null || invalidSymbols !== null || newCall.length > 26) {
+  if (saviorWithCall || availableCall || invalidSymbols || newCall.length > 26) {
     return await generateCall();
   }
 
@@ -24,7 +24,7 @@ const generateCall = async (): Promise<string> => {
 export const POST = async (): Promise<Response> => {
   const newCall = await generateCall();
 
-  await call.create<ICall>({ call: newCall });
+  // await call.create<ICall>({ call: newCall });
 
   return new Response(newCall);
 };

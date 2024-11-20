@@ -1,10 +1,9 @@
-
 DOCKER_DIR=./docker
 
 SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=1.3.0
+APP_VERSION=1.3.6
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
@@ -200,4 +199,4 @@ deploy-pv:
 	rsync -chavzP ./manifests/production-app/pv.yaml root@${CLUSTER_HOST}:/root/pv.yaml; \
 	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pv.yaml"; \
 	rsync -chavzP ./manifests/production-app/pvc.yaml root@${CLUSTER_HOST}:/root/pvc.yaml; \
-	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pvc.yaml -n julienne";
+	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pvc.yaml -n savior-julienne";
