@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker/locale/ru";
 import { savior, call } from "@/db";
-import { ICall, ISavior } from "@/db/domain";
+import { COOKIE_IDENTIFIER_KEY, ICall, ISavior } from "@/db/domain";
 import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
@@ -22,17 +22,9 @@ const generateCall = async (): Promise<string> => {
   return newCall;
 };
 
-export const POST = async (): Promise<Response> => {
-  const newCall = await generateCall();
-
-  await call.create<ICall>({ call: newCall });
-
-  return new Response(newCall);
-};
-
 export const GET = async (request: NextRequest): Promise<Response> => {
   const searchParams = request.nextUrl.searchParams;
-  const findCall = searchParams.get("call");
+  const findCall = searchParams.get(COOKIE_IDENTIFIER_KEY);
 
   const availableCall = await call.findOne<ICall>({ call: findCall }).exec();
 
@@ -44,3 +36,12 @@ export const GET = async (request: NextRequest): Promise<Response> => {
 
   return new Response();
 };
+
+export const POST = async (): Promise<Response> => {
+  const newCall = await generateCall();
+
+  await call.create<ICall>({ call: newCall });
+
+  return new Response(newCall);
+};
+

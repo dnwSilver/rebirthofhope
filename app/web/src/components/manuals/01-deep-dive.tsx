@@ -7,9 +7,10 @@ import Tutorial from "../tutorials/tutorial";
 import { REPO_CLONE, REPO_GO, RepoSwitch } from "../tutorials/commands";
 import Helper from "../helper";
 import Example from "../example";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const DeepDiveManual = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <Manual

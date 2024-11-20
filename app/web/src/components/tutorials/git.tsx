@@ -4,9 +4,10 @@ import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import { GIT_COMMIT, GitPush, GIT_STAGE, REPO_CLONE, REPO_GO, RepoSwitch } from "./commands";
 import Example from "../example";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const GitTutorial = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <>

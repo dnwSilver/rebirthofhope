@@ -6,9 +6,10 @@ import CommitHint from "../commit-hint";
 import DeployHint from "../deploy-hint";
 import { getCookie } from "@/helpers/cookies";
 import Example from "../example";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const ScenarioArmorManual: FC = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <Manual stepName={"scenario-armor"} title={"🛡️ Сценарная броня"} error={"Недостаточно защиты!"}>

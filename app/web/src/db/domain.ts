@@ -37,7 +37,7 @@ export type StepName =
   | "reunion" // Правим переменную окружения
   | "scenario-armor" // Настраиваем CORS
   | "maundy-thursday" // Избавляемся от CORS
-  | "restoration" // Восстанавливаем volume
+  | "restoration"; // Восстанавливаем volume
 
 type StepIcon = "🤿" | "🔬" | "🗝️" | "💰" | "🧹" | "🔗" | "🖼️" | "👯‍♀️" | "🌾" | "🛡️";
 
@@ -93,7 +93,9 @@ export const stepValidators: Record<StepName, string> = {
   restoration: "volume",
 };
 
-export const EXAMPLE_TIME_AVAILABLE = 3 * 60 * 60 * 1_000;
+export const COOKIE_IDENTIFIER_KEY = "id";
+
+export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
 
 export const SHORT_POLLING_INTERVAL = 60 * 60 * 1_000;
 

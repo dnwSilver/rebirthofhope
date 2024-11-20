@@ -5,9 +5,10 @@ import { panel } from "@/styles/panel";
 import Command from "./command";
 import Example from "./example";
 import Link from "next/link";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const EntryPoint = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <section style={panel}>

@@ -3,9 +3,8 @@ import { savior, call } from "@/db";
 import { ISavior, stepNames } from "@/db/domain";
 import { faker } from "@faker-js/faker/locale/ru";
 import mongoose from "mongoose";
-import { cookies } from "next/headers";
 
-export const joinSavior = async (): Promise<boolean> => {
+export const joinSavior = async (): Promise<{ call: string; name: string } | null> => {
   if (process.env.DB) {
     await mongoose.connect(process.env.DB);
   }
@@ -13,7 +12,7 @@ export const joinSavior = async (): Promise<boolean> => {
   const saviorCall = await call.findOne().exec();
 
   if (saviorCall === null) {
-    return false;
+    return null;
   }
 
   const name = faker.person.fullName();
@@ -31,8 +30,5 @@ export const joinSavior = async (): Promise<boolean> => {
 
   await call.deleteOne(saviorCall);
 
-  (await cookies()).set("call", saviorCall.call);
-  (await cookies()).set("name", name);
-
-  return true;
+  return { call: saviorCall.call, name: name };
 };

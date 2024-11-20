@@ -7,9 +7,10 @@ import { getCookie } from "@/helpers/cookies";
 import DeployHint from "../deploy-hint";
 import CommitHint from "../commit-hint";
 import Example from "../example";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const SortWheatFromChaffManual: FC = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <Manual

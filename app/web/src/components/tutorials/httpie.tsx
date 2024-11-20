@@ -3,9 +3,10 @@
 import { FC } from "react";
 import Command from "../command";
 import { getCookie } from "@/helpers/cookies";
+import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
 const HttpieTutorial: FC = () => {
-  const call = getCookie("call");
+  const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
     <>
