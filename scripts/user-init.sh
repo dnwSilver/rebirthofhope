@@ -68,7 +68,7 @@ gsed -i '/extraIngress:/,+10 d' $API_FILE >/dev/null && echo " Create task (I
 gsed -i 's|/.output/public/arts|/.output/arts|' $UIX_FILE >/dev/null && echo " Create task (VOLUMES)"
 
 # Rename deploy name
-for f in $(find . -name '*.yaml' -or -name '*.gotmpl' -or -name '*.tpl'); do gsed -i "s|julienne|$CALL|g" $f; done >/dev/null && echo " Rename namespace, domens, manifests"
+for f in $(find . -name '*.yaml' -or -name '*.gotmpl' -or -name '*.tpl'); do gsed -i "s|julienne|$CALL|g" $f; done >/dev/null && echo " Rename namespace, domains, manifests"
 
 cp ../Makefile Makefile >/dev/null && echo " Create make file";
 

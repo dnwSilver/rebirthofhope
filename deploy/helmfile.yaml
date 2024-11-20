@@ -30,7 +30,6 @@ environments:
           enabled: true
     secrets:
       - environments/production-app/secrets.yaml
-      - environments/production-wd/secrets.yaml
 
 templates:
   env: &set
