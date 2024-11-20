@@ -8,7 +8,7 @@ partOfOverride: ""
 
 image:
   pullPolicy: IfNotPresent
-  repository: dnwsilver/k8s-frontend
+  repository: dnwsilver/k8s-uix
   tag: ""
 
 ingress:

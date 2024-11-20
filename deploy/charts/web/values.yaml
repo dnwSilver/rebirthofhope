@@ -8,7 +8,7 @@ partOfOverride: ""
 
 image:
   pullPolicy: IfNotPresent
-  repository: dnwsilver/k8s-api
+  repository: dnwsilver/k8s-web
   tag: ""
 
 ingress:
@@ -16,17 +16,11 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - julienne-api.rebirthofhope.ru
+    - rebirthofhope.ru
   tls: []
   className: nginx
   paths:
     - /
-
-extraIngress:
-  enabled: false
-  ingresses: []
-  services: []
-  endpoints: []
 
 service:
   enabled: true
@@ -35,7 +29,7 @@ service:
     http: 8080
 
 containerPorts:
-  http: 8080
+  http: 3000
 
 replicaCount: 1
 
@@ -52,24 +46,19 @@ securityContext:
 
 resources:
   limits:
-    memory: 1Mi
-    cpu: 10m
+    memory: 256Mi
+    cpu: 200m
   requests:
-    memory: 1Mi
-    cpu: 10m
+    memory: 256Mi
+    cpu: 100m
 
 livenessProbe: {}
 
 readinessProbe: {}
 
-volumeMounts:
-  - name: cache
-    mountPath: /app/cache
+volumeMounts: []
 
-volumes:
-  - name: cache
-    emptyDir:
-      sizeLimit: 2Mi
+volumes: []
 
 nodeSelector: {}
 
@@ -90,9 +79,5 @@ configMap: {}
 hostAliases: []
 
 app:
-  cors:
-    origins: ""
-  log:
-    level: "info"
-  database:
-    connection: ""
+  environment: staging
+  db: ""

@@ -1,0 +1,13 @@
+image:
+  tag: 2.0.0
+
+ingress:
+  enabled: true
+  hosts:
+    - rebirthofhope.ru
+
+replicaCount: 1
+
+app:
+  environment: production
+  db: {{ .Values.app.db }}

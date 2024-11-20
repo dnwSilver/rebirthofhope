@@ -4,34 +4,30 @@ helmDefaults:
   atomic: true
 
 environments:
-  production-adm:
+  production-web:
     kubeContext: louvre
     values:
-      - fullnamePrefixOverride: p-adm
-      - partOfOverride: adm
-      - adm:
+      - fullnamePrefixOverride: p-web
+      - partOfOverride: web
+      - web:
           enabled: true
       - uix:
           enabled: false
       - api:
           enabled: false
-      - wd:
-          enabled: false
     secrets:
-      - environments/production-adm/secrets.yaml
+      - environments/production-web/secrets.yaml
   production-app:
     kubeContext: louvre
     values:
       - fullnamePrefixOverride: p-app
       - partOfOverride: app
-      - adm:
+      - web:
           enabled: false
       - uix:
           enabled: true
       - api:
           enabled: true
-      - wd:
-          enabled: false
     secrets:
       - environments/production-app/secrets.yaml
   production-wd:
@@ -39,14 +35,12 @@ environments:
     values:
       - fullnamePrefixOverride: p-wd
       - partOfOverride: wd
-      - adm:
+      - web:
           enabled: false
       - uix:
           enabled: false
       - api:
           enabled: false
-      - wd:
-          enabled: true
     secrets:
       - environments/production-wd/secrets.yaml
 
@@ -77,12 +71,12 @@ templates:
             rm -rf releases/{{`{{ base .Release.Chart }}`}}-*.tgz
 
 releases:
-  - name: "{{ .Environment.Name }}-adm"
+  - name: "{{ .Environment.Name }}-web"
     namespace: savior-julienne
-    chart: releases/adm
-    condition: adm.enabled
+    chart: releases/web
+    condition: web.enabled
     values:
-      - environments/{{ .Environment.Name }}/adm.yaml.gotmpl
+      - environments/{{ .Environment.Name }}/web.yaml.gotmpl
     <<: *set
     <<: *hooks
   - name: "{{ .Environment.Name }}-uix"
@@ -99,13 +93,5 @@ releases:
     values:
       - environments/{{ .Environment.Name }}/api.yaml.gotmpl
     condition: api.enabled
-    <<: *set
-    <<: *hooks
-  - name: "{{ .Environment.Name }}-wd"
-    namespace: savior-julienne
-    chart: releases/wd
-    values:
-      - environments/{{ .Environment.Name }}/wd.yaml.gotmpl
-    condition: wd.enabled
     <<: *set
     <<: *hooks

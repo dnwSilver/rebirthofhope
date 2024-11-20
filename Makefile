@@ -3,22 +3,19 @@ DOCKER_DIR=./docker
 SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=1.3.6
+APP_VERSION=2.0.0
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
 
-FRONTEND_DIR=./app/frontend
+FRONTEND_DIR=./app/uix
 FRONTEND_PORT=4010
 
-BACKEND_DIR=./app/backend
+BACKEND_DIR=./app/api
 BACKEND_PORT=4020
 
-MANAGER_DIR=./app/manager
+MANAGER_DIR=./app/web
 MANAGER_PORT=4000
-
-WATCHDOG_DIR=./app/watchdog
-WATCHDOG_PORT=4030
 
 DEPLOY_DIR=./deploy
 
@@ -32,14 +29,14 @@ build-workstation: update-bin update-secrets
 	--file ${DOCKER_DIR}/workstation.Dockerfile \
 	--tag workstation:${APP_VERSION} .;
 
-build-backend:
+build-api:
 	docker buildx build \
 	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg GO_VERSION=${GO_VERSION} \
-	--file ${DOCKER_DIR}/backend.Dockerfile \
-	--tag backend:${APP_VERSION} .;
+	--file ${DOCKER_DIR}/api.Dockerfile \
+	--tag api:${APP_VERSION} .;
 
-build-frontend:
+build-uix:
 	rm -rf ${FRONTEND_DIR}/.output;
 	cd ${FRONTEND_DIR}; \
 	bun install; \
@@ -47,10 +44,10 @@ build-frontend:
 	docker buildx build \
 	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg GO_VERSION=${NODE_VERSION} \
-	--file ${DOCKER_DIR}/frontend.Dockerfile \
-	--tag frontend:${APP_VERSION} .;
+	--file ${DOCKER_DIR}/uix.Dockerfile \
+	--tag uix:${APP_VERSION} .;
 
-build-manager:
+build-web:
 	rm -rf ${MANAGER_DIR}/.next;
 	cd ${MANAGER_DIR}; \
 	npm install --force; \
@@ -58,15 +55,8 @@ build-manager:
 	docker buildx build \
 	--platform ${SUPPORT_PLATFORMS} \
 	--build-arg NODE_VERSION=${NODE_VERSION} \
-	--file ${DOCKER_DIR}/manager.Dockerfile \
-	--tag manager:${APP_VERSION} .;
-
-build-watchdog:
-	docker buildx build \
-	--platform ${SUPPORT_PLATFORMS} \
-	--build-arg NODE_VERSION=${GO_VERSION} \
-	--file ${DOCKER_DIR}/watchdog.Dockerfile \
-	--tag watchdog:${APP_VERSION} .;
+	--file ${DOCKER_DIR}/web.Dockerfile \
+	--tag web:${APP_VERSION} .;
 
 build-ci:
 	docker buildx build \
@@ -74,18 +64,18 @@ build-ci:
 	--file ${DOCKER_DIR}/ci.Dockerfile \
 	--tag ci:${APP_VERSION} .;
 
-build: build-workstation build-backend build-frontend build-manager
+build: build-workstation build-api build-uix build-web
 
-run-dev-backend:
+run-dev-api:
 	cd ${BACKEND_DIR}; \
 	go run entrypoint.go;
 
-run-dev-frontend:
+run-dev-uix:
 	cd ${FRONTEND_DIR}; \
 	bun install; \
 	bun run dev --port=${FRONTEND_PORT};
 
-run-dev-manager:
+run-dev-web:
 	cd ${MANAGER_DIR}; \
 	[[ -d ${MANAGER_DIR}/node_modules ]] || npm install --force; \
 	npm run dev;
@@ -96,23 +86,23 @@ push-workstation:
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-workstation:${APP_VERSION};
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-workstation:latest;
 
-push-backend:
-	docker tag backend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-backend:${APP_VERSION};
-	docker tag backend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-backend:latest;
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-backend:${APP_VERSION};
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-backend:latest;
+push-api:
+	docker tag api:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-api:${APP_VERSION};
+	docker tag api:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-api:latest;
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-api:${APP_VERSION};
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-api:latest;
 
-push-frontend:
-	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
-	docker tag frontend:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:${APP_VERSION};
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-frontend:latest;
+push-uix:
+	docker tag uix:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-uix:${APP_VERSION};
+	docker tag uix:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-uix:latest;
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-uix:${APP_VERSION};
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-uix:latest;
 
-push-manager:
-	docker tag manager:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-manager:${APP_VERSION};
-	docker tag manager:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-manager:latest;
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-manager:${APP_VERSION};
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-manager:latest;
+push-web:
+	docker tag web:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-web:${APP_VERSION};
+	docker tag web:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-web:latest;
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-web:${APP_VERSION};
+	docker push ${DOCKER_HUB_NAMESPACE}/k8s-web:latest;
 
 push-ci:
 	docker tag ci:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-ci:${APP_VERSION};
@@ -120,17 +110,11 @@ push-ci:
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-ci:${APP_VERSION};
 	docker push ${DOCKER_HUB_NAMESPACE}/k8s-ci:latest;
 
-push-watchdog:
-	docker tag watchdog:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:${APP_VERSION};
-	docker tag watchdog:${APP_VERSION} ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:latest;
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:${APP_VERSION};
-	docker push ${DOCKER_HUB_NAMESPACE}/k8s-watchdog:latest;
-
 push-arts:
 	rsync -chavzP --stats ./assets/art-1.webp root@${CLUSTER_HOST}:/root/.storage/art-1.webp;
 	rsync -chavzP --stats ./assets/art-3.webp root@${CLUSTER_HOST}:/root/.storage/art-3.webp;
 
-push: push-workstation push-frontend push-backend push-manager push-ci push-arts
+push: push-workstation push-uix push-api push-web
 
 connect:
 	ssh root@${CLUSTER_HOST};
@@ -158,8 +142,6 @@ update-reverse-proxy:
 	ssh root@${CLUSTER_HOST} "nginx -t";
 	ssh root@${CLUSTER_HOST} "systemctl reload nginx";
 
-push-full: build-frontend push-frontend build-backend push-backend build-manager push-manager
-
 record-examples:
 	vhs ./examples/k9s.enter.tape;
 
@@ -186,13 +168,9 @@ deploy-app:
 	cd ${DEPLOY_DIR}; \
 	helmfile --environment production-app apply;
 
-deploy-adm:
+deploy-web:
 	cd ${DEPLOY_DIR}; \
-	helmfile --environment production-adm apply;
-
-deploy-wd:
-	cd ${DEPLOY_DIR}; \
-	helmfile --environment production-wd apply;
+	helmfile --environment production-web apply;
 
 deploy-pv:
 	cd ${DEPLOY_DIR}; \
