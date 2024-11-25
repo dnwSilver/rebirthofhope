@@ -3,7 +3,7 @@ DOCKER_DIR=./docker
 SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=2.0.1
+APP_VERSION=2.0.2
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets

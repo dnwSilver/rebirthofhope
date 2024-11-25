@@ -16,6 +16,10 @@ const (
 	SUCCESS        StatusType = "success"
 )
 
+type Savior struct {
+	Replicas *string `json:"replicas,omitempty" validate:"option"`
+}
+
 type FuncIntInt func(string) int
 
 func getReplicaCount(call string) int {
