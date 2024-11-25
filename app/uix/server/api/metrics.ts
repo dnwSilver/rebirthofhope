@@ -7,13 +7,12 @@ export default defineEventHandler(async (event) => {
   errors += Math.floor(Math.random() * 100);
 
   if (needVerify) {
-    await fetch("https://rebirthofhope.ru/api/finish", {
+    const response = await fetch("https://rebirthofhope.ru/api/finish/metrics", {
       method: "POST",
-      body: JSON.stringify({
-        call: process.env.CALL,
-        tasks: { metrics: true },
-      }),
+      body: process.env.CALL,
     });
+
+    console.log(response.ok)
 
     needVerify = false;
   }

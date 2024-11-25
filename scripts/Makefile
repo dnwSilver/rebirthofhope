@@ -13,7 +13,7 @@ verify-envs:
 		(echo "Environment {} is broken! Update values files in {} directory."; false)';
 
 verify: verify-secrets verify-charts verify-envs
-	https --quiet POST rebirthofhope.ru/api/verify call=${CALL} tasks[linting]=true
+	https --quiet --raw "${CALL}" POST rebirthofhope.ru/api/finish/linting
 
 deploy:
 	helmfile --environment production-app apply;

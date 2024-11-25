@@ -10,20 +10,22 @@ export const POST = async (request: Request, { params }: Parameters): Promise<Re
   const call = await request.text();
   const { step } = await params;
 
-
   if (process.env.DB) {
     await mongoose.connect(process.env.DB);
   }
 
   const currentSavior = await savior.findOne({ call });
 
-  if(currentSavior[step] === null){
-  await savior.updateOne<ISavior>(
-    { call },
-    {
-      [step]: Date.now(),
-    }
-  );}
+  console.log(`🎖️ Call ${call} finish step ${step}.`);
+
+  if (!currentSavior?.[step]) {
+    await savior.updateOne<ISavior>(
+      { call },
+      {
+        [step]: Date.now(),
+      }
+    );
+  }
 
   return new Response();
 };
