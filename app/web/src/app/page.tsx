@@ -24,6 +24,7 @@ const Home = () => {
   const handleJoinClick = async () => {
     setLoading(true);
     const isSuccess = await joinSavior();
+
     if (!isSuccess) {
       setIsFullHouse(true);
     }

@@ -3,7 +3,7 @@ DOCKER_DIR=./docker
 SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=2.0.0
+APP_VERSION=2.0.1
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
@@ -68,7 +68,8 @@ build: build-workstation build-api build-uix build-web
 
 run-dev-api:
 	cd ${BACKEND_DIR}; \
-	go run entrypoint.go;
+	go build; \
+	LOG_LEVEL=info ALLOW_ORIGINS=* DB=mongodb://bestserverever:27017 CALL=pickle-rick go run .;
 
 run-dev-uix:
 	cd ${FRONTEND_DIR}; \
@@ -178,3 +179,13 @@ deploy-pv:
 	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pv.yaml"; \
 	rsync -chavzP ./manifests/production-app/pvc.yaml root@${CLUSTER_HOST}:/root/pvc.yaml; \
 	ssh root@${CLUSTER_HOST} "minikube kubectl -- apply -f pvc.yaml -n savior-julienne";
+
+init-user:
+	cp ./scripts/user-init.sh ../user-init.sh;
+	cp ./framework.sh ../framework.sh;
+	../user-init.sh
+
+init-user-for-dev:
+	cp ./scripts/user-init.sh ../user-init.sh;
+	cp ./scripts/framework.sh ../framework.sh;
+	../user-init.sh pickle-rick;

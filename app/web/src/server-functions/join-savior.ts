@@ -1,24 +1,25 @@
 "use server";
 import { savior, call } from "@/db";
-import { ISavior, stepNames } from "@/db/domain";
+import { COOKIE_IDENTIFIER_KEY, EXAMPLE_TIME_AVAILABLE, ICall, ISavior, stepNames } from "@/db/domain";
 import { faker } from "@faker-js/faker/locale/ru";
 import mongoose from "mongoose";
+import { cookies } from "next/headers";
 
 export const joinSavior = async (): Promise<{ call: string; name: string } | null> => {
   if (process.env.DB) {
     await mongoose.connect(process.env.DB);
   }
 
-  const saviorCall = await call.findOne().exec();
+  const saviorCall = await call.findOne<ICall>().exec();
 
   if (saviorCall === null) {
     return null;
   }
 
-  const name = faker.person.fullName();
+  const saviorName = faker.person.fullName();
 
   await savior.create<ISavior>({
-    name,
+    name: saviorName,
     call: saviorCall.call,
     country: faker.internet.emoji({ types: ["flag"] }),
     progress: stepNames.map((step) => ({
@@ -28,7 +29,17 @@ export const joinSavior = async (): Promise<{ call: string; name: string } | nul
     })),
   });
 
-  await call.deleteOne(saviorCall);
+  await call.deleteOne({ call: saviorCall.call });
 
-  return { call: saviorCall.call, name: name };
+  const cookieStore = await cookies();
+
+  cookieStore.set(COOKIE_IDENTIFIER_KEY, saviorCall.call, {
+    // httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+    expires: Date.now() + EXAMPLE_TIME_AVAILABLE,
+  });
+  cookieStore.set("name", saviorName);
+
+  return { call: saviorCall.call, name: saviorName };
 };

@@ -19,7 +19,7 @@ const Greeting = () => {
           position: "fixed",
           width: "6rem",
           bottom: "1rem",
-          right: "1.5rem",
+          right: "2rem",
           zIndex: "3",
         }}
         onClick={async () => {

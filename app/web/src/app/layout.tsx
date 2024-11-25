@@ -34,10 +34,10 @@ export default async function RootLayout({
           position: "absolute",
           left: 0,
           right: 0,
-          marginLeft: "2%",
-          marginRight: "2%",
+          marginLeft: "2rem",
+          marginRight: "2rem",
           display: "grid",
-          gridTemplateColumns: "340px auto",
+          gridTemplateColumns: "24rem auto",
         }}
         className={`${geistSans.variable} ${geistMono.variable}`}
       >

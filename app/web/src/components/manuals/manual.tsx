@@ -41,7 +41,7 @@ const Manual = (props: Props) => {
               position: "fixed",
               // width: "6rem",
               bottom: "1rem",
-              right: "16rem",
+              right: "17rem",
               zIndex: "3",
             }}
             onClick={handleVerifyClick}

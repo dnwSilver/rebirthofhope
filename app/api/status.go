@@ -1,11 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"io"
 	"net/http"
 	"os"
-
-	"gopkg.in/yaml.v3"
 )
 
 type StatusType string
@@ -17,27 +16,27 @@ const (
 	SUCCESS        StatusType = "success"
 )
 
-type Deployment struct {
-	ReplicaCount int `yaml:"replicaCount"`
-}
-
 type FuncIntInt func(string) int
 
 func getReplicaCount(call string) int {
-	response, _ := http.Get("https://raw.githubusercontent.com/dnwSilver/rebirthofhope/refs/heads/savior/" + call + "/environments/production-app/api.yaml.gotmpl")
+	response, _ := http.Get("https://rebirthofhope.ru/api/savior/" + call)
 
 	defer response.Body.Close()
 	body, _ := io.ReadAll(response.Body)
 
-	deployment := Deployment{}
+	savior := Savior{}
 
-	err := yaml.Unmarshal([]byte(body), &deployment)
+	err := json.Unmarshal([]byte(body), &savior)
 
 	if err != nil {
 		return 1
 	}
 
-	return deployment.ReplicaCount
+	if savior.Replicas == nil {
+		return 1
+	}
+
+	return 2
 }
 
 func GetAppStatus() StatusType {

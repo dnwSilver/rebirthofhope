@@ -9,7 +9,12 @@ const Button: FC<
     <button
       disabled={disabled}
       onClick={onClick}
-      style={{ borderRadius: "4rem", fontSize: "1.5rem", ...style }}
+      style={{
+        color: disabled ? "#696969" : "",
+        borderRadius: "4rem",
+        fontSize: "1.5rem",
+        ...style,
+      }}
       className={disabled ? "" : styles["glow-on-hover"]}
       type="button"
     >

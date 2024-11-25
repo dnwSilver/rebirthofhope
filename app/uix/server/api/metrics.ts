@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   errors += Math.floor(Math.random() * 100);
 
   if (needVerify) {
-    await fetch("https://rebirthofhope.ru/api/verify", {
+    await fetch("https://rebirthofhope.ru/api/finish", {
       method: "POST",
       body: JSON.stringify({
         call: process.env.CALL,

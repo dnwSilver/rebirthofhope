@@ -34,7 +34,7 @@ const StatusPanel = () => {
           position: "fixed",
           width: "7rem",
           bottom: "1rem",
-          right: "8rem",
+          right: "9rem",
           zIndex: 2,
         }}
         onClick={async () => {

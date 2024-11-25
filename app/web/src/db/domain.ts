@@ -13,17 +13,16 @@ export interface ISavior {
   call: string;
   country: string;
   joining: Date;
-  linting: boolean;
-  metrics: boolean;
-  resources: boolean;
-  logs: boolean;
-  secrets: boolean;
-  replicas: boolean;
-  envs: boolean;
-  cors: boolean;
-  ingress: boolean;
-  volume: boolean;
-  features: boolean;
+  linting?: Date;
+  metrics?: Date;
+  resources?: Date;
+  logs?: Date;
+  secrets?: Date;
+  replicas?: Date;
+  envs?: Date;
+  cors?: Date;
+  ingress?: Date;
+  volume?: Date;
   progress: IStep[];
 }
 

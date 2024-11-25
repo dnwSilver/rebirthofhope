@@ -1,7 +1,17 @@
 #!/bin/bash
+. "$(dirname "$0")/framework.sh" /tmp/itperspectives/practice/k8s
 
-CALL=$(curl -X POST --silent https://rebirthofhope.ru/api/call || 0)
-echo $CALL
+# CONSTANTS
+CURATOR_DOMAIN=https://rebirthofhope.ru
+
+# PARAMETERS
+CALL=$1
+
+# SCRIPT
+
+[[ -z $CALL ]] && CALL=$(curl -X POST --silent https://rebirthofhope.ru/api/call || 0)
+
+echo $GOOD $CALL_ICON Call $CALL.
 
 BRANCH_NAME=savior/$CALL
 CLUSTER_HOST=80.87.106.221
