@@ -4,7 +4,7 @@ import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
 import Manual from "./manual";
 import Tutorial from "../tutorials/tutorial";
-import { REPO_CLONE, REPO_GO, RepoSwitch } from "../tutorials/commands";
+import { REPO_CLONE, REPO_GO } from "../tutorials/commands";
 import Helper from "../helper";
 import Example from "../example";
 import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
@@ -46,14 +46,12 @@ const DeepDiveManual = () => {
         <Example theme="docker-run" />
       </Helper>
       <h2>Получение конфигураций</h2>
-      Клонируем себе репозиторий в домашнюю директорию <mark>~/rebirthofhope</mark>.
-      <Command text={REPO_CLONE} />
-      <br />
-      Переходим в директорию c git репозиторием.
-      <Command text={REPO_GO} />
-      <br />
-      Переключаемся на нашу на ветку <b>savior/{call}</b>.
-      <Command text={RepoSwitch(call)} />
+      Клонируем себе репозиторий в домашнюю директорию <mark>~/rebirthofhope</mark>, сразу на нашу на ветку{" "},
+      <b>savior/{call}</b>. Переходим в директорию c git репозиторием.
+      <Command
+        text={`${REPO_CLONE(call)}
+${REPO_GO}`}
+      />
       <br />
       <Example theme="git-clone" />
       <br />

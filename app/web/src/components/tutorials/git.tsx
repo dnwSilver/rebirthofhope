@@ -2,7 +2,7 @@
 
 import { getCookie } from "@/helpers/cookies";
 import Command from "../command";
-import { GIT_COMMIT, GitPush, GIT_STAGE, REPO_CLONE, REPO_GO, RepoSwitch } from "./commands";
+import { GIT_COMMIT, GitPush, GIT_STAGE, REPO_CLONE, REPO_GO } from "./commands";
 import Example from "../example";
 import { COOKIE_IDENTIFIER_KEY } from "@/db/domain";
 
@@ -15,8 +15,7 @@ const GitTutorial = () => {
       <h2>Подготовка репозитория</h2>
       <Command
         text={`${REPO_GO}
-${REPO_CLONE}
-${RepoSwitch(call)}`}
+${REPO_CLONE(call)}`}
       />
       <br />
       <Example theme="git-clone" />

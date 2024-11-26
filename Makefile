@@ -3,7 +3,7 @@ DOCKER_DIR=./docker
 SUPPORT_PLATFORMS=linux/amd64,linux/arm64
 GO_VERSION=1.23
 NODE_VERSION=20.18.0
-APP_VERSION=2.0.5
+APP_VERSION=2.0.7
 
 BIN_DIR=~/practice/bin
 SECRETS_DIR=~/practice/secrets
@@ -183,9 +183,11 @@ deploy-pv:
 init-user:
 	cp ./scripts/user-init.sh ../user-init.sh;
 	cp ./scripts/framework.sh ../framework.sh;
+	cp ./scripts/Makefile ../Makefile;
 	../user-init.sh;
 
 init-user-for-dev:
 	cp ./scripts/user-init.sh ../user-init.sh;
 	cp ./scripts/framework.sh ../framework.sh;
+	cp ./scripts/Makefile ../Makefile;
 	../user-init.sh pickle-rick;

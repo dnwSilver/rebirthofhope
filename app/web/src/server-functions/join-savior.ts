@@ -22,11 +22,6 @@ export const joinSavior = async (): Promise<{ call: string; name: string } | nul
     name: saviorName,
     call: saviorCall.call,
     country: faker.internet.emoji({ types: ["flag"] }),
-    progress: stepNames.map((step) => ({
-      step,
-      giveUp: null,
-      finish: null,
-    })),
   });
 
   await call.deleteOne({ call: saviorCall.call });
@@ -34,7 +29,6 @@ export const joinSavior = async (): Promise<{ call: string; name: string } | nul
   const cookieStore = await cookies();
 
   cookieStore.set(COOKIE_IDENTIFIER_KEY, saviorCall.call, {
-    // httpOnly: true,
     sameSite: "strict",
     secure: true,
     expires: Date.now() + EXAMPLE_TIME_AVAILABLE,
