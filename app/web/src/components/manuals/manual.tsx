@@ -5,6 +5,7 @@ import Button from "../button";
 import { PropsWithChildren, ReactNode } from "react";
 import { StepName } from "@/db/domain";
 import { verifyStep } from "@/server-functions/verify-step";
+import styles from "../button.module.css";
 
 type Props = {
   stepName: StepName;
@@ -50,6 +51,20 @@ const Manual = (props: Props) => {
             Все сделано!
           </Button>
         )}
+        <span
+          style={{
+            position: "fixed",
+            color: 'white',
+            bottom: "1rem",
+            left: "26rem",
+            zIndex: "3",
+            borderRadius: "4rem",
+            fontSize: "1.5rem",
+          }}
+          className={styles["glow-on-hover"]}
+        >
+          Позывной: {currentSavior?.call}
+        </span>
       </section>
     </>
   );

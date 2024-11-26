@@ -11,9 +11,9 @@ COPY /.bin                  /home/.bin
 COPY /.secrets/ssh          /home/.ssh
 COPY /.secrets/certs        /home/.certs
 COPY /configs/kube.config   /home/.kube/config
-COPY /scripts/pre-push      /home/.githooks/.pre-push
+COPY /scripts/pre-push      /home/.githooks/pre-push
 
-RUN chmod +x /home/.githooks/.pre-push;
+RUN chmod +x /home/.githooks/pre-push;
 
 FROM ubuntu:$UBUNTU_VERSION AS runtime
 
@@ -41,4 +41,5 @@ RUN ln -s /usr/bin/batcat /usr/bin/bat;\
     gpg --import /etc/ssl/certs/gpg.key; \
     git config --global user.email "k8s.savior@gmail.com"; \
     git config --global user.email "Savior"; \
+    git config --global core.hooksPath /root/.githooks/; \
     sed -i 's|"font"|"cupcake"|' /root/.bashrc;

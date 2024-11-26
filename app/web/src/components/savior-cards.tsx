@@ -32,6 +32,24 @@ const SaviorCards = () => {
 
   return (
     <section style={{ height: "calc(100vh - 2rem)", overflow: "scroll", margin: "1rem" }}>
+      {processedSaviors
+        .sort((a, b) => b.progress.filter((s) => !!s.finish).length - a.progress.filter((s) => !!s.finish).length)
+        .map((savior) => (
+          <SaviorCard
+            key={savior.name}
+            start={savior.joining}
+            name={savior.name}
+            country={savior.country}
+            progress={savior.progress}
+          />
+        ))}
+      {finishSaviors.length > 0 && processedSaviors.length > 0 && (
+        <>
+          <br />
+          <hr />
+          <br />
+        </>
+      )}
       {finishSaviors
         .sort((a, b) => a.score - b.score)
         .map((savior, idx) => (
@@ -43,25 +61,6 @@ const SaviorCards = () => {
             country={savior.country}
             progress={savior.progress}
             score={savior.score}
-          />
-        ))}
-      {finishSaviors.length > 0 && processedSaviors.length > 0 && (
-        <>
-          <br />
-          <hr />
-          <br />
-        </>
-      )}
-
-      {processedSaviors
-        .sort((a, b) => b.progress.filter((s) => !!s.finish).length - a.progress.filter((s) => !!s.finish).length)
-        .map((savior) => (
-          <SaviorCard
-            key={savior.name}
-            start={savior.joining}
-            name={savior.name}
-            country={savior.country}
-            progress={savior.progress}
           />
         ))}
     </section>

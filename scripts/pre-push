@@ -1,11 +1,11 @@
 #!/bin/bash
 
-API_CONFIG=deploy/environments/production-app/api.yaml.gotmpl
-UIX_CONFIG=deploy/environments/production-app/uix.yaml.gotmpl
-SEC_CONFIG=deploy/environments/production-app/secrets.yaml
+API_CONFIG=environments/production-app/api.yaml.gotmpl
+UIX_CONFIG=environments/production-app/uix.yaml.gotmpl
+SEC_CONFIG=environments/production-app/secrets.yaml
 
 function finish () {
-  https --quiet --raw "$CALL" POST rebirthofhope.ru/api/finish/$1
+  https --quiet --ignore-stdin --raw "$CALL" POST rebirthofhope.ru/api/finish/$1;
 }
 
 # 03 RESOURCE
@@ -21,7 +21,9 @@ if grep -q "level: info" $API_CONFIG; then
 fi
 
 # 05 SECRETS
-if ! grep -q "MP7L7goFiZtmRlWPrakbY2Web2rQA+qwjjfUQl1zOgmUU2u477DMt3rcteVQ,iv" $SEC_CONFIG; then
+SECRET=$(helm secrets decrypt ./environments/production-app/secrets.yaml | yq --raw-output '.app.db')
+
+if [[ $SECRET == mongodb://bestserverever:27017 ]]; then
   finish secrets
   SECRETS=true
 fi
@@ -33,7 +35,7 @@ if grep -q "replicaCount: 2" $API_CONFIG; then
 fi
 
 # 07 ENVIRONMENTS
-if grep -q api.*-apis.rebirthofhope.ru $UIX_CONFIG; then
+if grep -q api.*-api.rebirthofhope.ru $UIX_CONFIG; then
   finish envs
   ENVIRONMENTS=true
 fi
@@ -52,7 +54,7 @@ fi
 
 # 10 VOLUMES
 if grep -q "mountPath: /.output/public/arts" $UIX_CONFIG; then
-  finish volumes
+  finish volume
   VOLUME=true
 fi
 

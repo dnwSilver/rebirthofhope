@@ -36,13 +36,16 @@ git switch -c $BRANCH_NAME >/dev/null && echo "󰊢 Create branch $BRANCH_NAME";
 rm -rf app >/dev/null && echo " Remove app"
 rm -rf assets >/dev/null && echo " Remove assets"
 rm -rf configs >/dev/null && echo " Remove config"
-rm -rf scripts >/dev/null && echo " Remove scripts"
 rm -rf docker >/dev/null && echo " Remove docker"
 rm -rf lor >/dev/null && echo " Remove lor"
 rm -f .gitignore >/dev/null && echo " Remove gitignore"
 rm -f docker-compose.yaml >/dev/null && echo " Remove docker-compose"
 rm -f Makefile >/dev/null && echo " Remove makefile"
 rm -f README.md >/dev/null && echo " Remove README.md"
+
+cp ./scripts/Makefile ./Makefile >/dev/null && echo " Create make file";
+
+rm -rf scripts >/dev/null && echo " Remove scripts"
 
 mv -v ./deploy/* ./deploy/.* ./ &>/dev/null && echo "󰉒 Move file to root directory"
 
@@ -94,7 +97,6 @@ ssh root@$CLUSTER_HOST "minikube kubectl -- apply -f pvc.yaml -n $NAMESPACE" >/d
 # Deploy release
 gsed -i 's|createNamespace: false|createNamespace: true|' $HELM_FILE >/dev/null && echo " Enable create namespace";
 gsed -i '/  production-web:/,+12 d' $HELM_FILE >/dev/null && echo " Clean helmfile";
-gsed -i '/  622172
 production-web:/,+12 d' $HELM_FILE >/dev/null && echo " Clean helmfile";
 gsed -zi 's|enabled: true|enabled: false|2' $HELM_FILE >/dev/null && echo "⭘ Disable API deploy"
 helmfile --environment production-app apply &>/dev/null && echo "󱃾 Deploy to cluster";

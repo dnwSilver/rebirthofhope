@@ -2,6 +2,7 @@ import { IStep } from "@/db/domain";
 import Progress from "./progress";
 import Timer from "./timer";
 import { panel } from "@/styles/panel";
+import { getCookie } from "@/helpers/cookies";
 
 const getPosition = (position: number) => {
   if (position == 1) {
@@ -31,8 +32,10 @@ const SaviorCard = ({
   progress: IStep[];
   score?: number | null;
 }) => {
+  const currentName = decodeURIComponent(getCookie("name") || "");
+
   return (
-    <article style={{...panel, minWidth:"310px"}}>
+    <article style={{ ...panel, minWidth: "310px", backgroundColor: currentName === name ? "#ADD8E6" : panel.background }}>
       <h4>
         {country} {position && getPosition(position) + " "}
         <b>{name}</b>
