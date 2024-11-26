@@ -182,8 +182,8 @@ deploy-pv:
 
 init-user:
 	cp ./scripts/user-init.sh ../user-init.sh;
-	cp ./framework.sh ../framework.sh;
-	../user-init.sh
+	cp ./scripts/framework.sh ../framework.sh;
+	../user-init.sh;
 
 init-user-for-dev:
 	cp ./scripts/user-init.sh ../user-init.sh;
