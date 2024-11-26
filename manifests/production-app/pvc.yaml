@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: p-pvc-arts
+  namespace: savior-walnut-and-beef-pie
+spec:
+  storageClassName: ""
+  volumeName: p-walnut-and-beef-pie-filesystem
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 5Mi

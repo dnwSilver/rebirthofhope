@@ -1,0 +1,17 @@
+image:
+  tag: 2.1.0
+
+ingress:
+  enabled: true
+  hosts:
+    - walnut-and-beef-pie-api.rebirthofhope.ru
+
+replicaCount: 1
+
+app:
+  cors:
+    origins: https://walnut-and-beef-pie-api.abyssofdespair.ru
+  log:
+    level: trace
+  database:
+    connection: {{ .Values.app.db }}
