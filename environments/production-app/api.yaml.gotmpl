@@ -1,0 +1,17 @@
+image:
+  tag: 2.1.0
+
+ingress:
+  enabled: true
+  hosts:
+    - orange-and-goji-berry-tart-api.rebirthofhope.ru
+
+replicaCount: 1
+
+app:
+  cors:
+    origins: https://orange-and-goji-berry-tart-api.abyssofdespair.ru
+  log:
+    level: trace
+  database:
+    connection: {{ .Values.app.db }}

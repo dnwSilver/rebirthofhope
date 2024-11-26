@@ -1,0 +1,23 @@
+image:
+  tag: 2.1.0
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - orange-and-goji-berry-tart-uix.rebirthofhope.ru
+
+volumeMounts:
+  - name: arts
+    mountPath: /.output/arts
+
+volumes:
+  - name: arts
+    persistentVolumeClaim:
+      claimName: p-pvc-arts
+
+app:
+  api: https://orange-and-goji-berry-tart-api.abyssofdespair.ru
+  log:
+    level: info
