@@ -1,0 +1,17 @@
+image:
+  tag: 2.1.0
+
+ingress:
+  enabled: true
+  hosts:
+    - souvlaki-api.rebirthofhope.ru
+
+replicaCount: 1
+
+app:
+  cors:
+    origins: https://souvlaki-api.abyssofdespair.ru
+  log:
+    level: trace
+  database:
+    connection: {{ .Values.app.db }}
