@@ -17,7 +17,7 @@ export const POST = async (request: Request, { params }: Parameters): Promise<Re
   const currentSavior = await savior.findOne({ call });
 
   if (!currentSavior?.[step]) {
-    console.log(`🎖️${call} earned an achievement ${step}`);
+    console.log(`🎖️${call} earned achievement ${step}`);
 
     await savior.updateOne<ISavior>(
       { call },

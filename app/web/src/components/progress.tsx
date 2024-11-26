@@ -1,6 +1,6 @@
 import { EXAMPLE_TIME_AVAILABLE, IStep, stepIcons, stepNames } from "@/db/domain";
 
-type ProgressBadge = "🟢" | "🔵" | "🟡" | "🔴";
+type ProgressBadge = "🟢" | "🔵" | "🟡" | "⚪️";
 
 export const getStepStatus = (start: Date, step: IStep | undefined): ProgressBadge => {
   if (step?.giveUp) {
@@ -12,7 +12,7 @@ export const getStepStatus = (start: Date, step: IStep | undefined): ProgressBad
   }
 
   if (Date.now() - new Date(start).getTime() > EXAMPLE_TIME_AVAILABLE) {
-    return "🔴";
+    return "⚪️";
   }
 
   return "🟡";

@@ -33,7 +33,7 @@ export const joinSavior = async (): Promise<{ call: string; name: string } | nul
 
   const cookieStore = await cookies();
 
-  console.log(`✋${call} joined`);
+  console.log(`✋${saviorCall.call} joined`);
   cookieStore.set(COOKIE_IDENTIFIER_KEY, saviorCall.call, {
     sameSite: "strict",
     secure: true,

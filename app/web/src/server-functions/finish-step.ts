@@ -12,7 +12,9 @@ export const finishStep = async (call: string | undefined, stepName: StepName) =
 
     console.log(`${steps[stepName]}${call} close step ${stepName}`);
 
-    console.log(`🏁${call} finish practice`);
+    if (stepName === "restoration") {
+      console.log(`🏁${call} finish practice`);
+    }
 
     await savior.updateOne<ISavior>({ call }, { progress: updatedSavior.progress });
   }

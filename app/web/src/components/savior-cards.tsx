@@ -6,6 +6,8 @@ import useSaviors from "@/hooks/use-saviors";
 import { score } from "@/helpers/score";
 import { inProgress, isFinish } from "@/helpers/state";
 
+const getFinishStepsCount = (s: ISavior) => s.progress.filter((step) => !!step.finish).length;
+
 const SaviorCards = () => {
   const { saviors } = useSaviors();
 
@@ -33,7 +35,7 @@ const SaviorCards = () => {
   return (
     <section style={{ height: "calc(100vh - 2rem)", overflow: "scroll", margin: "1rem" }}>
       {processedSaviors
-        .sort((a, b) => b.progress.filter((s) => !!s.finish).length - a.progress.filter((s) => !!s.finish).length)
+        .sort((a, b) => getFinishStepsCount(b) - getFinishStepsCount(a))
         .map((savior) => (
           <SaviorCard
             key={savior.name}
@@ -51,7 +53,13 @@ const SaviorCards = () => {
         </>
       )}
       {finishSaviors
-        .sort((a, b) => a.score - b.score)
+        .sort((a, b) => {
+          const stepDiff = getFinishStepsCount(b) - getFinishStepsCount(a);
+          if (stepDiff == 0) {
+            return a.score - b.score;
+          }
+          return stepDiff;
+        })
         .map((savior, idx) => (
           <SaviorCard
             key={savior.name}
