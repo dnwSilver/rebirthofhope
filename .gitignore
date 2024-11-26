@@ -1,6 +1,1 @@
-*.crt
-*.key
-
-/releases
-/.secrets
-/.bin
+releases/
