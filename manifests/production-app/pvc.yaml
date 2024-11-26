@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: p-pvc-arts
+  namespace: savior-sweet-assyrian-stew
+spec:
+  storageClassName: ""
+  volumeName: p-sweet-assyrian-stew-filesystem
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 5Mi
