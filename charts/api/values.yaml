@@ -1,0 +1,98 @@
+nameOverride: ""
+
+fullnamePrefixOverride: ""
+
+instanceOverride: ""
+
+partOfOverride: ""
+
+image:
+  pullPolicy: IfNotPresent
+  repository: dnwsilver/k8s-api
+  tag: ""
+
+ingress:
+  enabled: false
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - kebab-api.rebirthofhope.ru
+  tls: []
+  className: nginx
+  paths:
+    - /
+
+extraIngress:
+  enabled: false
+  ingresses: []
+  services: []
+  endpoints: []
+
+service:
+  enabled: true
+  type: NodePort
+  ports:
+    http: 8080
+
+containerPorts:
+  http: 8080
+
+replicaCount: 1
+
+podSecurityContext:
+  fsGroup: 1001
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1001
+
+resources:
+  limits:
+    memory: 1Mi
+    cpu: 10m
+  requests:
+    memory: 1Mi
+    cpu: 10m
+
+livenessProbe: {}
+
+readinessProbe: {}
+
+volumeMounts:
+  - name: cache
+    mountPath: /app/cache
+
+volumes:
+  - name: cache
+    emptyDir:
+      sizeLimit: 2Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+command: []
+
+args: []
+
+annotations: {}
+
+vmPodScrape: {}
+
+configMap: {}
+
+hostAliases: []
+
+app:
+  cors:
+    origins: ""
+  log:
+    level: "info"
+  database:
+    connection: ""
