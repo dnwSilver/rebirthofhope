@@ -33,6 +33,7 @@ git switch main >/dev/null && echo "󰊢 Switch to main";
 git reset --hard && git clean -xdf >/dev/null && echo "󰊢 Reset repository";
 git switch -c $BRANCH_NAME >/dev/null && echo "󰊢 Create branch $BRANCH_NAME";
 
+rm -rf .vscode >/dev/null && echo " Remove .vscode"
 rm -rf app >/dev/null && echo " Remove app"
 rm -rf assets >/dev/null && echo " Remove assets"
 rm -rf configs >/dev/null && echo " Remove config"
@@ -48,6 +49,9 @@ cp ./scripts/Makefile ./Makefile >/dev/null && echo " Create make file";
 rm -rf scripts >/dev/null && echo " Remove scripts"
 
 mv -v ./deploy/* ./deploy/.* ./ &>/dev/null && echo "󰉒 Move file to root directory"
+
+rm -rf charts/web >/dev/null && echo " Remove chart web"
+rm -rf environments/production-web >/dev/null && echo " Remove envs web"
 
 rm -rf deploy
 
@@ -96,11 +100,16 @@ ssh root@$CLUSTER_HOST "minikube kubectl -- apply -f pvc.yaml -n $NAMESPACE" >/d
 
 # Deploy release
 gsed -i 's|createNamespace: false|createNamespace: true|' $HELM_FILE >/dev/null && echo " Enable create namespace";
-gsed -i '/  production-web:/,+12 d' $HELM_FILE >/dev/null && echo " Clean helmfile";
-production-web:/,+12 d' $HELM_FILE >/dev/null && echo " Clean helmfile";
+
+gsed -i '/  production-web:/,+12 d' $HELM_FILE >/dev/null && \
+gsed -i '/{{ .Environment.Name }}-web/,+7 d' $HELM_FILE >/dev/null && \
+gsed -i '/- web/,+1 d' $HELM_FILE >/dev/null && \
+gsed -i '/  production-web:/,+12 d' $HELM_FILE >/dev/null && \
+echo " Clean helmfile";
+
 gsed -zi 's|enabled: true|enabled: false|2' $HELM_FILE >/dev/null && echo "⭘ Disable API deploy"
 helmfile --environment production-app apply &>/dev/null && echo "󱃾 Deploy to cluster";
-gsed -zi 's|enabled: false|enabled: true|2' $HELM_FILE >/dev/null && echo "⏽ Enable API deploy";
+gsed -zi 's|enabled: false|enabled: true|1' $HELM_FILE >/dev/null && echo "⏽ Enable API deploy";
 gsed -i 's|createNamespace: true|createNamespace: false|' $HELM_FILE >/dev/null && echo " Disable create namespace";
 
 git add . >/dev/null && echo "󰊢 Add files"

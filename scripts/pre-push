@@ -58,11 +58,11 @@ if grep -q "mountPath: /.output/public/arts" $UIX_CONFIG; then
   VOLUME=true
 fi
 
-[[ -z $RESOURCE ]]      && echo "🍄 RESOURCE"       || echo "🍀 RESOURCE"
-[[ -z $LOGS ]]          && echo "🍄 LOGS"           || echo "🍀 LOGS"
-[[ -z $SECRETS ]]       && echo "🍄 SECRETS"        || echo "🍀 SECRETS"
-[[ -z $REPLICA ]]       && echo "🍄 REPLICA"        || echo "🍀 REPLICA"
-[[ -z $ENVIRONMENTS ]]  && echo "🍄 ENVIRONMENTS"   || echo "🍀 ENVIRONMENTS"
-[[ -z $CORS ]]          && echo "🍄 CORS"           || echo "🍀 CORS"
-[[ -z $INGRESS ]]       && echo "🍄 INGRESS"        || echo "🍀 INGRESS"
-[[ -z $VOLUME ]]        && echo "🍄 VOLUME"         || echo "🍀 VOLUMES"
+# [[ -z $RESOURCE ]]      && echo "🍄 RESOURCE"       || echo "🍀 RESOURCE"
+# [[ -z $LOGS ]]          && echo "🍄 LOGS"           || echo "🍀 LOGS"
+# [[ -z $SECRETS ]]       && echo "🍄 SECRETS"        || echo "🍀 SECRETS"
+# [[ -z $REPLICA ]]       && echo "🍄 REPLICA"        || echo "🍀 REPLICA"
+# [[ -z $ENVIRONMENTS ]]  && echo "🍄 ENVIRONMENTS"   || echo "🍀 ENVIRONMENTS"
+# [[ -z $CORS ]]          && echo "🍄 CORS"           || echo "🍀 CORS"
+# [[ -z $INGRESS ]]       && echo "🍄 INGRESS"        || echo "🍀 INGRESS"
+# [[ -z $VOLUME ]]        && echo "🍄 VOLUME"         || echo "🍀 VOLUMES"

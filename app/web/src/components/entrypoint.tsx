@@ -11,7 +11,9 @@ const EntryPoint = () => {
   const call = getCookie(COOKIE_IDENTIFIER_KEY);
 
   return (
-    <section style={panel}>
+    <section
+      style={{ ...panel, marginTop: "1rem", paddingBottom: "3rem", height: "calc(100vh - 4rem)", overflowY: "scroll" }}
+    >
       Мы рады, что ты с нами <b>{decodeURIComponent(getCookie("name") || "")}</b>!
       <br />
       Твой позывной <b>{call}</b>.

@@ -96,7 +96,7 @@ export const COOKIE_IDENTIFIER_KEY = "id";
 
 export const EXAMPLE_TIME_AVAILABLE = 2 * 60 * 60 * 1_000;
 
-export const SHORT_POLLING_INTERVAL = 60 * 60 * 1_000;
+export const SHORT_POLLING_INTERVAL = 60 * 1_000;
 
 export const stepNames = Object.keys(steps) as Array<StepName>;
 

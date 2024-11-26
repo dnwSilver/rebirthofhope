@@ -35,12 +35,15 @@ export const joinSavior = async (): Promise<{ call: string; name: string } | nul
 
   console.log(`✋${call} joined`);
   cookieStore.set(COOKIE_IDENTIFIER_KEY, saviorCall.call, {
-    // httpOnly: true,
     sameSite: "strict",
     secure: true,
     expires: Date.now() + EXAMPLE_TIME_AVAILABLE,
   });
-  cookieStore.set("name", saviorName);
+  cookieStore.set("name", saviorName, {
+    sameSite: "strict",
+    secure: true,
+    expires: Date.now() + EXAMPLE_TIME_AVAILABLE,
+  });
 
   return { call: saviorCall.call, name: saviorName };
 };

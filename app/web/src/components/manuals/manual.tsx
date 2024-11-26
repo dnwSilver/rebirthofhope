@@ -40,7 +40,6 @@ const Manual = (props: Props) => {
           <Button
             style={{
               position: "fixed",
-              // width: "6rem",
               bottom: "1rem",
               right: "17rem",
               zIndex: "3",
