@@ -1,0 +1,23 @@
+image:
+  tag: 2.1.0
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  hosts:
+    - lotus-root-and-rabbit-pie-uix.rebirthofhope.ru
+
+volumeMounts:
+  - name: arts
+    mountPath: /.output/arts
+
+volumes:
+  - name: arts
+    persistentVolumeClaim:
+      claimName: p-pvc-arts
+
+app:
+  api: https://lotus-root-and-rabbit-pie-api.abyssofdespair.ru
+  log:
+    level: info
