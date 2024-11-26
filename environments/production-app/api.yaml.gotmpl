@@ -8,6 +8,10 @@ ingress:
 
 replicaCount: 1
 
+resources:
+  limits:
+    memory: 8Mi
+
 app:
   cors:
     origins: https://orange-and-goji-berry-tart-api.abyssofdespair.ru
