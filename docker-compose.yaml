@@ -1,9 +1,0 @@
-services:
-  mongodb:
-    image: mongo:8.0.3-noble
-    ports:
-      - "27017:27017"
-    volumes:
-      - dbdata6:/data/db
-volumes:
-  dbdata6:

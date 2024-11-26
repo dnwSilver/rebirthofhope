@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: p-pvc-arts
+  namespace: savior-french-fries-with-sausages
+spec:
+  storageClassName: ""
+  volumeName: p-french-fries-with-sausages-filesystem
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 5Mi
