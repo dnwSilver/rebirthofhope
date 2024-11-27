@@ -6,6 +6,10 @@ ingress:
   hosts:
     - pierogi-api.rebirthofhope.ru
 
+resources:
+  limits:
+    memory: 8Mi
+
 replicaCount: 1
 
 app:
