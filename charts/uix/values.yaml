@@ -1,0 +1,84 @@
+nameOverride: ""
+
+fullnamePrefixOverride: ""
+
+instanceOverride: ""
+
+partOfOverride: ""
+
+image:
+  pullPolicy: IfNotPresent
+  repository: dnwsilver/k8s-uix
+  tag: ""
+
+ingress:
+  enabled: false
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - margarine-and-kangaroo-pie-uix.rebirthofhope.ru
+  tls: []
+  className: nginx
+  paths:
+    - /
+
+service:
+  enabled: true
+  type: NodePort
+  ports:
+    http: 8080
+
+containerPorts:
+  http: 3000
+
+replicaCount: 1
+
+podSecurityContext:
+  fsGroup: 1001
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  runAsUser: 1001
+
+resources:
+  limits:
+    memory: 64Mi
+    cpu: 10m
+  requests:
+    memory: 32Mi
+    cpu: 10m
+
+livenessProbe: {}
+
+readinessProbe: {}
+
+volumeMounts: []
+
+volumes: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+command: []
+
+args: []
+
+annotations: {}
+
+vmPodScrape: {}
+
+configMap: {}
+
+hostAliases: []
+
+app:
+  api: ""
+  log:
+    level: ""
