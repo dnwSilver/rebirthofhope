@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: p-pvc-arts
+  namespace: savior-seafood-paella
+spec:
+  storageClassName: ""
+  volumeName: p-seafood-paella-filesystem
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 5Mi
