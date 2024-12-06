@@ -1,0 +1,61 @@
+helmDefaults:
+  createNamespace: false
+  wait: true
+  atomic: true
+
+environments:
+  production-app:
+    kubeContext: louvre
+    values:
+      - fullnamePrefixOverride: p-app
+      - partOfOverride: app
+      - uix:
+          enabled: true
+      - api:
+          enabled: true
+    secrets:
+      - environments/production-app/secrets.yaml
+
+templates:
+  env: &set
+    set:
+      - name: fullnamePrefixOverride
+        value: {{ .Values.fullnamePrefixOverride }}
+      - name: partOfOverride
+        value: {{ .Values.partOfOverride }}
+      - name: image.tag
+        value: {{ env "APP_TAG" }}
+  hooks: &hooks
+    hooks:
+      - events:
+          - prepare
+        showlogs: true
+        command: sh
+        args:
+          - -c
+          - |
+            mkdir -p releases
+            rm -rf releases/{{`{{ base .Release.Chart }}`}}
+            helm package charts/{{`{{ base .Release.Chart }}`}} \
+              --app-version '{{`{{ env "APP_TAG" }}`}}' \
+              -d releases
+            tar xvf $(ls {{`{{ .Release.Chart }}`}}-*.tgz) -C releases
+            rm -rf releases/{{`{{ base .Release.Chart }}`}}-*.tgz
+
+releases:
+  - name: "{{ .Environment.Name }}-uix"
+    namespace: savior-som-tam
+    chart: releases/uix
+    values:
+      - environments/{{ .Environment.Name }}/uix.yaml.gotmpl
+    condition: uix.enabled
+    <<: *set
+    <<: *hooks
+  - name: "{{ .Environment.Name }}-api"
+    namespace: savior-som-tam
+    chart: releases/api
+    values:
+      - environments/{{ .Environment.Name }}/api.yaml.gotmpl
+    condition: api.enabled
+    <<: *set
+    <<: *hooks
